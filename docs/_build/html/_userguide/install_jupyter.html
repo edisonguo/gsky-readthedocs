@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing Jupyter and Python &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using GSKY through the web" href="gsky_through_the_web.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/datasets.html">Datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software setup for Jupyter notebook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-miniconda-on-macos">Installing Miniconda on macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-virtual-environment">Setting up virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-jupyter">Installing Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clone-gsky-jupyter-notebooks">Clone GSKY Jupyter notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-notebooks">Running notebooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gsky_through_the_web.html">GSKY through the web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_terriaJS.html">Using TerriaJS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OGC web services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WCS.html">WCS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WMS.html">WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WPS.html">WPS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WCS.html">GSKY WCS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_ClicknShip.html">GSKY WCS Click and Ship</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS.html">GSKY WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WPS_Polygon_Drill.html">GSKY WPS polygon drill</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY Source code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_source/source.html">Source code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY license</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_license/license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_help/help.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Installing Jupyter and Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_userguide/install_jupyter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="installing-jupyter-and-python">
+<h1>Installing Jupyter and Python<a class="headerlink" href="#installing-jupyter-and-python" title="Permalink to this headline">¶</a></h1>
+<p>We recommend installing <a class="reference external" href="https://conda.io/docs/user-guide/install/index.html">Miniconda</a>, a mini version of <a class="reference external" href="https://www.anaconda.com/download/#macos">Anaconda</a> which conveniently installs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Python</li>
+<li>Jupyter Notebook</li>
+<li>Other commonly used packages for scientific computing and data science</li>
+</ul>
+</div></blockquote>
+<p>Miniconda includes only conda and its dependencies. If you would like to have conda plus over 720 open source packages, install Anaconda.</p>
+<div class="section" id="installing-miniconda-on-macos">
+<h2>Installing Miniconda on macOS<a class="headerlink" href="#installing-miniconda-on-macos" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="first docutils">
+<dt>Download the installers</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://conda.io/miniconda.html">Miniconda installer for macOS</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Install</dt>
+<dd><ul class="first last">
+<li><p class="first"><strong>Miniconda</strong> via terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ~/Downloads
+
+$ bash Miniconda3-latest-MacOSX-x86_64.sh
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Close and re-open your terminal window.</p>
+</li>
+<li><p class="first">To test that the installation was successful, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda list
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="setting-up-virtual-environment">
+<h2>Setting up virtual environment<a class="headerlink" href="#setting-up-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>Let’s first set up a virtual environment to work in where we can install all the required modules for the tutorials:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda create -n GSKY python=3.6
+</pre></div>
+</div>
+<p>Now let’s activate our virtual environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source activate GSKY
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-jupyter">
+<h2>Installing Jupyter<a class="headerlink" href="#installing-jupyter" title="Permalink to this headline">¶</a></h2>
+<p>Run the following command to install Jupyter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install jupyter
+</pre></div>
+</div>
+</div>
+<div class="section" id="clone-gsky-jupyter-notebooks">
+<h2>Clone GSKY Jupyter notebooks<a class="headerlink" href="#clone-gsky-jupyter-notebooks" title="Permalink to this headline">¶</a></h2>
+<p>Open up or create a working directory where we can clone the GSKY Jupyter notebooks:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/nci-training/gsky-demos.git
+
+$ cd gsky-demos
+</pre></div>
+</div>
+<p>For these tutorials we will need to install <a class="reference external" href="https://github.com/jupyter-widgets/ipyleaflet">ipyleaflet</a>, <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/user_guide.html">ipywidgets</a>, <a class="reference external" href="https://geopython.github.io/OWSLib/">owslib</a>, <a class="reference external" href="https://matplotlib.org/">matplotlib</a>, <a class="reference external" href="https://www.gdal.org/">gdal</a>, <a class="reference external" href="https://pillow.readthedocs.io/en/5.2.x/">PIL</a>, <a class="reference external" href="https://unidata.github.io/netcdf4-python/">netCDF4</a>, and <a class="reference external" href="https://bokeh.pydata.org/en/latest/">Bokeh</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install -c conda-forge ipyleaflet ipywidgets owslib matplotlib
+
+$ conda install gdal pillow netcdf4
+
+$ conda install -c bokeh bokeh
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-notebooks">
+<h2>Running notebooks<a class="headerlink" href="#running-notebooks" title="Permalink to this headline">¶</a></h2>
+<p>We should now be ready to run the Jupyter notebook tutorials. To launch the notebooks:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter notebook &lt; notebook.ipynb &gt;
+</pre></div>
+</div>
+<p>For example, to launch <code class="docutils literal notranslate"><span class="pre">Notebook_GSKY_WMS_ipyleaflet.ipynb</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter notebook Notebook_GSKY_WMS_ipyleaflet.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gsky_through_the_web.html" class="btn btn-neutral float-right" title="Using GSKY through the web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

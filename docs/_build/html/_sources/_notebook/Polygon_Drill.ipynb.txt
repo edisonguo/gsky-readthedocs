@@ -1,0 +1,544 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## OGC Web Processing Service (WPS) with GSKY\n",
+    "\n",
+    "The OGC Web Processing Service (WPS) Interface Standard provides access to pre-defined processes and provides job control operations that can instantiate, control and monitor processing jobs. To do this, WPS defines the following operations:\n",
+    "\n",
+    "* **GetCapabilities**\n",
+    "* **DescribeProcess**\n",
+    "* **Execute**\n",
+    "\n",
+    "### GetCapabilities\n",
+    "\n",
+    "The **GetCapabilities** request returns metadata about the GSKY supported operations and processes.\n",
+    "\n",
+    "For example, the **GetCapabilities** request takes the following form:\n",
+    "\n",
+    "> `http://GSKY_URL/ows?`<FONT COLOR=\"red\">service</FONT>=WPS&<FONT COLOR=\"red\">request</FONT>=GetCapabilities&<FONT COLOR=\"red\">version</FONT>=version\n",
+    "\n",
+    "**WPS GetCapabilities example:**\n",
+    "\n",
+    "> [http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=GetCapabilities&version=1.0.0<br/>](http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=GetCapabilities&version=1.0.0)\n",
+    "\n",
+    "\n",
+    "\n",
+    "The **GetCapabilities** request produces an ``xml`` showing a list of the WPS processes:\n",
+    "\n",
+    "<img src=\"./images/wps_getcaps.png\">\n",
+    "\n",
+    "\n",
+    "### DescribeProcess\n",
+    "\n",
+    "To describe a process, we can run a **DescribeProcess** request which returns a detailed description of the requested WPS processes. \n",
+    "\n",
+    "A **DescribeProcess** request takes the following form (using the 8-day drill process as an example):\n",
+    "\n",
+    "> `http://GSKY_URL/ows?`<FONT COLOR=\"red\">service</FONT>=WPS&<FONT COLOR=\"red\">request</FONT>=DescribeProcess&<FONT COLOR=\"red\">version</FONT>=version&<FONT COLOR=\"red\">Identifier</FONT>=8-day+drill\n",
+    "\n",
+    "**WPS DescribeProcess example:**\n",
+    "\n",
+    "> [http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=DescribeProcess&version=1.0.0&Identifier=8-day+drill<br/>](http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=DescribeProcess&version=1.0.0&Identifier=8-day+drill)\n",
+    "\n",
+    "The **DescribeProcess** request produces an ``xml`` containing metadata about the requested process, with information about the inputs required to execute the 8-day drill process:\n",
+    "\n",
+    "<img src=\"./images/wps_describeprocess.png\">\n",
+    "\n",
+    "\n",
+    "\n",
+    "### Execute\n",
+    "\n",
+    "An **Execute** request returns the outputs of the process identified in the request. The **Execute** request can be sent through HTTP GET or HTTP POST with an XML request document. \n",
+    "\n",
+    "Let's try and construct an **Execute** POST request. From our 8-day drill **DescribeProcess** request, we can see that we will need to define a `start_datetime`, an `end_datetime` and our polygon `geometry`. \n",
+    "\n",
+    "\n",
+    "For this example, we will use a `start_datetime` of **2002-02-15T00:00** and an `end_datetime`of **2002-03-15T00:00**\n",
+    "\n",
+    "\n",
+    "### Geometry - defining a region in GeoJSON\n",
+    "\n",
+    "[geojson.io](http://geojson.io) allows us to draw polygons and get their gjson representation.\n",
+    "\n",
+    "Let's first navigate to the [geojson.io](http://geojson.io) webpage:\n",
+    "\n",
+    "<img src=\"./images/geojson1.png\">\n",
+    "\n",
+    "Now we can zoom into an area of interest:\n",
+    "\n",
+    "<img src=\"./images/geojson1b.png\">\n",
+    "\n",
+    "\n",
+    "<img src=\"./images/geojson2.png\">\n",
+    "\n",
+    "Next let's use the *Draw Polygon* or *Draw rectangle* tools to draw a bounding box over the area we are interested in (for this example, we are looking in Western Australia):\n",
+    "\n",
+    "<img src=\"./images/geojson3.png\">\n",
+    "\n",
+    "Finally, we can copy over the coordinates from the json output:\n",
+    "\n",
+    "<img src=\"./images/geojson4.png\">\n",
+    "\n",
+    "which for our example is:\n",
+    "\n",
+    "`{\"type\":\"Polygon\",\"coordinates\":[[[116.2,-30.4],[123.0,-30.4],[123.0,-26.3],[116.2,-26.3],[116.2,-30.4]]]}`\n",
+    "\n",
+    "\n",
+    "Finally, we need to build our **Execute** POST request. \n",
+    "\n",
+    "Below is an example of such a request where we have inserted our `start_datetime`, `end_datetime` and `geometry`:\n",
+    "\n",
+    "``<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+    "<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=\"http://www.opengis.net/wfs\" xmlns:wps=\"http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"http://www.opengis.net/ows/1.1\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:wcs=\"http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\">\n",
+    "  <ows:Identifier>8-day drill</ows:Identifier>\n",
+    "  <wps:DataInputs>\n",
+    "    <wps:Input>\n",
+    "      <ows:Identifier>start_datetime</ows:Identifier>\n",
+    "      <wps:Data>\n",
+    "        <wps:ComplexData>{\"type\":\"object\",\"properties\":{\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\",\"date-time\":\"2002-02-15T00:00\"}}}</wps:ComplexData>\n",
+    "      </wps:Data>\n",
+    "    </wps:Input>\n",
+    "    <wps:Input>\n",
+    "      <ows:Identifier>end_datetime</ows:Identifier>\n",
+    "      <wps:Data>\n",
+    "        <wps:ComplexData>{\"type\":\"object\",\"properties\":{\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\",\"date-time\":\"2002-03-15T00:00\"}}}</wps:ComplexData>\n",
+    "      </wps:Data>\n",
+    "    </wps:Input>\n",
+    "    <wps:Input>\n",
+    "      <ows:Identifier>geometry</ows:Identifier>\n",
+    "      <wps:Data>\n",
+    "        <wps:ComplexData>{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[116.2,-30.4],[123.0,-30.4],[123.0,-26.3],[116.2,-26.3],[116.2,-30.4]]]}}]}</wps:ComplexData>\n",
+    "      </wps:Data>\n",
+    "    </wps:Input>\n",
+    "  </wps:DataInputs>\n",
+    "  <wps:ResponseForm>\n",
+    "    <wps:ResponseDocument storeExecuteResponse=\"true\" status=\"true\"/>\n",
+    "  </wps:ResponseForm>\n",
+    "</wps:Execute>\n",
+    "``\n",
+    "\n",
+    "\n",
+    "Now let's save the request above as an xml (e.g. payload.xml)\n",
+    "\n",
+    "\n",
+    "To run our WPS request, open a terminal with the following command:\n",
+    "\n",
+    "``curl -X POST -d '@payload.xml' -o result.xml http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=Execute ``\n",
+    "\n",
+    "We can also run this command in our jupyter notebook:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0"
+      ]
+     },
+     "execution_count": 62,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import subprocess\n",
+    "\n",
+    "subprocess.call(['curl', '-X', 'POST', '-d', '@payload.xml', '-o', 'result.xml', 'http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=Execute'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## WPS in python "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### GetCapabilities"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import python libraries\n",
+    "\n",
+    "\n",
+    "#######################################################\n",
+    "#   OWSLib is a Python package for client             #\n",
+    "#   programming with Open Geospatial Consortium (OGC) #\n",
+    "#   web service (hence OWS)interface standards,       # \n",
+    "#   and their related content models.                 # \n",
+    "#######################################################\n",
+    "\n",
+    "\n",
+    "from owslib.wcs import WebCoverageService\n",
+    "from owslib.wps import WebProcessingService\n",
+    "from owslib.wps import printInputOutput\n",
+    "from PIL import Image\n",
+    "%matplotlib inline\n",
+    "\n",
+    "### Link to GSKY WPS\n",
+    "\n",
+    "gsky_url = 'http://130.56.242.16/ows/edge/generic_wps'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'GSKY WPS'"
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Define the WPS\n",
+    "\n",
+    "wps = WebProcessingService(gsky_url, verbose=False, skip_caps=True)\n",
+    "wps.getcapabilities()\n",
+    "wps.identification.title"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'GSKY - A Scalable, Distributed Geospatial Data Service. https://geonetwork.nci.org.au/geonetwork/srv/eng/catalog.search#/metadata/dc9fb2db-8d6f-4b76-a734-93ac7fbc9201'"
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# View the wps abstract\n",
+    "\n",
+    "wps.identification.abstract"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "geometryDrill Geometry Drill\n",
+      "8-day drill 8-day Fractional Cover Drill\n",
+      "LS8 NBAR True drill LS8 NBAR True Drill\n"
+     ]
+    }
+   ],
+   "source": [
+    "# List the WPS processes available\n",
+    "\n",
+    "for process in wps.processes:\n",
+    "    print(process.identifier, process.title)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### DescribeProcess\n",
+    "\n",
+    "Determine how a specific process needs to be invoked - i.e. what are its input parameters, and output result:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# DescribeProceess   (WPS Describe process doesn't work in python)\n",
+    "\n",
+    "# Let's look at the 8-day drill for this example\n",
+    "\n",
+    "#f = wps.processes[1]\n",
+    "#h = f.identifier\n",
+    "\n",
+    "#process = wps.describeprocess(h)\n",
+    "#process = wps.describeprocess('8-day drill')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Execute\n",
+    "\n",
+    "Submit a processing request (extraction of a climate index variable over a specific GML polygon, for a given period of time), monitor the execution until complete:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "### Example from https://geopython.github.io/OWSLib/ of what building an execution in python might look like:\n",
+    "\n",
+    "from owslib.wps import GMLMultiPolygonFeatureCollection\n",
+    "\n",
+    "polygon = [(116.2,-30.4), (123.0,-30.4), (123.0,-26.3), (116.2,-26.3), (116.2,-30.4)]\n",
+    "\n",
+    "featureCollection = GMLMultiPolygonFeatureCollection( [polygon] )\n",
+    "\n",
+    "processid = 'http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=Execute'\n",
+    "\n",
+    "inputs = [ (\"FEATURE_ATTRIBUTE_NAME\",\"the_geom\"),\n",
+    "            (\"DATASET_URI\", \"dods://cida.usgs.gov/qa/thredds/dodsC/derivatives/derivative-days_above_threshold.pr.ncml\"),\n",
+    "            (\"DATASET_ID\", \"ensemble_b1_pr-days_above_threshold\"),\n",
+    "            (\"TIME_START\",\"2010-01-01T00:00:00.000Z\"),\n",
+    "            (\"TIME_END\",\"2011-01-01T00:00:00.000Z\"),\n",
+    "            (\"REQUIRE_FULL_COVERAGE\",\"false\"),\n",
+    "            (\"DELIMITER\",\"COMMA\"),\n",
+    "            (\"STATISTICS\",\"MEAN\"),\n",
+    "            (\"GROUP_BY\",\"STATISTIC\"),\n",
+    "            (\"SUMMARIZE_TIMESTEP\",\"false\"),\n",
+    "            (\"SUMMARIZE_FEATURE_ATTRIBUTE\",\"false\"),\n",
+    "            (\"FEATURE_COLLECTION\", featureCollection)\n",
+    "           ]\n",
+    "output = \"OUTPUT\"\n",
+    "\n",
+    "execution = wps.execute(processid, inputs, output = \"OUTPUT\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0"
+      ]
+     },
+     "execution_count": 63,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import subprocess\n",
+    "\n",
+    "subprocess.call(['curl', '-X', 'POST', '-d', '@payload2.xml', '-o', 'result.txt', 'http://130.56.242.16/ows/edge/generic_wps?service=WPS&request=Execute'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Plotting output of WPS request"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import libraries\n",
+    "\n",
+    "import csv\n",
+    "import numpy as np\n",
+    "import datetime as dt\n",
+    "import matplotlib.dates as mdates\n",
+    "\n",
+    "from bokeh.layouts import gridplot\n",
+    "from bokeh.plotting import figure, show, output_file\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 78,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# extract the data we want to plot\n",
+    "\n",
+    "results = []\n",
+    "with open('result_long.txt', newline='') as inputfile:\n",
+    "    for row in csv.reader(inputfile):\n",
+    "        results.append(row)\n",
+    "\n",
+    "orig_dates = results[0::5]\n",
+    "orig_PV = results[1::5]\n",
+    "orig_NPV = results[2::5]\n",
+    "orig_BS = results[3::5]\n",
+    "orig_Total = results[4::5]\n",
+    "\n",
+    "dates_array = np.asarray([item for sublist in orig_dates for item in sublist])\n",
+    "PV_array = np.asarray([item for sublist in orig_PV for item in sublist])\n",
+    "NPV_array = np.asarray([item for sublist in orig_NPV for item in sublist])\n",
+    "BS_array = np.asarray([item for sublist in orig_BS for item in sublist])\n",
+    "Total_array = np.asarray([item for sublist in orig_Total for item in sublist])\n",
+    "\n",
+    "PV = PV_array.astype(np.float)\n",
+    "NPV = NPV_array.astype(np.float)\n",
+    "BS = BS_array.astype(np.float)\n",
+    "Total = Total_array.astype(np.float)\n",
+    "\n",
+    "# make dates python plottable\n",
+    "dt_dates = [dt.datetime.strptime(date,'%Y-%m-%dT%H:%M:%S.000Z').date() for date in dates_array ]\n",
+    "dates = mdates.date2num(list(dt_dates))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Plotting our time-series using Bokeh "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 79,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "######################################################################################################\n",
+    "#                                                                                                    #\n",
+    "#   Bokeh is an interactive visualization library that targets modern web browsers for presentation. #\n",
+    "#   Its goal is to provide elegant, concise construction of versatile graphics, and to extend this   #\n",
+    "#   capability with high-performance interactivity over very large or streaming datasets.            #\n",
+    "#                                                                                                    #\n",
+    "#   For more information about Bokeh, please visit https://bokeh.pydata.org/en/latest/               #\n",
+    "#                                                                                                    #\n",
+    "######################################################################################################\n",
+    "\n",
+    "## Plot PV NPV BS Total all on the same graph\n",
+    "\n",
+    "p = figure(x_axis_type=\"datetime\", title=\"8-day Fractional Cover Drill\", plot_height=800, plot_width=1600)\n",
+    "p.xgrid.grid_line_color=None\n",
+    "p.background_fill_color = \"beige\"\n",
+    "p.background_fill_alpha = 0.5\n",
+    "p.ygrid.grid_line_alpha=0.5\n",
+    "p.xaxis.axis_label = 'Time'\n",
+    "p.yaxis.axis_label = '%'\n",
+    "\n",
+    "p.line(dt_dates, PV, color = 'green', legend='PV')\n",
+    "p.line(dt_dates, NPV, color = 'blue', legend='NPV')\n",
+    "p.line(dt_dates, BS, color = 'red', legend='BS')\n",
+    "p.line(dt_dates, Total, color = 'orange', legend='Total')\n",
+    "\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "## Plot seperate graphs for each of PV NPV BS Total\n",
+    "\n",
+    "from bokeh.plotting import figure, show\n",
+    "from bokeh.palettes import Spectral6\n",
+    "from bokeh.models import ColumnDataSource, DataRange1d, Plot, LinearAxis, Grid, Legend, LegendItem\n",
+    "from bokeh.layouts import row, column, gridplot\n",
+    "\n",
+    "p1 = figure(x_axis_type=\"datetime\", title=\"PV\", plot_height=350, plot_width=800)\n",
+    "p1.xgrid.grid_line_color=None\n",
+    "#p1.background_fill_color = \"beige\"\n",
+    "#p1.background_fill_alpha = 0.5\n",
+    "p1.ygrid.grid_line_alpha=0.5\n",
+    "p1.xaxis.axis_label = 'Time'\n",
+    "p1.yaxis.axis_label = '%'\n",
+    "p1.line(dt_dates, PV, color = 'green')#, legend='PV')\n",
+    "\n",
+    "p2 = figure(x_axis_type=\"datetime\", title=\"NPV\", plot_height=350, plot_width=800)\n",
+    "p2.xgrid.grid_line_color=None\n",
+    "#p2.background_fill_color = \"beige\"\n",
+    "#p2.background_fill_alpha = 0.5\n",
+    "p2.ygrid.grid_line_alpha=0.5\n",
+    "p2.xaxis.axis_label = 'Time'\n",
+    "p2.yaxis.axis_label = '%'\n",
+    "p2.line(dt_dates, NPV, color = 'blue')#, legend='NPV')\n",
+    "\n",
+    "p3 = figure(x_axis_type=\"datetime\", title=\"BS\", plot_height=350, plot_width=800)\n",
+    "p3.xgrid.grid_line_color=None\n",
+    "p3.ygrid.grid_line_alpha=0.5\n",
+    "p3.xaxis.axis_label = 'Time'\n",
+    "p3.yaxis.axis_label = '%'\n",
+    "p3.line(dt_dates, BS, color = 'red')#, legend='BS')\n",
+    "\n",
+    "p4 = figure(x_axis_type=\"datetime\", title=\"Total\", plot_height=350, plot_width=800)\n",
+    "p4.xgrid.grid_line_color=None\n",
+    "p4.ygrid.grid_line_alpha=0.5\n",
+    "p4.xaxis.axis_label = 'Time'\n",
+    "p4.yaxis.axis_label = '%'\n",
+    "p4.line(dt_dates, Total, color = 'orange')#, legend='Total')\n",
+    "\n",
+    "p = gridplot([[p1,p2],[p3,p4]])\n",
+    "\n",
+    "show(p)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# inputs = open('./example_WPS_request/payload.xml','rb').read()\n",
+    "\n",
+    "# execute = wps.execute(None, [], request=inputs, output = 'OUTPUT.json')\n",
+    "\n",
+    "# from owslib.wps import monitorExecution\n",
+    "\n",
+    "# f = monitorExecution(execute)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [default]",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

@@ -1,0 +1,20 @@
+Welcome to the GSKY Manual
+===================================
+
+GSKY is a distributed geospatial data server exposing OGC services developed at the NCI.
+
+**In a few lines**
+-------------------
+
+GSKY is designed to:
+
+  * **Scale**: Distributed solution that scales in serving large volume of data for concurrent user access
+  * **Work with raw data**: Transparent ingestion of geospatial collections in many scientific data formats such as NetCDF, HDF or geoTIFF
+  * **Compute on-the-fly**: No need to precompute products. Resampling and reprojection happen on-the-fly in real time
+  * **Standards**:  Implements OGC standards such as WMS, WCS and WPS
+  * More functionalities to come....
+
+`GSKY website`_
+
+.. _GSKY website: http://gsky.nci.org.au/
+

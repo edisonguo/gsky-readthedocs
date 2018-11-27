@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web Coverage Services (WCS) &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Web Map Service (WMS)" href="WMS.html" />
+    <link rel="prev" title="Getting Started" href="../_userguide/using_terriaJS.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/datasets.html">Datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/install_jupyter.html">Using Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/using_terriaJS.html">Using TerriaJS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OGC web services</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">WCS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constructing-wcs-requests">Constructing WCS requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getcoverage-parameters">GetCoverage parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wcs-getcapabilities-and-describecoverage">WCS GetCapabilities and DescribeCoverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getcoverage-request">GetCoverage request</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WMS.html">WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WPS.html">WPS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS.html">WMS Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WCS.html">WCS Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_ClicknShip.html">WCS Click and Ship</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">WMS ipyleaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WPS_Polygon_Drill.html">WPS Polygon Drill</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GEOGLAM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/gsky_through_the_web.html"> GEOGLAM</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY Source code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_source/source.html">Source code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY license</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_license/license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_help/help.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Web Coverage Services (WCS)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_ogc/WCS.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="web-coverage-services-wcs">
+<h1>Web Coverage Services (WCS)<a class="headerlink" href="#web-coverage-services-wcs" title="Permalink to this headline">¶</a></h1>
+<p>NCI’s GSKY Data Server supports the Open Geospatial Consortium (OGC) Web Coverage Service (WCS), which is a standard protocol for serving geospatial data in common formats such as NetCDF and GeoTIFF.</p>
+<div class="section" id="constructing-wcs-requests">
+<h2>Constructing WCS requests<a class="headerlink" href="#constructing-wcs-requests" title="Permalink to this headline">¶</a></h2>
+<p>GSKY’s Web Coverage Service (WCS) allows users to request data or subsets of data in either NetCDF3 or GeoTIFF format. The request is made by constructing a GetCoverage URL, which is then used within a web browser to communicate to the GSKY Data Server.</p>
+<p>For example, the GetCoverage request takes the following form:</p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?<span class="red">service</span>=WCS&amp;<span class="red">version</span>=1.0.0&amp;<span class="red">request</span>=GetCoverage&amp;<span class="red">coverage</span>=<span class="green">value</span>&amp;<span class="red">format</span>=<span class="green">value</span>
+&amp;<span class="blue">bbox</span>=<span class="green">value</span>&amp;<span class="blue">crs</span>=<span class="green">value</span></p>
+<p>where <span class="red">red</span> indicates required fields, <span class="blue">blue</span> are optional, and <span class="green">green</span> are where input values relevant to the dataset and user request need to be defined.</p>
+</div>
+<div class="section" id="getcoverage-parameters">
+<h2>GetCoverage parameters<a class="headerlink" href="#getcoverage-parameters" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="27%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Required/Optional</th>
+<th class="head">Input</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>service</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">WCS</span></code></td>
+</tr>
+<tr class="row-odd"><td>version</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">1.0.0</span></code></td>
+</tr>
+<tr class="row-even"><td>request</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">GetCoverage</span></code></td>
+</tr>
+<tr class="row-odd"><td>coverage</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>format</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">GeoTIFF,</span> <span class="pre">GeoTIFF_Float,</span> <span class="pre">NetCDF3</span></code></td>
+</tr>
+<tr class="row-odd"><td>bbox <code class="docutils literal notranslate"><span class="pre">*</span></code></td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;xmin,ymin,xmax,ymax&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>time <code class="docutils literal notranslate"><span class="pre">*</span></code></td>
+<td>Required/Optional</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;time_value&gt;</span></code></td>
+</tr>
+<tr class="row-odd"><td>srs, or crs</td>
+<td>Required/Optional</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;srs_value&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;crs_value&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">*</span></code> For large files and/or files with a time dimension, these might be necessary. If <code class="docutils literal notranslate"><span class="pre">bbox</span></code> is not defined, the entire spatial domain will be returned (if server limits allow)
+and if <code class="docutils literal notranslate"><span class="pre">time</span></code> is not specified, either the first or sometimes the last timestep is returned.</p>
+</div>
+<div class="section" id="wcs-getcapabilities-and-describecoverage">
+<h2>WCS GetCapabilities and DescribeCoverage<a class="headerlink" href="#wcs-getcapabilities-and-describecoverage" title="Permalink to this headline">¶</a></h2>
+<p><strong>Where do you find valid input values?</strong></p>
+<p>In order to contruct the <strong>GetCoverage</strong> URL, a <strong>GetCapabilities</strong> request can be made to the server. This requests returns an xml describing the available
+WCS parameters (metadata, services, and data) made available by NCI’s GSKY server. Additional metadata information can also be requested about a specific
+coverage layer by making a <strong>DescribeCoverage</strong> request.</p>
+<p><strong>GetCapabilities example:</strong></p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;request=GetCapabilities">http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;request=GetCapabilities</a></p>
+<img alt="../_images/gsky_wcs1.png" src="../_images/gsky_wcs1.png" />
+<p><strong>DescribeCoverage example:</strong></p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;coverage=LS5:NBAR:TRUE&amp;request=DescribeCoverage">http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;coverage=LS5:NBAR:TRUE&amp;request=DescribeCoverage</a></p>
+<img alt="../_images/gsky_wcs2.png" src="../_images/gsky_wcs2.png" />
+</div>
+<div class="section" id="getcoverage-request">
+<h2>GetCoverage request<a class="headerlink" href="#getcoverage-request" title="Permalink to this headline">¶</a></h2>
+<p>Using the information returned from the GetCapabilities and DescribeCoverage requests, a GetMap URL can be constructed and then entered into the address bar of any web browser.</p>
+<p><strong>Example GetCoverage (NetCDF format)</strong></p>
+<blockquote>
+<div><blockquote>
+<div><div class="line-block">
+<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?</div>
+<div class="line"><span class="red">service</span>=WCS&amp;</div>
+<div class="line"><span class="red">coverage</span>=LS7:NBAR:TRUE&amp;</div>
+<div class="line"><span class="red">crs</span>=EPSG:4326&amp;</div>
+<div class="line"><span class="red">format</span>=NetCDF&amp;</div>
+<div class="line"><span class="red">request</span>=GetCoverage&amp;</div>
+<div class="line"><span class="red">height</span>=256&amp;</div>
+<div class="line"><span class="red">width</span> =256&amp;</div>
+<div class="line"><span class="red">version</span>=1.0.0&amp;</div>
+<div class="line"><span class="red">bbox</span>=148,-37,151,-34&amp;</div>
+<div class="line"><span class="red">time</span>=1999-08-05T00:00:00.000Z</div>
+</div>
+</div></blockquote>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=NetCDF&amp;request=GetCoverage&amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE&amp;time=1999-08-05T00:00:00.000Z">http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=NetCDF&amp;request=GetCoverage &amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE &amp;time=1999-08-05T00:00:00.000Z</a>.</p>
+<p><strong>Example GetCoverage (GeoTIFF format)</strong></p>
+<blockquote>
+<div><blockquote>
+<div><div class="line-block">
+<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?</div>
+<div class="line"><span class="red">service</span>=WCS&amp;</div>
+<div class="line"><span class="red">coverage</span>=LS7:NBAR:TRUE&amp;</div>
+<div class="line"><span class="red">crs</span>=EPSG:4326&amp;</div>
+<div class="line"><span class="red">format</span>=GeoTIFF&amp;</div>
+<div class="line"><span class="red">request</span>=GetCoverage&amp;</div>
+<div class="line"><span class="red">height</span>=256&amp;</div>
+<div class="line"><span class="red">width</span> =256&amp;</div>
+<div class="line"><span class="red">version</span>=1.0.0&amp;</div>
+<div class="line"><span class="red">bbox</span>=148,-37,151,-34&amp;</div>
+<div class="line"><span class="red">time</span>=1999-08-05T00:00:00.000Z</div>
+</div>
+</div></blockquote>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=GeoTIFF&amp;request=GetCoverage&amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE&amp;time=1999-08-05T00:00:00.000Z">http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=GeoTIFF&amp;request=GetCoverage &amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE &amp;time=1999-08-05T00:00:00.000Z</a>.</p>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="WMS.html" class="btn btn-neutral float-right" title="Web Map Service (WMS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../_userguide/using_terriaJS.html" class="btn btn-neutral" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

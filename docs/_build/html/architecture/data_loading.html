@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Loading &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/help.html">Help</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Data Loading</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/architecture/data_loading.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="data-loading">
+<span id="dev-arch-storage"></span><h1>Data Loading<a class="headerlink" href="#data-loading" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="types-of-data-loading">
+<h2>Types of Data Loading<a class="headerlink" href="#types-of-data-loading" title="Permalink to this headline">¶</a></h2>
+<p>There are two major use-cases for loading data from the Datacube
+<em>Ad hoc access</em>, and <em>Large scale processing</em>. These are described below.</p>
+<ol class="arabic simple">
+<li>Ad hoc access</li>
+</ol>
+<ul class="simple">
+<li>A small spatial region and time segment are chosen by the user</li>
+<li>Data is expected to fit into RAM</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Large scale processing (<code class="xref py py-class docutils literal notranslate"><span class="pre">GridWorkflow</span></code>)</li>
+</ol>
+<ul class="simple">
+<li>Continental scale processing</li>
+<li>Used to compute new products or to perform statistics on existing data</li>
+<li>Often unconstrained spatially</li>
+<li>Often unconstrained along time dimension</li>
+<li>Data is accessed using regular grid in <em>small enough</em> chunks</li>
+<li>The specific access pattern is algorithm/compute environment dependent
+and is supplied by the user and requires manual tuning</li>
+</ul>
+<div class="section" id="ad-hoc-data-access">
+<h3>Ad hoc data access<a class="headerlink" href="#ad-hoc-data-access" title="Permalink to this headline">¶</a></h3>
+<p>Typically a small spatial region and time range are chosen by the user,
+and all of the returned Data is expected to fit into RAM.</p>
+<p>One database query maps to one <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> which is
+processed/displayed/analyzed by custom user code. This happens as a two
+step process:</p>
+<ol class="arabic simple">
+<li>Build a Virtual Storage Resource (VSR) – a description of what data
+needs to be loaded, possibly from many disparate sources</li>
+<li>Load data from the VSR into a contiguous memory representation
+<code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.Dataset</span></code></li>
+</ol>
+<p>Building the VSR involves querying the database to find all possible <em>storage
+units</em> that might contribute to the <abbr title="region of interest, x,y,t">ROI</abbr> and
+performing various post processing on the result:</p>
+<ul class="simple">
+<li>Possibly pruning results somewhat based on <em>valid data</em> geo-polygons,
+or any other metric</li>
+<li>Grouping result by time (i.e. assembling several <code class="docutils literal notranslate"><span class="pre">VSR2D</span></code> into <code class="docutils literal notranslate"><span class="pre">VSR3D</span></code>)</li>
+</ul>
+<p><strong>Code refs:</strong> <code class="xref py py-meth docutils literal notranslate"><span class="pre">find_datasets()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">group_datasets()</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code></p>
+<p>Once a VSR is built it can be loaded into memory either as a whole or small
+portions at a time.</p>
+<p><strong>Code refs:</strong> <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_data()</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">GeoBox</span></code></p>
+</div>
+<div class="section" id="large-scale-processing-data-access">
+<h3>Large scale processing data access<a class="headerlink" href="#large-scale-processing-data-access" title="Permalink to this headline">¶</a></h3>
+<p>Just like in the ad hoc scenario described above there are two steps.
+One involves querying the database in order to build a VSR, and the
+second step is loading data. The difference is in the way the VSR is built.
+Rather than constructing one giant VSR covering the entire collection a
+large number of VSRs are constructed each covering a non-overlapping
+region (one of the cells on a grid). Rather than querying the database once
+for each grid cell, a single query is performed and the result is
+then binned according to the <a class="reference internal" href="../about/glossary.html#term-grid-spec"><span class="xref std std-term">grid spec</span></a>.</p>
+<p>Data loading happens in exactly the same way as in the ad hoc approach, except
+it usually happens in parallel across multiple processing nodes.</p>
+</div>
+</div>
+<div class="section" id="data-structures">
+<h2>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="virtual-storage-resource">
+<h3>Virtual Storage Resource<a class="headerlink" href="#virtual-storage-resource" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><em>Virtual</em> as opposite of Real/Physical, meaning constructed on the fly
+as opposed to read from database or file. Logical is another name
+often used for this kind of thing</li>
+<li><em>Storage</em> as in just container of data, no possibility for compute
+beyond maybe projection changes, not specific to raster data</li>
+<li><em>Resource</em> as in U<strong>R</strong>I, U<strong>R</strong>L, possibly file on some
+local/network file system, but could be S3, HTTP, FTP, OPeNDAP, etc.</li>
+</ul>
+<p>Provides a unified view of a collection of disparate storage resources.</p>
+<p>At the moment there is no actual <em>Virtual Storage Resource</em> class
+instead we use</p>
+<ul class="simple">
+<li>VSR3D is an <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> that has a time dimension and contains
+a VSR2D for every timestamp</li>
+<li>VSR2D is a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code></li>
+<li><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> aggregates multiple bands into one storage
+resource. It is stored in the database and is used for provenance tracking.</li>
+</ul>
+<p>All the information about individual <em>storage units</em> is captured in the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code>, it includes:</p>
+<ul class="simple">
+<li>Mapping from band names to underlying files/URIs</li>
+<li>Geo-spatial info: CRS, extent</li>
+<li>Time range covered by the observation</li>
+<li>Complete metadata document (excluding lineage data)</li>
+</ul>
+<p>It’s important to note that <code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> describes
+observations for one timeslice only.</p>
+<blockquote>
+<div><strong>TODO</strong>: describe issues with timestamps, each pixel has it’s own
+actual capture time, which we do not store or track, but it does
+mean that single time slice is not just a point in time, but rather
+an interval)</div></blockquote>
+<p>The relationship between <code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> and <em>storage units</em> is
+complex, it’s not one to one, nor is one to many. Common scenarios are
+listed below</p>
+<ol class="arabic simple">
+<li><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> refers to several GeoTiff files, one for
+each band. Each GeoTiff file is referenced by exactly one dataset.</li>
+<li><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> refers to one netCDF4 file containing
+single timeslice, all bands are stored in that one file. NetCDF4 file
+is referenced by one dataset.</li>
+<li><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> refers to one time slice within a
+<em>stacked</em> netCDF4 file. This same netCDF4 file is referenced by a
+large number of datasets, each referring to a single time slice
+within the file.</li>
+</ol>
+<p>It is assumed that individual storage units within a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code> are of the same format. In fact storage
+format is usually shared by all datasets belonging to the same <a class="reference internal" href="data_model.html#product"><span class="std std-ref">Product</span></a>,
+although it is possible to index different formats under one product.</p>
+</div>
+</div>
+<div class="section" id="data-load-in-detail">
+<h2>Data load in detail<a class="headerlink" href="#data-load-in-detail" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\text{VSR}, \text{GeoBox}, [\text{bands of interest}, \text{ opts}] \rightarrow \text{pixel data}\]</div>
+<p>Once you have VSR constructed you can load all or part of it into memory
+using <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_data()</span></code>. At this point users can customise which bands they
+want, how to deal with overlapping data, and other options like a per band
+re-sampling strategy can also be supplied.</p>
+<div class="section" id="internal-interfaces">
+<h3>Internal interfaces<a class="headerlink" href="#internal-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>The primary internal interface for loading data from storage is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.storage.storage.BandDataSource</span></code>, unfortunately this rather generic name is taken by the
+specific implementation based on the <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/">rasterio</a> library.
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.storage.storage.BandDataSource</span></code> is responsible for describing data stored for a given
+band, one can query:</p>
+<ul class="simple">
+<li>The Shape (in pixels) and data type</li>
+<li>Geospatial information: CRS + Affine transform</li>
+</ul>
+<p>and also provides access to pixel data via 2 methods</p>
+<ul class="simple">
+<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code>: access a section of source data in native projection but
+possibly in different resolution</li>
+<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">reproject()</span></code>: access a section of source data, re-projecting to
+an arbitrary projection/resolution</li>
+</ul>
+<p>This interface follows very closely the interface provided by the <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/">rasterio</a>
+library. Conflating the reading and transformation of pixel data into one
+function is motivated by the need for efficient data access. Some file
+formats support multi-resolution storage for example, so it is more
+efficient to read data at the appropriate scale rather than reading
+highest resolution version followed by down sampling. Similarly
+re-projection can be more memory efficient if source data is loaded in
+smaller chunks interleaved with raster warping execution compared to a
+conceptually simpler but less efficient <em>load all then warp all</em>
+approach.</p>
+<p><strong>Code refs:</strong> <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_data()</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">GeoBox</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">BandDataSource</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">RasterDatasetDataSource</span></code></p>
+</div>
+</div>
+<div class="section" id="fuse-function-customisation">
+<h2>Fuse function customisation<a class="headerlink" href="#fuse-function-customisation" title="Permalink to this headline">¶</a></h2>
+<p>A VSR2D might consist of multiple overlapping pixel planes. This is
+either due to duplicated data (e.g.&nbsp;consecutive Landsat scenes include a north/south
+overlap, and all derived products keep those duplicates) or due to
+grouping using a larger time period (e.g.&nbsp;one month). Whatever the reason,
+the overlap needs to be resolved when loading data since the user expects a
+single plane of pixels.</p>
+<p>The strategy for dealing with overlapping data can be supplied by the
+user at the load time. The default strategy is to simply pick the first
+observed valid pixel value, where any pixel that is different from the
+<code class="docutils literal notranslate"><span class="pre">nodata</span></code> value is considered valid. In situations where pixel validity
+is defined by a more complex metric, one can supply a custom <code class="docutils literal notranslate"><span class="pre">fuse</span></code>
+function. Fuse function takes two pixel planes (<code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) of
+the same shape and data type, the first contains <em>fused result so far</em>,
+and the second one is the <em>new data</em>. The <code class="docutils literal notranslate"><span class="pre">fuse</span></code> function is expected to
+update <em>fused result so far</em> with the <em>new data</em> in place.</p>
+<p>Below is a pseudo-code of the load code that uses a <code class="docutils literal notranslate"><span class="pre">fuse</span></code> function
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">reproject_and_fuse()</span></code> is the actual implementation).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dst</span> <span class="o">=</span> <span class="n">ndarray_filled_with_nodata_values</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets_for_this_timeslot</span><span class="p">:</span>
+   <span class="n">new_data</span> <span class="o">=</span> <span class="n">get_the_data_in_the_right_projection</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+   <span class="c1"># tmp and dst have the same shape and dtype</span>
+   <span class="n">fuse</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">new_data</span><span class="p">)</span> <span class="c1">## &lt;&lt; update dst in place</span>
+</pre></div>
+</div>
+<p><strong>Code refs:</strong> <code class="xref py py-func docutils literal notranslate"><span class="pre">reproject_and_fuse()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">_fuse_measurement()</span></code>,
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">load_data()</span></code></p>
+<div class="section" id="problems-with-the-current-approach-to-fusing">
+<h3>Problems with the current approach to fusing<a class="headerlink" href="#problems-with-the-current-approach-to-fusing" title="Permalink to this headline">¶</a></h3>
+<p>One major limitation is that the <code class="docutils literal notranslate"><span class="pre">fuse</span></code> function is customised per
+product, but should really be customised per band. It is completely
+reasonable for different bands of the same product to be sufficiently
+different as to require a different fusing strategy. And since a <code class="docutils literal notranslate"><span class="pre">fuse</span></code>
+function doesn’t know which band it is processing it can not dispatch to
+different implementations internally.</p>
+<p>The types of computation a <code class="docutils literal notranslate"><span class="pre">fuse</span></code> function can perform is limited by the
+interface, for example one can not implement <em>average</em> nor <em>median</em>. With
+some modification it should be possible to support arbitrary incremental
+computations, like <em>average</em>, without loading all the data at once.</p>
+</div>
+</div>
+<div class="section" id="lazy-load-with-dask">
+<h2>Lazy load with dask<a class="headerlink" href="#lazy-load-with-dask" title="Permalink to this headline">¶</a></h2>
+<p>In computer science context <em>lazy</em> means roughly <em>not computed until
+needed</em>. Rather then loading all the data immediately <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_data()</span></code>
+function can instead construct an <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> that the user can use
+in the same way as a fully <em>loaded</em> data set, except that pixel data will be
+fetched from disk/network on demand as needed. The on-demand loading
+functionality is provided by third party libraries <a class="reference external" href="https://xarray.pydata.org/">xarray</a> and
+<a class="reference external" href="https://dask.pydata.org/">dask</a>(used internally by <a class="reference external" href="https://xarray.pydata.org/">xarray</a>). Datacube code constructs
+a <em>recipe</em> for loading data on demand, this recipe is executed as needed
+by <code class="docutils literal notranslate"><span class="pre">xarray</span></code>/<code class="docutils literal notranslate"><span class="pre">dask</span></code> library when real data is required to be loaded for the first
+time.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>TODO</strong></p>
+<ul class="last simple">
+<li>Discuss chunks and how they relate to on-disk storage chunks</li>
+<li>Discuss memory management, how data is unloaded from RAM,
+avoiding out of memory errors when processing large arrays.</li>
+<li>We need to provide a clear guidance as to when this mode should be used
+and how</li>
+</ul>
+</div>
+</div>
+<div class="section" id="limitations-and-problems">
+<h2>Limitations and problems<a class="headerlink" href="#limitations-and-problems" title="Permalink to this headline">¶</a></h2>
+<p>One of the original goals of Datacube is to support a wide variety of
+different input data sources, as such flexibility has been preferred to
+efficiency. When designing an API one would strive for simplicity,
+generality and efficiency. An “Ideal API” would have all three turned up to
+the max, but often it is necessary to balance one at the expense of the
+other. Efficiency in particular often has significant complexity costs,
+it is also harder to achieve when striving to be as generic as possible.</p>
+<p>Internal interfaces for reading data is per time slice per band.
+Description of a storage unit for a given band for a given time slice
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Dataset</span></code>) is passed from the database to storage
+specific loading code one by one, and the results are assembled into a
+3D structure by generic loading code.</p>
+<p>On a plus side this maps nicely to the way things work in
+<code class="docutils literal notranslate"><span class="pre">gdal/rasterio</span></code> land and is the most generic representation that
+allows for greatest variety of storage regimes</p>
+<ul class="simple">
+<li>bands/time slices split across multiple files</li>
+<li>bands stored in one files, one file per time slice</li>
+<li>stacked files that store multiple time slices and all the bands</li>
+</ul>
+<p>On the other hand this way of partitioning code leads to less than
+optimal I/O access patterns. This is particularly noticeable when using
+“stacked files” (a common use case on the NCI installation of the
+datacube) while doing “pixel drill” type of access.</p>
+<p>Problems are:</p>
+<ul class="simple">
+<li>Same netCDF file is opened/closed multiple times – no netCDF chunk
+cache sharing between reads</li>
+<li>Larger more complex (many bands) files might have slightly larger
+“open overhead” to begin with, not a problem if you share the same
+file handle to load all the data of interest, but adds to a
+significant cost when you re-open the same file many times
+needlessly.</li>
+<li>File open overhead increases as we move towards cloud storage
+solutions like Amazon S3.</li>
+<li>Chunking along time dimension makes depth reads even more costly when
+using this access pattern since data is read and decompressed just to
+be thrown away (in the case of NCI install, chunking along time
+dimension is 5 time slices per chunk, so 80% of decoded data is
+thrown away due to access pattern, since we only read one time slice
+at a time).</li>
+</ul>
+<div class="section" id="possible-solutions">
+<h3>Possible Solutions<a class="headerlink" href="#possible-solutions" title="Permalink to this headline">¶</a></h3>
+<p>One possible solution is to keep internal interfaces as they are and
+introduce global IO cache to allow sharing of opened files/partially
+loaded data. This adds quite a bit of complexity, particularly around
+memory management: can’t just keep adding data to the cache, need to
+purge some data eventually, meaning that depending on the use pattern
+efficiency improvements aren’t guaranteed. Global state that such a
+solution will need to rely on is problematic in the multi-threaded
+environment and often leads to hard to debug errors even in a single
+threaded application. Global state makes testing harder too.</p>
+<p>As such we believe that a more practical approach is to modify internal
+IO interfaces to support efficient reads from stacked multi-band
+storage. To do that we need to move internal interface boundary up to
+VSR3D level, VSR in <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> out.</p>
+<p>We propose roughly the following interface</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">::</span> <span class="pre">VSR,</span> <span class="pre">[output</span> <span class="pre">CRS,</span> <span class="pre">output</span> <span class="pre">scale,</span> <span class="pre">opts]</span> <span class="pre">-&gt;</span> <span class="pre">VSRDataSource</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">read</span> <span class="pre">::</span> <span class="pre">VSRDataSource,</span> <span class="pre">[GeoBox,</span> <span class="pre">bands</span> <span class="pre">of</span> <span class="pre">interest,</span> <span class="pre">time</span> <span class="pre">of</span> <span class="pre">interest,</span> <span class="pre">opts]</span> <span class="pre">-&gt;</span> <span class="pre">xarray.Dataset</span></code></li>
+</ol>
+<p>A two step process, first construct pixel data source supplying ahead of
+time output projection and scale (optional, defaulting to native
+projection and resolution when possible), then read sections of data as
+needed, user can choose what spatio-temporal region they want to access
+and select a subset of bands they need to read into memory. Note that
+read might perform re-projection under the hood, based on whether output
+projection/resolution was supplied and whether it differs from native.</p>
+</div>
+</div>
+<div class="section" id="storage-drivers">
+<h2>Storage Drivers<a class="headerlink" href="#storage-drivers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gdal">
+<h3>GDAL<a class="headerlink" href="#gdal" title="Permalink to this headline">¶</a></h3>
+<p>The GDAL-based driver uses <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/">rasterio</a> to read a single time slice of a single
+variable/measurement at a time, in a synchronous manner.</p>
+</div>
+<div class="section" id="s3io">
+<h3>S3IO<a class="headerlink" href="#s3io" title="Permalink to this headline">¶</a></h3>
+<p>This driver provides access to chunked array storage on Amazon S3.</p>
+</div>
+</div>
+<div class="section" id="supporting-diagrams">
+<h2>Supporting Diagrams<a class="headerlink" href="#supporting-diagrams" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-read-process">
+<h3>Data Read Process<a class="headerlink" href="#data-read-process" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="storage-classes">
+<h3>Storage Classes<a class="headerlink" href="#storage-classes" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

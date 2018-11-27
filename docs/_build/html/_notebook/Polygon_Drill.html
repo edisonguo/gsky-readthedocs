@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OGC Web Processing Service (WPS) with GSKY &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="../_installation/install.html" />
+    <link rel="prev" title="GSKY WMS with ipyleafet and widgets" href="Notebook_GSKY_WMS_ipyleaflet.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/datasets.html">Datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/install_jupyter.html">Software setup for Jupyter notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/gsky_through_the_web.html">GSKY through the web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/using_terriaJS.html">Using TerriaJS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OGC web services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WCS.html">WCS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WMS.html">WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WPS.html">WPS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Notebook_GSKY_WCS.html">GSKY WCS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_GSKY_WMS.html">GSKY WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OGC Web Processing Service (WPS) with GSKY</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#GetCapabilities">GetCapabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#DescribeProcess">DescribeProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Execute">Execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Geometry---defining-a-region-in-GeoJSON">Geometry - defining a region in GeoJSON</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#WPS-in-python">WPS in python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#GetCapabilities">GetCapabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#DescribeProcess">DescribeProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Execute">Execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plotting-output-of-WPS-request">Plotting output of WPS request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plotting-our-time-series-using-Bokeh">Plotting our time-series using Bokeh</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_installation/install.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_source/source.html">Source code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY license</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_license/license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_help/help.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>OGC Web Processing Service (WPS) with GSKY</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_notebook/Polygon_Drill.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="OGC-Web-Processing-Service-(WPS)-with-GSKY">
+<h1>OGC Web Processing Service (WPS) with GSKY<a class="headerlink" href="#OGC-Web-Processing-Service-(WPS)-with-GSKY" title="Permalink to this headline">¶</a></h1>
+<p>The OGC Web Processing Service (WPS) Interface Standard provides access
+to pre-defined processes and provides job control operations that can
+instantiate, control and monitor processing jobs. To do this, WPS
+defines the following operations:</p>
+<ul class="simple">
+<li><strong>GetCapabilities</strong></li>
+<li><strong>DescribeProcess</strong></li>
+<li><strong>Execute</strong></li>
+</ul>
+<div class="section" id="GetCapabilities">
+<h2>GetCapabilities<a class="headerlink" href="#GetCapabilities" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>GetCapabilities</strong> request returns metadata about the GSKY
+supported operations and processes.</p>
+<p>For example, the <strong>GetCapabilities</strong> request takes the following form:</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">http://GSKY_URL/ows?</span></code>service=WPS&amp;request=GetCapabilities&amp;version=version</div></blockquote>
+<p><strong>WPS GetCapabilities example:</strong></p>
+<blockquote>
+<div><a class="reference external" href="http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=GetCapabilities&amp;version=1.0.0">http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=GetCapabilities&amp;version=1.0.0</a></div></blockquote>
+<p>The <strong>GetCapabilities</strong> request produces an <code class="docutils literal notranslate"><span class="pre">xml</span></code> showing a list of
+the WPS processes:</p>
+</div>
+<div class="section" id="DescribeProcess">
+<h2>DescribeProcess<a class="headerlink" href="#DescribeProcess" title="Permalink to this headline">¶</a></h2>
+<p>To describe a process, we can run a <strong>DescribeProcess</strong> request which
+returns a detailed description of the requested WPS processes.</p>
+<p>A <strong>DescribeProcess</strong> request takes the following form (using the 8-day
+drill process as an example):</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">http://GSKY_URL/ows?</span></code>service=WPS&amp;request=DescribeProcess&amp;version=version&amp;Identifier=8-day+drill</div></blockquote>
+<p><strong>WPS DescribeProcess example:</strong></p>
+<blockquote>
+<div><a class="reference external" href="http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=DescribeProcess&amp;version=1.0.0&amp;Identifier=8-day+drill">http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=DescribeProcess&amp;version=1.0.0&amp;Identifier=8-day+drill</a></div></blockquote>
+<p>The <strong>DescribeProcess</strong> request produces an <code class="docutils literal notranslate"><span class="pre">xml</span></code> containing metadata
+about the requested process, with information about the inputs required
+to execute the 8-day drill process:</p>
+</div>
+<div class="section" id="Execute">
+<h2>Execute<a class="headerlink" href="#Execute" title="Permalink to this headline">¶</a></h2>
+<p>An <strong>Execute</strong> request returns the outputs of the process identified in
+the request. The <strong>Execute</strong> request can be sent through HTTP GET or
+HTTP POST with an XML request document.</p>
+<p>Let’s try and construct an <strong>Execute</strong> POST request. From our 8-day
+drill <strong>DescribeProcess</strong> request, we can see that we will need to
+define a <code class="docutils literal notranslate"><span class="pre">start_datetime</span></code>, an <code class="docutils literal notranslate"><span class="pre">end_datetime</span></code> and our polygon
+<code class="docutils literal notranslate"><span class="pre">geometry</span></code>.</p>
+<p>For this example, we will use a <code class="docutils literal notranslate"><span class="pre">start_datetime</span></code> of
+<strong>2002-02-15T00:00</strong> and an <code class="docutils literal notranslate"><span class="pre">end_datetime</span></code>of <strong>2002-03-15T00:00</strong></p>
+</div>
+<div class="section" id="Geometry---defining-a-region-in-GeoJSON">
+<h2>Geometry - defining a region in GeoJSON<a class="headerlink" href="#Geometry---defining-a-region-in-GeoJSON" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://geojson.io">geojson.io</a> allows us to draw polygons and get
+their gjson representation.</p>
+<p>Let’s first navigate to the <a class="reference external" href="http://geojson.io">geojson.io</a> webpage:</p>
+<p>Now we can zoom into an area of interest:</p>
+<p>Next let’s use the <em>Draw Polygon</em> or <em>Draw rectangle</em> tools to draw a
+bounding box over the area we are interested in (for this example, we
+are looking in Western Australia):</p>
+<p>Finally, we can copy over the coordinates from the json output:</p>
+<p>which for our example is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[[[116.2,-30.4],[123.0,-30.4],[123.0,-26.3],[116.2,-26.3],[116.2,-30.4]]]}</span></code></p>
+<p>Finally, we need to build our <strong>Execute</strong> POST request.</p>
+<p>Below is an example of such a request where we have inserted our
+<code class="docutils literal notranslate"><span class="pre">start_datetime</span></code>, <code class="docutils literal notranslate"><span class="pre">end_datetime</span></code> and <code class="docutils literal notranslate"><span class="pre">geometry</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;?xml</span> <span class="pre">version=&quot;1.0&quot;</span> <span class="pre">encoding=&quot;UTF-8&quot;?&gt;</span> <span class="pre">&lt;wps:Execute</span> <span class="pre">version=&quot;1.0.0&quot;</span> <span class="pre">service=&quot;WPS&quot;</span> <span class="pre">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="pre">xmlns=&quot;http://www.opengis.net/wps/1.0.0&quot;</span> <span class="pre">xmlns:wfs=&quot;http://www.opengis.net/wfs&quot;</span> <span class="pre">xmlns:wps=&quot;http://www.opengis.net/wps/1.0.0&quot;</span> <span class="pre">xmlns:ows=&quot;http://www.opengis.net/ows/1.1&quot;</span> <span class="pre">xmlns:gml=&quot;http://www.opengis.net/gml&quot;</span> <span class="pre">xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;</span> <span class="pre">xmlns:wcs=&quot;http://www.opengis.net/wcs/1.1.1&quot;</span> <span class="pre">xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;</span> <span class="pre">xsi:schemaLocation=&quot;http://www.opengis.net/wps/1.0.0</span> <span class="pre">http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd&quot;&gt;</span>&#160;&#160; <span class="pre">&lt;ows:Identifier&gt;8-day</span> <span class="pre">drill&lt;/ows:Identifier&gt;</span>&#160;&#160; <span class="pre">&lt;wps:DataInputs&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:Input&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;ows:Identifier&gt;start_datetime&lt;/ows:Identifier&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:Data&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;timestamp&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;format&quot;:&quot;date-time&quot;,&quot;date-time&quot;:&quot;2002-02-15T00:00&quot;}}}&lt;/wps:ComplexData&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;/wps:Data&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;/wps:Input&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:Input&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;ows:Identifier&gt;end_datetime&lt;/ows:Identifier&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:Data&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;timestamp&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;format&quot;:&quot;date-time&quot;,&quot;date-time&quot;:&quot;2002-03-15T00:00&quot;}}}&lt;/wps:ComplexData&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;/wps:Data&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;/wps:Input&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:Input&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;ows:Identifier&gt;geometry&lt;/ows:Identifier&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:Data&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;FeatureCollection&quot;,&quot;features&quot;:[{&quot;type&quot;:&quot;Feature&quot;,&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[[[116.2,-30.4],[123.0,-30.4],[123.0,-26.3],[116.2,-26.3],[116.2,-30.4]]]}}]}&lt;/wps:ComplexData&gt;</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;/wps:Data&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;/wps:Input&gt;</span>&#160;&#160; <span class="pre">&lt;/wps:DataInputs&gt;</span>&#160;&#160; <span class="pre">&lt;wps:ResponseForm&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">&lt;wps:ResponseDocument</span> <span class="pre">storeExecuteResponse=&quot;true&quot;</span> <span class="pre">status=&quot;true&quot;/&gt;</span>&#160;&#160; <span class="pre">&lt;/wps:ResponseForm&gt;</span> <span class="pre">&lt;/wps:Execute&gt;</span></code></p>
+<p>Now let’s save the request above as an xml (e.g. payload.xml)</p>
+<p>To run our WPS request, open a terminal with the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-d</span> <span class="pre">'&#64;payload.xml'</span> <span class="pre">-o</span> <span class="pre">result.xml</span> <span class="pre">http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=Execute</span></code></p>
+<p>We can also run this command in our jupyter notebook:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;curl&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="s1">&#39;@payload.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;result.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=Execute&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[62]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="WPS-in-python">
+<h1>WPS in python<a class="headerlink" href="#WPS-in-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="GetCapabilities">
+<h2>GetCapabilities<a class="headerlink" href="#GetCapabilities" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Import python libraries</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1">#   OWSLib is a Python package for client             #</span>
+<span class="c1">#   programming with Open Geospatial Consortium (OGC) #</span>
+<span class="c1">#   web service (hence OWS)interface standards,       #</span>
+<span class="c1">#   and their related content models.                 #</span>
+<span class="c1">#######################################################</span>
+
+
+<span class="kn">from</span> <span class="nn">owslib.wcs</span> <span class="k">import</span> <span class="n">WebCoverageService</span>
+<span class="kn">from</span> <span class="nn">owslib.wps</span> <span class="k">import</span> <span class="n">WebProcessingService</span>
+<span class="kn">from</span> <span class="nn">owslib.wps</span> <span class="k">import</span> <span class="n">printInputOutput</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1">### Link to GSKY WPS</span>
+
+<span class="n">gsky_url</span> <span class="o">=</span> <span class="s1">&#39;http://130.56.242.16/ows/edge/generic_wps&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define the WPS</span>
+
+<span class="n">wps</span> <span class="o">=</span> <span class="n">WebProcessingService</span><span class="p">(</span><span class="n">gsky_url</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_caps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">wps</span><span class="o">.</span><span class="n">getcapabilities</span><span class="p">()</span>
+<span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">title</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[55]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&#39;GSKY WPS&#39;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># View the wps abstract</span>
+
+<span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">abstract</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[56]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&#39;GSKY - A Scalable, Distributed Geospatial Data Service. https://geonetwork.nci.org.au/geonetwork/srv/eng/catalog.search#/metadata/dc9fb2db-8d6f-4b76-a734-93ac7fbc9201&#39;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># List the WPS processes available</span>
+
+<span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="n">wps</span><span class="o">.</span><span class="n">processes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">process</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+geometryDrill Geometry Drill
+8-day drill 8-day Fractional Cover Drill
+LS8 NBAR True drill LS8 NBAR True Drill
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="DescribeProcess">
+<h2>DescribeProcess<a class="headerlink" href="#DescribeProcess" title="Permalink to this headline">¶</a></h2>
+<p>Determine how a specific process needs to be invoked - i.e. what are its
+input parameters, and output result:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># DescribeProceess   (WPS Describe process doesn&#39;t work in python)</span>
+
+<span class="c1"># Let&#39;s look at the 8-day drill for this example</span>
+
+<span class="c1">#f = wps.processes[1]</span>
+<span class="c1">#h = f.identifier</span>
+
+<span class="c1">#process = wps.describeprocess(h)</span>
+<span class="c1">#process = wps.describeprocess(&#39;8-day drill&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Execute">
+<h2>Execute<a class="headerlink" href="#Execute" title="Permalink to this headline">¶</a></h2>
+<p>Submit a processing request (extraction of a climate index variable over
+a specific GML polygon, for a given period of time), monitor the
+execution until complete:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### Example from https://geopython.github.io/OWSLib/ of what building an execution in python might look like:</span>
+
+<span class="kn">from</span> <span class="nn">owslib.wps</span> <span class="k">import</span> <span class="n">GMLMultiPolygonFeatureCollection</span>
+
+<span class="n">polygon</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">116.2</span><span class="p">,</span><span class="o">-</span><span class="mf">30.4</span><span class="p">),</span> <span class="p">(</span><span class="mf">123.0</span><span class="p">,</span><span class="o">-</span><span class="mf">30.4</span><span class="p">),</span> <span class="p">(</span><span class="mf">123.0</span><span class="p">,</span><span class="o">-</span><span class="mf">26.3</span><span class="p">),</span> <span class="p">(</span><span class="mf">116.2</span><span class="p">,</span><span class="o">-</span><span class="mf">26.3</span><span class="p">),</span> <span class="p">(</span><span class="mf">116.2</span><span class="p">,</span><span class="o">-</span><span class="mf">30.4</span><span class="p">)]</span>
+
+<span class="n">featureCollection</span> <span class="o">=</span> <span class="n">GMLMultiPolygonFeatureCollection</span><span class="p">(</span> <span class="p">[</span><span class="n">polygon</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">processid</span> <span class="o">=</span> <span class="s1">&#39;http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=Execute&#39;</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s2">&quot;FEATURE_ATTRIBUTE_NAME&quot;</span><span class="p">,</span><span class="s2">&quot;the_geom&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;DATASET_URI&quot;</span><span class="p">,</span> <span class="s2">&quot;dods://cida.usgs.gov/qa/thredds/dodsC/derivatives/derivative-days_above_threshold.pr.ncml&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;DATASET_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;ensemble_b1_pr-days_above_threshold&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;TIME_START&quot;</span><span class="p">,</span><span class="s2">&quot;2010-01-01T00:00:00.000Z&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;TIME_END&quot;</span><span class="p">,</span><span class="s2">&quot;2011-01-01T00:00:00.000Z&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;REQUIRE_FULL_COVERAGE&quot;</span><span class="p">,</span><span class="s2">&quot;false&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;DELIMITER&quot;</span><span class="p">,</span><span class="s2">&quot;COMMA&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;STATISTICS&quot;</span><span class="p">,</span><span class="s2">&quot;MEAN&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;GROUP_BY&quot;</span><span class="p">,</span><span class="s2">&quot;STATISTIC&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;SUMMARIZE_TIMESTEP&quot;</span><span class="p">,</span><span class="s2">&quot;false&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;SUMMARIZE_FEATURE_ATTRIBUTE&quot;</span><span class="p">,</span><span class="s2">&quot;false&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;FEATURE_COLLECTION&quot;</span><span class="p">,</span> <span class="n">featureCollection</span><span class="p">)</span>
+           <span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;OUTPUT&quot;</span>
+
+<span class="n">execution</span> <span class="o">=</span> <span class="n">wps</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">processid</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;OUTPUT&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;curl&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="s1">&#39;@payload2.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;result.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;http://130.56.242.16/ows/edge/generic_wps?service=WPS&amp;request=Execute&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[63]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plotting-output-of-WPS-request">
+<h2>Plotting output of WPS request<a class="headerlink" href="#Plotting-output-of-WPS-request" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [77]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Import libraries</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+
+<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="k">import</span> <span class="n">gridplot</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">output_file</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [78]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># extract the data we want to plot</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;result_long.txt&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputfile</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">inputfile</span><span class="p">):</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="n">orig_dates</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">orig_PV</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">orig_NPV</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">orig_BS</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">3</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">orig_Total</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">4</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">dates_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_dates</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
+<span class="n">PV_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_PV</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
+<span class="n">NPV_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_NPV</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
+<span class="n">BS_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_BS</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
+<span class="n">Total_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_Total</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
+
+<span class="n">PV</span> <span class="o">=</span> <span class="n">PV_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">NPV</span> <span class="o">=</span> <span class="n">NPV_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">BS</span> <span class="o">=</span> <span class="n">BS_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">Total</span> <span class="o">=</span> <span class="n">Total_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+<span class="c1"># make dates python plottable</span>
+<span class="n">dt_dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S.000Z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">dates_array</span> <span class="p">]</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plotting-our-time-series-using-Bokeh">
+<h2>Plotting our time-series using Bokeh<a class="headerlink" href="#Plotting-our-time-series-using-Bokeh" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [79]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">######################################################################################################</span>
+<span class="c1">#                                                                                                    #</span>
+<span class="c1">#   Bokeh is an interactive visualization library that targets modern web browsers for presentation. #</span>
+<span class="c1">#   Its goal is to provide elegant, concise construction of versatile graphics, and to extend this   #</span>
+<span class="c1">#   capability with high-performance interactivity over very large or streaming datasets.            #</span>
+<span class="c1">#                                                                                                    #</span>
+<span class="c1">#   For more information about Bokeh, please visit https://bokeh.pydata.org/en/latest/               #</span>
+<span class="c1">#                                                                                                    #</span>
+<span class="c1">######################################################################################################</span>
+
+<span class="c1">## Plot PV NPV BS Total all on the same graph</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;8-day Fractional Cover Drill&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">1600</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">background_fill_color</span> <span class="o">=</span> <span class="s2">&quot;beige&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">background_fill_alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">PV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;PV&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">NPV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;NPV&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">BS</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;BS&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">Total</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [80]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">## Plot seperate graphs for each of PV NPV BS Total</span>
+
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="k">import</span> <span class="n">Spectral6</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="k">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">DataRange1d</span><span class="p">,</span> <span class="n">Plot</span><span class="p">,</span> <span class="n">LinearAxis</span><span class="p">,</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">Legend</span><span class="p">,</span> <span class="n">LegendItem</span>
+<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="k">import</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">gridplot</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PV&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
+<span class="c1">#p1.background_fill_color = &quot;beige&quot;</span>
+<span class="c1">#p1.background_fill_alpha = 0.5</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">PV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;PV&#39;)</span>
+
+<span class="n">p2</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;NPV&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
+<span class="c1">#p2.background_fill_color = &quot;beige&quot;</span>
+<span class="c1">#p2.background_fill_alpha = 0.5</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">NPV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;NPV&#39;)</span>
+
+<span class="n">p3</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;BS&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">p3</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
+<span class="n">p3</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">p3</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
+<span class="n">p3</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
+<span class="n">p3</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">BS</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;BS&#39;)</span>
+
+<span class="n">p4</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">p4</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
+<span class="n">p4</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">p4</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
+<span class="n">p4</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
+<span class="n">p4</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">Total</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;Total&#39;)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">([[</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">],[</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">]])</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># inputs = open(&#39;./example_WPS_request/payload.xml&#39;,&#39;rb&#39;).read()</span>
+
+<span class="c1"># execute = wps.execute(None, [], request=inputs, output = &#39;OUTPUT.json&#39;)</span>
+
+<span class="c1"># from owslib.wps import monitorExecution</span>
+
+<span class="c1"># f = monitorExecution(execute)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../_installation/install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Notebook_GSKY_WMS_ipyleaflet.html" class="btn btn-neutral" title="GSKY WMS with ipyleafet and widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

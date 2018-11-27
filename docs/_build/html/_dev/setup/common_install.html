@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python and packages &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_intro/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_intro/help.html">Help</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Python and packages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/_dev/setup/common_install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="python-and-packages">
+<h1>Python and packages<a class="headerlink" href="#python-and-packages" title="Permalink to this headline">¶</a></h1>
+<p>Python 3.5+ is required. Python 3.6 is recommended.</p>
+<div class="section" id="anaconda-python">
+<h2>Anaconda Python<a class="headerlink" href="#anaconda-python" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.anaconda.com/download/">Install Anaconda Python</a></p>
+<p>Add conda-forge to package channels:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+</pre></div>
+</div>
+<p>Conda Environments are recommended for use in isolating your ODC development environment from your system installation and other python evironments.</p>
+<p>Install required python packages and create an <code class="docutils literal notranslate"><span class="pre">odc</span></code> conda environment.</p>
+<p>Python 3.6:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">odc</span> <span class="o">--</span><span class="n">file</span> <span class="o">.</span><span class="n">travis</span><span class="o">/</span><span class="n">environment</span><span class="o">.</span><span class="n">yaml</span> <span class="n">sphinx</span>
+</pre></div>
+</div>
+<p>Activate <code class="docutils literal notranslate"><span class="pre">odc</span></code> python environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">odc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="postgres-database-configuration">
+<h1>Postgres database configuration<a class="headerlink" href="#postgres-database-configuration" title="Permalink to this headline">¶</a></h1>
+<p>This configuration supports local development using your login name.</p>
+<p>If this is a new installation of Postgres on your system it is probably wise to set the postgres user password. As the local “postgres” Linux user, we are allowed to connect and manipulate the server using the psql command.</p>
+<p>In a terminal, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">postgres</span> <span class="n">psql</span> <span class="n">postgres</span>
+</pre></div>
+</div>
+<p>Set a password for the “postgres” database role using the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">password</span> <span class="n">postgres</span>
+</pre></div>
+</div>
+<p>and set the password when prompted. The password text will be hidden from the console for security purposes.</p>
+<p>Type <strong>Control+D</strong> or <strong>q</strong> to exit the posgreSQL prompt.</p>
+<p>By default in Ubuntu, Postgresql is configured to use <code class="docutils literal notranslate"><span class="pre">ident</span> <span class="pre">sameuser</span></code> authentication for any connections from the same machine which is useful for development. Check out the excellent Postgresql documentation for more information, but essentially this means that if your Ubuntu username is <code class="docutils literal notranslate"><span class="pre">foo</span></code> and you add <code class="docutils literal notranslate"><span class="pre">foo</span></code> as a Postgresql user then you can connect to a database without requiring a password for many functions.</p>
+<p>Since the only user who can connect to a fresh install is the postgres user, here is how to create yourself a database account (which is in this case also a database superuser) with the same name as your login name and then create a password for the user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo -u postgres createuser --superuser $USER
+sudo -u postgres psql
+
+postgres=# \password $USER
+</pre></div>
+</div>
+<p>Now we can create an <code class="docutils literal notranslate"><span class="pre">agdcintegration</span></code> database for testing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="n">agdcintegration</span>
+</pre></div>
+</div>
+<p>Connecting to your own database to try out some SQL should now be as easy as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">-</span><span class="n">d</span> <span class="n">agdcintegration</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-data-cube-source-and-development-configuration">
+<h1>Open Data Cube source and development configuration<a class="headerlink" href="#open-data-cube-source-and-development-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Download the latest version of the software from the <a class="reference external" href="https://github.com/opendatacube/datacube-core">repository</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">opendatacube</span><span class="o">/</span><span class="n">datacube</span><span class="o">-</span><span class="n">core</span>
+<span class="n">cd</span> <span class="n">datacube</span><span class="o">-</span><span class="n">core</span>
+</pre></div>
+</div>
+<p>We need to specify the database user and password for the ODC integration testing. To do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">integration_tests</span><span class="o">/</span><span class="n">agdcintegration</span><span class="o">.</span><span class="n">conf</span> <span class="o">~/.</span><span class="n">datacube_integration</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Then edit the <code class="docutils literal notranslate"><span class="pre">~/.datacube_integration.conf</span></code> with a text editor and add the following lines replacing <code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;</span></code> with your username and <code class="docutils literal notranslate"><span class="pre">&lt;foobar&gt;</span></code> with the database user password you set above (not the postgres one, your <code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;</span></code> one):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">datacube</span><span class="p">]</span>
+<span class="n">db_hostname</span><span class="p">:</span> <span class="n">localhost</span>
+<span class="n">db_database</span><span class="p">:</span> <span class="n">agdcintegration</span>
+<span class="n">db_username</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">foo</span><span class="o">&gt;</span>
+<span class="n">db_password</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">foobar</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="verify-it-all-works">
+<h1>Verify it all works<a class="headerlink" href="#verify-it-all-works" title="Permalink to this headline">¶</a></h1>
+<p>Run the integration tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">datacube</span><span class="o">-</span><span class="n">core</span>
+<span class="o">./</span><span class="n">check</span><span class="o">-</span><span class="n">code</span><span class="o">.</span><span class="n">sh</span> <span class="n">integration_tests</span>
+</pre></div>
+</div>
+<p>Build the documentation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">datacube</span><span class="o">-</span><span class="n">core</span><span class="o">/</span><span class="n">docs</span>
+<span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Then open <code class="file docutils literal notranslate"><span class="pre">_build/html/index.html</span></code> in your browser to view the Documentation.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Extending Datacube &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/help.html">Help</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Extending Datacube</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/architecture/driver.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="extending-datacube">
+<span id="id1"></span><h1>Extending Datacube<a class="headerlink" href="#extending-datacube" title="Permalink to this headline">¶</a></h1>
+<p>Beyond the configuration available in ODC, there are three extension points
+provided for implementing different types of data storage and indexing.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Drivers for Reading Data</li>
+<li>Drivers for Writing Data</li>
+<li>Alternative types of Index</li>
+</ul>
+</div></blockquote>
+<div class="section" id="support-for-plug-in-drivers">
+<h2>Support for Plug-in drivers<a class="headerlink" href="#support-for-plug-in-drivers" title="Permalink to this headline">¶</a></h2>
+<p>A light weight implementation of a driver loading system has been
+implemented in <a class="reference external" href="https://github.com/opendatacube/datacube-core/blob/60187e38669d529c55d05a962bd7c5288d906f1b/datacube/drivers/driver_cache.py">datacube/drivers/driver_cache.py</a>
+which uses <a class="reference external" href="http://setuptools.readthedocs.io/en/latest/setuptools.html#dynamic-discovery-of-services-and-plugins">setuptools dynamic service and plugin discovery mechanism</a>
+to name and define available drivers. This code caches the available
+drivers in the current environment, and allows them to be loaded on
+demand, as well as handling any failures due to missing dependencies or
+other environment issues.</p>
+</div>
+<div class="section" id="data-read-plug-ins">
+<h2>Data Read Plug-ins<a class="headerlink" href="#data-read-plug-ins" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Entry point group:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><a class="reference external" href="https://github.com/opendatacube/datacube-core/blob/9c0ea8923fa5d29dc2a813141ad64daea74c4902/setup.py#L104">datacube.plugins.io.read</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Read plug-ins are specified as supporting particular <strong>uri protocols</strong>
+and <strong>formats</strong>, both of which are fields available on existing
+<code class="docutils literal notranslate"><span class="pre">Datasets</span></code></p>
+<p>A ReadDriver returns a <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> implementation, which is chosen
+based on:</p>
+<ul class="simple">
+<li>Dataset URI protocol, eg. <code class="docutils literal notranslate"><span class="pre">s3://</span></code></li>
+<li>Dataset format. As stored in the Data Cube <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.</li>
+<li>Current system settings</li>
+<li>Available IO plugins</li>
+</ul>
+<p>If no specific <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> can be found, a default
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.storage.storage.RasterDatasetDataSource</span></code> is returned, which uses <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> to read
+from the local file system or a network resource.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> maintains the same interface as before, which works
+at the individual <em>dataset+time+band</em> level for loading data. This is
+something to be addressed in the future.</p>
+<div class="section" id="example-code-to-implement-a-reader-driver">
+<h3>Example code to implement a reader driver<a class="headerlink" href="#example-code-to-implement-a-reader-driver" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init_reader_driver</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">AbstractReaderDriver</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">AbstractReaderDriver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">supports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">def</span> <span class="nf">new_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">band_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataSource</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AbstractDataSource</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">band_name</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">AbstractDataSource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># Same interface as before</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="s3-driver">
+<h3>S3 Driver<a class="headerlink" href="#s3-driver" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">URI Protocol:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">s3://</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Dataset Format:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">aio</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Implementation location:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><a class="reference external" href="https://github.com/opendatacube/datacube-core/blob/9c0ea8923fa5d29dc2a813141ad64daea74c4902/datacube/drivers/s3/driver.py">datacube/drivers/s3/driver.py</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example-pickle-based-driver">
+<h3>Example Pickle Based Driver<a class="headerlink" href="#example-pickle-based-driver" title="Permalink to this headline">¶</a></h3>
+<p>Available in <code class="docutils literal notranslate"><span class="pre">/examples/io_plugin</span></code>. Includes an example <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>
+as well as an example <strong>Read</strong> and <strong>Write</strong> Drivers.</p>
+</div>
+</div>
+<div class="section" id="data-write-plug-ins">
+<span id="write-plugin"></span><h2>Data Write Plug-ins<a class="headerlink" href="#data-write-plug-ins" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Entry point group:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><a class="reference external" href="https://github.com/opendatacube/datacube-core/blob/9c0ea8923fa5d29dc2a813141ad64daea74c4902/setup.py#L107">datacube.plugins.io.write</a></td>
+</tr>
+</tbody>
+</table>
+<p>Are selected based on their name. The <code class="docutils literal notranslate"><span class="pre">storage.driver</span></code> field has been
+added to the ingestion configuration file which specifies the name of
+the write driver to use. Drivers can specify a list of names that they
+can be known by, as well as publicly defining their output format,
+however this information isn’t used by the ingester to decide which
+driver to use. Not specifying a driver counts as an error, there is no
+default.</p>
+<p>At this stage there is no decision on what sort of a public API to
+expose, but the <code class="docutils literal notranslate"><span class="pre">write_dataset_to_storage()</span></code> method implemented in
+each driver is the closest we’ve got. The <strong>ingester</strong> is using it to
+write data.</p>
+<div class="section" id="example-code-to-implement-a-writer-driver">
+<h3>Example code to implement a writer driver<a class="headerlink" href="#example-code-to-implement-a-writer-driver" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init_writer_driver</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">AbstractWriterDriver</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">AbstractWriterDriver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">aliases</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># List of names this writer answers to</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span>  <span class="c1"># Format that this writer supports</span>
+
+    <span class="k">def</span> <span class="nf">write_dataset_to_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span>
+                                 <span class="n">global_attributes</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                                 <span class="n">variable_params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                                 <span class="n">storage_config</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="p">{}</span>  <span class="c1"># Can return extra metadata to be saved in the index with the dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="netcdf-writer-driver">
+<h3>NetCDF Writer Driver<a class="headerlink" href="#netcdf-writer-driver" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Name:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">netcdf</span></code>, <code class="docutils literal notranslate"><span class="pre">NetCDF</span> <span class="pre">CF</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Format:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">NetCDF</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Implementation:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.drivers.netcdf.driver.NetcdfWriterDriver</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="s3-writer-driver">
+<h3>S3 Writer Driver<a class="headerlink" href="#s3-writer-driver" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Name:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">s3aio</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Protocol:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">s3</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Format:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">aio</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Implementation:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.drivers.s3.driver.S3WriterDriver</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="index-plug-ins">
+<h2>Index Plug-ins<a class="headerlink" href="#index-plug-ins" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Entry point group:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><a class="reference external" href="https://github.com/opendatacube/datacube-core/blob/9c0ea8923fa5d29dc2a813141ad64daea74c4902/setup.py#L112">datacube.plugins.index</a></td>
+</tr>
+</tbody>
+</table>
+<p>A connection to an <code class="docutils literal notranslate"><span class="pre">Index</span></code> is required to find data in the Data Cube.
+Already implemented in the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch was the concept of
+<code class="docutils literal notranslate"><span class="pre">environments</span></code> which are a named set of configuration parameters used
+to connect to an <code class="docutils literal notranslate"><span class="pre">Index</span></code>. This PR extends this with an
+<code class="docutils literal notranslate"><span class="pre">index_driver</span></code> parameter, which specifies the name of the Index Driver
+to use. If this parameter is missing, it falls back to using the default
+PostgreSQL Index.</p>
+<div class="section" id="example-code-to-implement-an-index-driver">
+<h3>Example code to implement an index driver<a class="headerlink" href="#example-code-to-implement-an-index-driver" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">index_driver_init</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">AbstractIndexDriver</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">AbstractIndexDriver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">connect_to_index</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">application_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validate_connection</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Index</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">application_name</span><span class="p">,</span> <span class="n">validate_connection</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="default-implementation">
+<h3>Default Implementation<a class="headerlink" href="#default-implementation" title="Permalink to this headline">¶</a></h3>
+<p>The default <code class="docutils literal notranslate"><span class="pre">Index</span></code> uses a PostgreSQL database for all storage and
+retrieval.</p>
+</div>
+<div class="section" id="s3-extensions">
+<h3>S3 Extensions<a class="headerlink" href="#s3-extensions" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.drivers.s3aio_index.S3AIOIndex</span></code> driver subclasses the default PostgreSQL Index with
+support for saving additional data about the size and shape of chunks
+stored in S3 objects. As such, it implements an identical interface,
+while overriding the <code class="docutils literal notranslate"><span class="pre">dataset.add()</span></code> method to save the additional
+data.</p>
+</div>
+</div>
+<div class="section" id="drivers-plugin-management-module">
+<h2>Drivers Plugin Management Module<a class="headerlink" href="#drivers-plugin-management-module" title="Permalink to this headline">¶</a></h2>
+<p>Drivers are defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">-&gt;</span> <span class="pre">entry_points</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;datacube.plugins.io.read&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;s3aio = datacube.drivers.s3.driver:reader_driver_init&#39;</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;datacube.plugins.io.write&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;netcdf = datacube.drivers.netcdf.driver:writer_driver_init&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;s3aio = datacube.drivers.s3.driver:writer_driver_init&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;s3aio_test = datacube.drivers.s3.driver:writer_test_driver_init&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-cube-drivers-api">
+<h2>Data Cube Drivers API<a class="headerlink" href="#data-cube-drivers-api" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="references-and-history">
+<h2>References and History<a class="headerlink" href="#references-and-history" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a href="#id2"><span class="problematic" id="id3">:pull:`346`</span></a></li>
+<li><a class="reference external" href="https://github.com/orgs/opendatacube/teams/developers/discussions/2">Pluggable Back Ends Discussion [7 December
+2017]</a></li>
+<li>Teleconference with &#64;omad &#64;petewa &#64;rtaib &#64;Kirill888 on <em>12 December
+2017</em>.</li>
+<li><a class="reference external" href="https://docs.google.com/document/d/1l2xOaKyvQRV4h35NELKvyM3DYOUosXJhcj-lgHC8MN4/edit">Notes from ODC Storage and Index Driver
+Meeting</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

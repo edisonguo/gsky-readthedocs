@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Windows Developer Setup &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_intro/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_intro/help.html">Help</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Windows Developer Setup</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/_dev/setup/windows_dev.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="windows-developer-setup">
+<h1>Windows Developer Setup<a class="headerlink" href="#windows-developer-setup" title="Permalink to this headline">¶</a></h1>
+<p>Base OS: Windows 10</p>
+<p>This guide will setup an ODC core development environment and includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Anaconda python using conda environments to isolate the odc development environment</li>
+<li>installation of required software and useful developer manuals for those libraries</li>
+<li>Postgres database installation with a local user configuration</li>
+<li>Integration tests to confirm both successful development setup and for ongoing testing</li>
+<li>Build configuration for local ODC documentation</li>
+</ul>
+</div></blockquote>
+<div class="section" id="required-software">
+<h2>Required software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h2>
+<p>Postgres:</p>
+<blockquote>
+<div>Download and install from <a class="reference external" href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">here</a>.</div></blockquote>
+</div>
+<div class="section" id="python-and-packages">
+<h2>Python and packages<a class="headerlink" href="#python-and-packages" title="Permalink to this headline">¶</a></h2>
+<p>Python 3.5+ is required. Python 3.6 is recommended.</p>
+<div class="section" id="anaconda-python">
+<h3>Anaconda Python<a class="headerlink" href="#anaconda-python" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.anaconda.com/download/">Install Anaconda Python</a></p>
+<p>Add conda-forge to package channels:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+</pre></div>
+</div>
+<p>Conda Environments are recommended for use in isolating your ODC development environment from your system installation and other python evironments.</p>
+<p>Install required python packages and create an <code class="docutils literal notranslate"><span class="pre">odc</span></code> conda environment.</p>
+<p>Python 3.6:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">odc</span> <span class="o">--</span><span class="n">file</span> <span class="o">.</span><span class="n">travis</span><span class="o">/</span><span class="n">environment</span><span class="o">.</span><span class="n">yaml</span> <span class="n">sphinx</span>
+</pre></div>
+</div>
+<p>Activate <code class="docutils literal notranslate"><span class="pre">odc</span></code> python environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">activate</span> <span class="n">odc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="postgres-database-configuration">
+<h2>Postgres database configuration<a class="headerlink" href="#postgres-database-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This configuration supports local development using your login name.</p>
+</div>
+<div class="section" id="open-data-cube-source-and-development-configuration">
+<h2>Open Data Cube source and development configuration<a class="headerlink" href="#open-data-cube-source-and-development-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Download the latest version of the software from the <a class="reference external" href="https://github.com/opendatacube/datacube-core">repository</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">opendatacube</span><span class="o">/</span><span class="n">datacube</span><span class="o">-</span><span class="n">core</span>
+<span class="n">cd</span> <span class="n">datacube</span><span class="o">-</span><span class="n">core</span>
+</pre></div>
+</div>
+<p>We need to specify the database user and password for the ODC integration testing. To do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">copy</span> <span class="n">integration_tests</span>\<span class="n">agdcintegration</span><span class="o">.</span><span class="n">conf</span> <span class="o">%</span><span class="n">HOME</span><span class="o">%</span>\<span class="o">.</span><span class="n">datacube_integration</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Then edit the <code class="docutils literal notranslate"><span class="pre">%HOME%\.datacube_integration.conf</span></code> with a text editor and add the following lines replacing <code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;</span></code> with your username and <code class="docutils literal notranslate"><span class="pre">&lt;foobar&gt;</span></code> with the database user password you set above (not the postgres one, your <code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;</span></code> one):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">datacube</span><span class="p">]</span>
+<span class="n">db_hostname</span><span class="p">:</span> <span class="n">localhost</span>
+<span class="n">db_database</span><span class="p">:</span> <span class="n">agdcintegration</span>
+<span class="n">db_username</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">foo</span><span class="o">&gt;</span>
+<span class="n">db_password</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">foobar</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="verify-it-all-works">
+<h2>Verify it all works<a class="headerlink" href="#verify-it-all-works" title="Permalink to this headline">¶</a></h2>
+<p>Run the integration tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">datacube</span><span class="o">-</span><span class="n">core</span>
+<span class="n">pytest</span>
+</pre></div>
+</div>
+<p>Build the documentation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">datacube</span><span class="o">-</span><span class="n">core</span><span class="o">/</span><span class="n">docs</span>
+<span class="n">make</span> <span class="n">html</span>
+<span class="nb">open</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

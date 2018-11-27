@@ -1,0 +1,954 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>What’s New &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/help.html">Help</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>What’s New</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/about/whats_new.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="what-s-new">
+<span id="whats-new"></span><h1>What’s New<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-6-1-27-august-2018">
+<h2>v1.6.1 (27 August 2018)<a class="headerlink" href="#v1-6-1-27-august-2018" title="Permalink to this headline">¶</a></h2>
+<p>Correction release. By mistake, v1.6.0 was identical to v1.6rc2!</p>
+</div>
+<div class="section" id="v1-6-0-23-august-2018">
+<h2>v1.6.0 (23 August 2018)<a class="headerlink" href="#v1-6-0-23-august-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Enable use of <em>aliases</em> when specifying band names</li>
+<li>Fix ingestion failing after the first run (<a href="#id1"><span class="problematic" id="id2">:pull:`510`</span></a>)</li>
+<li>Docker images now know which version of ODC they contain (<a href="#id3"><span class="problematic" id="id4">:pull:`523`</span></a>)</li>
+<li>Fix data loading when <code class="code docutils literal notranslate"><span class="pre">nodata</span></code> is <code class="code docutils literal notranslate"><span class="pre">NaN</span></code> (<a href="#id5"><span class="problematic" id="id6">:pull:`531`</span></a>)</li>
+<li>Allow querying based on python <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code> objects. (<a href="#id7"><span class="problematic" id="id8">:pull:`499`</span></a>)</li>
+<li>Require <a class="reference external" href="https://github.com/mapbox/rasterio/blob/1.0.2/CHANGES.txt">rasterio 1.0.2</a> or higher, which fixes several critical bugs when
+loading and reprojecting from multi-band files.</li>
+<li>Assume fixed paths for <code class="code docutils literal notranslate"><span class="pre">id</span></code> and <code class="code docutils literal notranslate"><span class="pre">sources</span></code> metadata fields (<a href="#id9"><span class="problematic" id="id10">:issue:`482`</span></a>)</li>
+<li><code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.model.Measurement</span></code> was put to use for loading in attributes
+and made to inherit from <code class="code docutils literal notranslate"><span class="pre">dict</span></code> to preserve current behaviour. (<a href="#id11"><span class="problematic" id="id12">:pull:`502`</span></a>)</li>
+<li>Updates when indexing data with <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span></code> (See <a href="#id13"><span class="problematic" id="id14">:pull:`485`</span></a>, <a href="#id15"><span class="problematic" id="id16">:issue:`451`</span></a> and <a href="#id17"><span class="problematic" id="id18">:issue:`480`</span></a>)<ul>
+<li>Allow indexing without lineage <code class="xref std std-option docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span> <span class="pre">--ignore-lineage</span></code></li>
+<li>Removed the <code class="code docutils literal notranslate"><span class="pre">--sources-policy=skip|verify|ensure</span></code>. Instead use
+<code class="code docutils literal notranslate"><span class="pre">--[no-]auto-add-lineage</span></code> and <code class="code docutils literal notranslate"><span class="pre">--[no-]verify-lineage</span></code></li>
+<li>New option <code class="xref std std-option docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span> <span class="pre">--exclude-product</span></code> <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code>
+allows excluding some products from auto-matching</li>
+</ul>
+</li>
+<li>Preliminary API for indexing datasets (<a href="#id19"><span class="problematic" id="id20">:pull:`511`</span></a>)</li>
+<li>Enable creation of MetadataTypes without having an active database connection (<a href="#id21"><span class="problematic" id="id22">:pull:`535`</span></a>)</li>
+</ul>
+</div>
+<div class="section" id="v1-6rc2-29-june-2018">
+<h2>v1.6rc2 (29 June 2018)<a class="headerlink" href="#v1-6rc2-29-june-2018" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="backwards-incompatible-changes">
+<h3>Backwards Incompatible Changes<a class="headerlink" href="#backwards-incompatible-changes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The <code class="code docutils literal notranslate"><span class="pre">helpers.write_geotiff()</span></code> function has been updated to support files smaller
+than 256x256. It also no longer supports specifying the time index. Before passing
+data in, use <code class="code docutils literal notranslate"><span class="pre">xarray_data.isel(time=&lt;my_time_index&gt;)</span></code>. (<a href="#id23"><span class="problematic" id="id24">:pull:`277`</span></a>)</p>
+</li>
+<li><p class="first">Removed product matching options from <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">update</span></code> (<a href="#id25"><span class="problematic" id="id26">:pull:`445`</span></a>).
+No matching is needed in this case as all datasets are already in the database
+and are associated to products.</p>
+</li>
+<li><p class="first">Removed <code class="code docutils literal notranslate"><span class="pre">--match-rules</span></code> option from <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span></code> (<a href="#id27"><span class="problematic" id="id28">:pull:`447`</span></a>)</p>
+</li>
+<li><p class="first">The seldom-used <code class="code docutils literal notranslate"><span class="pre">stack</span></code> keyword argument has been removed from <code class="code docutils literal notranslate"><span class="pre">Datcube.load</span></code>.
+(<a href="#id29"><span class="problematic" id="id30">:pull:`461`</span></a>)</p>
+</li>
+<li><p class="first">The behaviour of the time range queries has changed to be compatible with
+standard Python searches (eg. time slice an xarray). Now the time range
+selection is inclusive of any unspecified time units. (<a href="#id31"><span class="problematic" id="id32">:pull:`440`</span></a>)</p>
+<dl class="docutils">
+<dt>Example 1:</dt>
+<dd><p class="first last"><code class="code docutils literal notranslate"><span class="pre">time=('2008-01',</span> <span class="pre">'2008-03')</span></code> previously would have returned all data from
+the start of 1st January, 2008 to the end of 1st of March, 2008. Now, this
+query will return all data from the start of 1st January, 2008 and
+23:59:59.999 on 31st of March, 2008.</p>
+</dd>
+<dt>Example 2:</dt>
+<dd><p class="first">To specify a search time between 1st of January and 29th of February, 2008
+(inclusive), use a search query like <code class="code docutils literal notranslate"><span class="pre">time=('2008-01',</span> <span class="pre">'2008-02')</span></code>. This query
+is equivalent to using any of the following in the second time element:</p>
+<div class="last line-block">
+<div class="line"><code class="code docutils literal notranslate"><span class="pre">('2008-02-29')</span></code></div>
+<div class="line"><code class="code docutils literal notranslate"><span class="pre">('2008-02-29</span> <span class="pre">23')</span></code></div>
+<div class="line"><code class="code docutils literal notranslate"><span class="pre">('2008-02-29</span> <span class="pre">23:59')</span></code></div>
+<div class="line"><code class="code docutils literal notranslate"><span class="pre">('2008-02-29</span> <span class="pre">23:59:59')</span></code></div>
+<div class="line"><code class="code docutils literal notranslate"><span class="pre">('2008-02-29</span> <span class="pre">23:59:59.999')</span></code></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="changes">
+<h3>Changes<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">A <code class="code docutils literal notranslate"><span class="pre">--location-policy</span></code> option has been added to the <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">update</span></code>
+command. Previously this command would always add a new location to the list
+of URIs associated with a dataset. It’s now possible to specify <code class="code docutils literal notranslate"><span class="pre">archive</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">forget</span></code> options, which will mark previous location as archived or remove them
+from the index altogether. The default behaviour is unchanged. (<a href="#id33"><span class="problematic" id="id34">:pull:`469`</span></a>)</p>
+</li>
+<li><p class="first">The masking related function <code class="code docutils literal notranslate"><span class="pre">describe_variable_flags()</span></code> now returns a pandas
+DataFrame by default. This will display as a table in Jupyter Notebooks.
+(<a href="#id35"><span class="problematic" id="id36">:pull:`422`</span></a>)</p>
+</li>
+<li><p class="first">Usability improvements in <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">[add|update]</span></code> commands
+(<a href="#id37"><span class="problematic" id="id38">:issue:`447`</span></a>, <a href="#id39"><span class="problematic" id="id40">:issue:`448`</span></a>, <a href="#id41"><span class="problematic" id="id42">:issue:`398`</span></a>)</p>
+<ul class="simple">
+<li>Embedded documentation updates</li>
+<li>Deprecated <code class="code docutils literal notranslate"><span class="pre">--auto-match</span></code> (it was always on anyway)</li>
+<li>Renamed <code class="code docutils literal notranslate"><span class="pre">--dtype</span></code> to <code class="code docutils literal notranslate"><span class="pre">--product</span></code> (the old name will still work, but with a warning)</li>
+<li>Add option to skip lineage data when indexing (useful for saving time when
+testing) (<a href="#id43"><span class="problematic" id="id44">:pull:`473`</span></a>)</li>
+</ul>
+</li>
+<li><p class="first">Enable compression for metadata documents stored in NetCDFs generated by
+<code class="code docutils literal notranslate"><span class="pre">stacker</span></code> and <code class="code docutils literal notranslate"><span class="pre">ingestor</span></code> (<a href="#id45"><span class="problematic" id="id46">:issue:`452`</span></a>)</p>
+</li>
+<li><p class="first">Implement better handling of stacked NetCDF files (<a href="#id47"><span class="problematic" id="id48">:issue:`415`</span></a>)</p>
+<ul class="simple">
+<li>Record the slice index as part of the dataset location URI, using <code class="code docutils literal notranslate"><span class="pre">#part=&lt;int&gt;</span></code>
+syntax, index is 0-based</li>
+<li>Use this index when loading data instead of fuzzy searching by timestamp</li>
+<li>Fall back to the old behaviour when <code class="code docutils literal notranslate"><span class="pre">#part=&lt;int&gt;</span></code> is missing and the file is
+more than one time slice deep</li>
+</ul>
+</li>
+<li><p class="first">Expose the following dataset fields and make them searchable:</p>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">indexed_time</span></code> (when the dataset was indexed)</li>
+<li><code class="code docutils literal notranslate"><span class="pre">indexed_by</span></code> (user who indexed the dataset)</li>
+<li><code class="code docutils literal notranslate"><span class="pre">creation_time</span></code> (creation of dataset: when it was processed)</li>
+<li><code class="code docutils literal notranslate"><span class="pre">label</span></code> (the label for a dataset)</li>
+</ul>
+<p>(See <a href="#id49"><span class="problematic" id="id50">:pull:`432`</span></a> for more details)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The <code class="code docutils literal notranslate"><span class="pre">.dimensions</span></code> property of a product no longer crashes when product is
+missing a <code class="code docutils literal notranslate"><span class="pre">grid_spec</span></code>. It instead defaults to <code class="code docutils literal notranslate"><span class="pre">time,y,x</span></code></li>
+<li>Fix a regression in <code class="code docutils literal notranslate"><span class="pre">v1.6rc1</span></code> which made it impossible to run <code class="code docutils literal notranslate"><span class="pre">datacube</span>
+<span class="pre">ingest</span></code> to create products which were defined in <code class="code docutils literal notranslate"><span class="pre">1.5.5</span></code> and earlier versions of
+ODC. (<a href="#id51"><span class="problematic" id="id52">:issue:`423`</span></a>, <a href="#id53"><span class="problematic" id="id54">:pull:`436`</span></a>)</li>
+<li>Allow specifying the chunking for string variables when writing NetCDFs
+(<a href="#id55"><span class="problematic" id="id56">:issue:`453`</span></a>)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-6rc1-easter-bilby-10-april-2018">
+<h2>v1.6rc1 Easter Bilby (10 April 2018)<a class="headerlink" href="#v1-6rc1-easter-bilby-10-april-2018" title="Permalink to this headline">¶</a></h2>
+<p>This is the first release in a while, and so there’s a lot of changes, including
+some significant refactoring, with the potential having issues when upgrading.</p>
+<div class="section" id="backwards-incompatible-fixes">
+<h3>Backwards Incompatible Fixes<a class="headerlink" href="#backwards-incompatible-fixes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Drop Support for Python 2. Python 3.5 is now the earliest supported Python
+version.</li>
+<li>Removed the old <code class="docutils literal notranslate"><span class="pre">ndexpr</span></code>, <code class="docutils literal notranslate"><span class="pre">analytics</span></code> and <code class="docutils literal notranslate"><span class="pre">execution</span> <span class="pre">engine</span></code> code. There is
+work underway in the <a class="reference external" href="https://github.com/opendatacube/datacube-core/compare/csiro/execution-engine">execution engine branch</a> to replace these features.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="enhancements">
+<h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">Support for third party drivers, for custom data storage and custom index
+implementations</p>
+</li>
+<li><p class="first">The correct way to get an Index connection in code is to use
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">datacube.index.index_connect()</span></code>.</p>
+</li>
+<li><p class="first">Changes in ingestion configuration</p>
+<ul>
+<li><p class="first">Must now specify the <a class="reference internal" href="../architecture/driver.html#write-plugin"><span class="std std-ref">Data Write Plug-ins</span></a> to use. For s3 ingestion there was
+a top level <code class="docutils literal notranslate"><span class="pre">container</span></code> specified, which has been renamed and moved
+under <code class="docutils literal notranslate"><span class="pre">storage</span></code>. The entire <code class="docutils literal notranslate"><span class="pre">storage</span></code> section is passed through to
+the <a class="reference internal" href="../architecture/driver.html#write-plugin"><span class="std std-ref">Data Write Plug-ins</span></a>, so drivers requiring other configuration can
+include them here. eg:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">...</span>
+<span class="l l-Scalar l-Scalar-Plain">storage</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+  <span class="l l-Scalar l-Scalar-Plain">driver</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">s3aio</span>
+  <span class="l l-Scalar l-Scalar-Plain">bucket</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">my_s3_bucket</span>
+<span class="nn">...</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Added a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to enable automated builds for a reference Docker image.</p>
+</li>
+<li><p class="first">Multiple environments can now be specified in one datacube config. See
+<a href="#id57"><span class="problematic" id="id58">:pull:`298`</span></a> and the <span class="xref std std-ref">runtime-config-doc</span></p>
+<ul class="simple">
+<li>Allow specifying which <code class="docutils literal notranslate"><span class="pre">index_driver</span></code> should be used for an environment.</li>
+</ul>
+</li>
+<li><p class="first">Command line tools can now output CSV or YAML. (Issue <a href="#id59"><span class="problematic" id="id60">:issue:`206`</span></a>, <a href="#id61"><span class="problematic" id="id62">:pull:`390`</span></a>)</p>
+</li>
+<li><p class="first">Support for saving data to NetCDF using a Lambert Conformal Conic Projection
+(<a href="#id63"><span class="problematic" id="id64">:pull:`329`</span></a>)</p>
+</li>
+<li><p class="first">Lots of documentation updates:</p>
+<ul class="simple">
+<li>Information about <a class="reference internal" href="../_dev/api/masking.html#bit-masking"><span class="std std-ref">Bit Masking</span></a>.</li>
+<li>A description of how data is loaded.</li>
+<li>Some higher level architecture documentation.</li>
+<li>Updates on how to index new data.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id65">
+<h3>Bug Fixes<a class="headerlink" href="#id65" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Allow creation of <code class="xref py py-class docutils literal notranslate"><span class="pre">datacube.utils.geometry.Geometry</span></code> objects from 3d
+representations. The Z axis is simply thrown away.</li>
+<li>The <code class="xref std std-option docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">--config_file</span></code> option has been renamed to
+<code class="xref std std-option docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">--config</span></code>, which is shorter and more consistent with the
+other options. The old name can still be used for now.</li>
+<li>Fix a severe performance regression when extracting and reprojecting a small
+region of data. (<a href="#id66"><span class="problematic" id="id67">:pull:`393`</span></a>)</li>
+<li>Fix for a somewhat rare bug causing read failures by attempt to read data from
+a negative index into a file. (<a href="#id68"><span class="problematic" id="id69">:pull:`376`</span></a>)</li>
+<li>Make <code class="xref py py-class docutils literal notranslate"><span class="pre">CRS</span></code> equality comparisons a little bit looser. Trust either a
+<em>Proj.4</em> based comparison or a <em>GDAL</em> based comparison. (Closed <a href="#id70"><span class="problematic" id="id71">:issue:`243`</span></a>)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="new-data-support">
+<h3>New Data Support<a class="headerlink" href="#new-data-support" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Added example prepare script for Collection 1 USGS data; improved band
+handling and downloads.</li>
+<li>Add a product specification and prepare script for indexing Landsat L2 Surface
+Reflectance Data (<a href="#id72"><span class="problematic" id="id73">:pull:`375`</span></a>)</li>
+<li>Add a product specification for Sentinel 2 ARD Data (<a href="#id74"><span class="problematic" id="id75">:pull:`342`</span></a>)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="v1-5-4-dingley-dahu-13th-december-2017">
+<h2>v1.5.4 Dingley Dahu (13th December 2017)<a class="headerlink" href="#v1-5-4-dingley-dahu-13th-december-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">Minor features backported from 2.0:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Support for <code class="docutils literal notranslate"><span class="pre">limit</span></code> in searches</li>
+<li>Alternative lazy search method <code class="docutils literal notranslate"><span class="pre">find_lazy</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Fixes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Improve native field descriptions</li>
+<li>Connection should not be held open between multi-product searches</li>
+<li>Disable prefetch for celery workers</li>
+<li>Support jsonify-ing decimals</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-5-3-purpler-unicorn-with-starlight-16-october-2017">
+<h2>v1.5.3 Purpler Unicorn with Starlight (16 October 2017)<a class="headerlink" href="#v1-5-3-purpler-unicorn-with-starlight-16-october-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Use <code class="docutils literal notranslate"><span class="pre">cloudpickle</span></code> as the <code class="docutils literal notranslate"><span class="pre">celery</span></code> serialiser</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-5-2-purpler-unicorn-with-stars-28-august-2017">
+<h2>v1.5.2 Purpler Unicorn with Stars (28 August 2017)<a class="headerlink" href="#v1-5-2-purpler-unicorn-with-stars-28-august-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fix bug when reading data in native projection, but outside <code class="docutils literal notranslate"><span class="pre">source</span></code> area. Often hit when running <code class="docutils literal notranslate"><span class="pre">datacube-stats</span></code></li>
+<li>Fix error loading and fusing data using <code class="docutils literal notranslate"><span class="pre">dask</span></code>. (Fixes <a href="#id76"><span class="problematic" id="id77">:issue:`276`</span></a>)</li>
+<li>When reading data, implement <code class="docutils literal notranslate"><span class="pre">skip_broken_datasets</span></code> for the <code class="docutils literal notranslate"><span class="pre">dask</span></code> case too</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id78">
+<h2>v1.5.4 Dingley Dahu (13th December 2017)<a class="headerlink" href="#id78" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">Minor features backported from 2.0:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Support for <code class="docutils literal notranslate"><span class="pre">limit</span></code> in searches</li>
+<li>Alternative lazy search method <code class="docutils literal notranslate"><span class="pre">find_lazy</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Fixes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Improve native field descriptions</li>
+<li>Connection should not be held open between multi-product searches</li>
+<li>Disable prefetch for celery workers</li>
+<li>Support jsonify-ing decimals</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id79">
+<h2>v1.5.3 Purpler Unicorn with Starlight (16 October 2017)<a class="headerlink" href="#id79" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Use <code class="docutils literal notranslate"><span class="pre">cloudpickle</span></code> as the <code class="docutils literal notranslate"><span class="pre">celery</span></code> serialiser</li>
+<li>Allow <code class="docutils literal notranslate"><span class="pre">celery</span></code> tests to run without installing it</li>
+<li>Move <code class="docutils literal notranslate"><span class="pre">datacube-worker</span></code> inside the main datacube package</li>
+<li>Write <code class="docutils literal notranslate"><span class="pre">metadata_type</span></code> from the ingest configuration if available</li>
+<li>Support config parsing limitations of Python 2</li>
+<li>Fix <a href="#id80"><span class="problematic" id="id81">:issue:`303`</span></a>: resolve GDAL build dependencies on Travis</li>
+<li>Upgrade <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> to newer version</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id82">
+<h2>v1.5.2 Purpler Unicorn with Stars (28 August 2017)<a class="headerlink" href="#id82" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fix bug when reading data in native projection, but outside <code class="docutils literal notranslate"><span class="pre">source</span></code> area.
+Often hit when running <code class="docutils literal notranslate"><span class="pre">datacube-stats</span></code></li>
+<li>Fix error loading and fusing data using <code class="docutils literal notranslate"><span class="pre">dask</span></code>. (Fixes <a href="#id83"><span class="problematic" id="id84">:issue:`276`</span></a>)</li>
+<li>When reading data, implement <code class="docutils literal notranslate"><span class="pre">skip_broken_datasets</span></code> for the <code class="docutils literal notranslate"><span class="pre">dask</span></code> case too</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-5-1-purpler-unicorn-13-july-2017">
+<h2>v1.5.1 Purpler Unicorn (13 July 2017)<a class="headerlink" href="#v1-5-1-purpler-unicorn-13-july-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fix bug <a href="#id85"><span class="problematic" id="id86">:issue:`261`</span></a>. Unable to load Australian Rainfall Grid Data. This was as a
+result of the CRS/Transformation override functionality being broken when
+using the latest <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> version <code class="docutils literal notranslate"><span class="pre">1.0a9</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-5-0-purple-unicorn-9-july-2017">
+<h2>v1.5.0 Purple Unicorn (9 July 2017)<a class="headerlink" href="#v1-5-0-purple-unicorn-9-july-2017" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-features">
+<h3>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Support for AWS S3 array storage</li>
+<li>Driver Manager support for NetCDF, S3, S3-file drivers.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="usability-improvements">
+<h3>Usability Improvements<a class="headerlink" href="#usability-improvements" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>When <code class="docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span></code> is unable to add a Dataset to the index, print
+out the entire Dataset to make it easier to debug the problem.</li>
+<li>Give <code class="docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">system</span> <span class="pre">check</span></code> prettier and more readable output.</li>
+<li>Make <code class="docutils literal notranslate"><span class="pre">celery</span></code> and <code class="docutils literal notranslate"><span class="pre">redis</span></code> optional when installing.</li>
+<li>Significantly reduced disk space usage for integration tests</li>
+<li><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> objects now have an <code class="docutils literal notranslate"><span class="pre">is_active</span></code> field to mirror <code class="docutils literal notranslate"><span class="pre">is_archived</span></code>.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">index.datasets.get_archived_location_times()</span></code> to see when each
+location was archived.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="v1-4-1-25-may-2017">
+<h2>v1.4.1 (25 May 2017)<a class="headerlink" href="#v1-4-1-25-may-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Support for reading multiband HDF datasets, such as MODIS collection 6</li>
+<li>Workaround for <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> issue when reprojecting stacked data</li>
+<li>Bug fixes for command line arg handling</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-4-0-17-may-2017">
+<h2>v1.4.0 (17 May 2017)<a class="headerlink" href="#v1-4-0-17-may-2017" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Adds more convenient year/date range search expressions (see <a href="#id87"><span class="problematic" id="id88">:pull:`226`</span></a>)</li>
+<li>Adds a <span class="xref std std-ref">simple replication utility</span> (see <a href="#id89"><span class="problematic" id="id90">:pull:`223`</span></a>)</li>
+<li>Fixed issue reading products without embedded CRS info, such as <code class="docutils literal notranslate"><span class="pre">bom_rainfall_grid</span></code> (see <a href="#id91"><span class="problematic" id="id92">:issue:`224`</span></a>)</li>
+<li>Fixed issues with stacking and ncml creation for NetCDF files</li>
+<li>Various documentation and bug fixes</li>
+<li>Added CircleCI as a continuous build system, for previewing generated documenation on pull</li>
+<li>Require <code class="docutils literal notranslate"><span class="pre">xarray</span></code> &gt;= 0.9. Solves common problems caused by losing embedded <code class="docutils literal notranslate"><span class="pre">flag_def</span></code> and <code class="docutils literal notranslate"><span class="pre">crs</span></code> attributes.</li>
+</ul>
+</div>
+<div class="section" id="v1-3-1-20-april-2017">
+<h2>v1.3.1 (20 April 2017)<a class="headerlink" href="#v1-3-1-20-april-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Docs now refer to “Open Data Cube”</li>
+<li>Docs describe how to use <code class="docutils literal notranslate"><span class="pre">conda</span></code> to install datacube.</li>
+<li>Bug fixes for the stacking process.</li>
+<li>Various other bug fixes and document updates.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-3-0">
+<h2>v1.3.0<a class="headerlink" href="#v1-3-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Updated the Postgres product views to include the whole dataset metadata
+document.</li>
+<li><code class="docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">system</span> <span class="pre">init</span></code> now recreates the product views by default every
+time it is run, and now supports Postgres 9.6.</li>
+<li>URI searches are now better supported from the cli: <code class="docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">search</span> <span class="pre">uri</span> <span class="pre">=</span> <span class="pre">file:///some/uri/here</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">user</span></code> now supports a user description (via <code class="docutils literal notranslate"><span class="pre">--description</span></code>)
+when creating a user, and delete accepts multiple user arguments.</li>
+<li>Platform-specific (Landsat) fields have been removed from the default <code class="docutils literal notranslate"><span class="pre">eo</span></code>
+metadata type in order to keep it minimal. Users &amp; products can still add
+their own metadata types to use additional fields.</li>
+<li>Dataset locations can now be archived, not just deleted. This represents a
+location that is still accessible but is deprecated.</li>
+<li>We are now part of Open Data Cube, and have a new home at
+<a class="reference external" href="https://github.com/opendatacube/datacube-core">https://github.com/opendatacube/datacube-core</a></li>
+</ul>
+</div></blockquote>
+<p>This release now enforces the uri index changes to be applied: it will prompt
+you to rerun <code class="docutils literal notranslate"><span class="pre">init</span></code> as an administrator to update your existing cubes:
+<code class="docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">-v</span> <span class="pre">system</span> <span class="pre">init</span></code> (this command can be run without affecting
+read-only users, but will briefly pause writes)</p>
+</div>
+<div class="section" id="v1-2-2">
+<h2>v1.2.2<a class="headerlink" href="#v1-2-2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added <code class="docutils literal notranslate"><span class="pre">--allow-exclusive-lock</span></code> flag to product add/update commands, allowing faster index updates when
+system usage can be halted.</li>
+<li><code class="docutils literal notranslate"><span class="pre">{version}</span></code> can now be used in ingester filename patterns</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-2-0-boring-as-batman-15-february-2017">
+<h2>v1.2.0 Boring as Batman (15 February 2017)<a class="headerlink" href="#v1-2-0-boring-as-batman-15-february-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Implemented improvements to <code class="code docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">search</span></code> and <code class="code docutils literal notranslate"><span class="pre">info</span></code> cli outputs</li>
+<li>Can now specify a range of years to process to <code class="code docutils literal notranslate"><span class="pre">ingest</span></code> cli (e.g. 2000-2005)</li>
+<li>Fixed <code class="code docutils literal notranslate"><span class="pre">metadata_type</span> <span class="pre">update</span></code> cli not creating indexes (running <code class="code docutils literal notranslate"><span class="pre">system</span> <span class="pre">init</span></code> will create missing ones)</li>
+<li>Enable indexing of datacube generated NetCDF files. Making it much easier to pull
+selected data into a private datacube index.
+Use by running <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span> <span class="pre">selected_netcdf.nc</span></code>.</li>
+<li>Switch versioning system to increment the second digit instead of the third.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-18-mushroom-milkshake-9-february-2017">
+<h2>v1.1.18 Mushroom Milkshake (9 February 2017)<a class="headerlink" href="#v1-1-18-mushroom-milkshake-9-february-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added <code class="code docutils literal notranslate"><span class="pre">sources-policy</span></code> options to <code class="code docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">add</span></code> cli</li>
+<li>Multiple dataset search improvements related to locations</li>
+<li>Keep hours/minutes when grouping data by <code class="code docutils literal notranslate"><span class="pre">solar_day</span></code></li>
+<li>Code Changes: <code class="code docutils literal notranslate"><span class="pre">datacube.model.[CRS,BoundingBox,Coordinate,GeoBox</span></code> have moved into
+<code class="code docutils literal notranslate"><span class="pre">datacube.utils.geometry</span></code>. Any code using these should update their imports.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-17-happy-festivus-continues-12-january-2017">
+<h2>v1.1.17 Happy Festivus Continues (12 January 2017)<a class="headerlink" href="#v1-1-17-happy-festivus-continues-12-january-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed several issues with the geometry utils</li>
+<li>Added more operations to the geometry utils</li>
+<li>Updated <span class="xref std std-ref">recipes</span> to use geometry utils</li>
+<li>Enabled Windows CI (python 3 only)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-16-happy-festivus-6-january-2017">
+<h2>v1.1.16 Happy Festivus (6 January 2017)<a class="headerlink" href="#v1-1-16-happy-festivus-6-january-2017" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added <code class="code docutils literal notranslate"><span class="pre">update</span></code> command to <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span></code> cli</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">show</span></code> command to <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">product</span></code> cli</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">list</span></code> and <code class="code docutils literal notranslate"><span class="pre">show</span></code> commands to <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">metadata_type</span></code> cli</li>
+<li>Added ‘storage unit’ stacker application</li>
+<li>Replaced <code class="code docutils literal notranslate"><span class="pre">model.GeoPolygon</span></code> with <code class="code docutils literal notranslate"><span class="pre">utils.geometry</span></code> library</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-15-minion-party-hangover-1-december-2016">
+<h2>v1.1.15 Minion Party Hangover (1 December 2016)<a class="headerlink" href="#v1-1-15-minion-party-hangover-1-december-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed a data loading issue when reading HDF4_EOS datasets.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-14-minion-party-30-november-2016">
+<h2>v1.1.14 Minion Party (30 November 2016)<a class="headerlink" href="#v1-1-14-minion-party-30-november-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added support for buffering/padding of GridWorkflow tile searches</li>
+<li>Improved the Query class to make filtering by a source or parent dataset easier.
+For example, this can be used to filter Datasets by Geometric Quality Assessment (GQA).
+Use <code class="code docutils literal notranslate"><span class="pre">source_filter</span></code> when requesting data.</li>
+<li>Additional data preparation and configuration scripts</li>
+<li>Various fixes for single point values for lat, lon &amp; time searches</li>
+<li>Grouping by solar day now overlays scenes in a consistent, northern scene takes precedence manner.
+Previously it was non-deterministic which scene/tile would be put on top.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-13-black-goat-15-november-2016">
+<h2>v1.1.13 Black Goat (15 November 2016)<a class="headerlink" href="#v1-1-13-black-goat-15-november-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added support for accessing data through <code class="code docutils literal notranslate"><span class="pre">http</span></code> and <code class="code docutils literal notranslate"><span class="pre">s3</span></code> protocols</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">search</span></code> command for filtering datasets (lists <code class="code docutils literal notranslate"><span class="pre">id</span></code>, <code class="code docutils literal notranslate"><span class="pre">product</span></code>, <code class="code docutils literal notranslate"><span class="pre">location</span></code>)</li>
+<li><code class="code docutils literal notranslate"><span class="pre">ingestion_bounds</span></code> can again be specified in the ingester config</li>
+<li>Can now do range searches on non-range fields (e.g. <code class="code docutils literal notranslate"><span class="pre">dc.load(orbit=(20,</span> <span class="pre">30)</span></code>)</li>
+<li>Merged several bug-fixes from CEOS-SEO branch</li>
+<li>Added Polygon Drill recipe to <span class="xref std std-ref">recipes</span></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-12-unnamed-unknown-1-november-2016">
+<h2>v1.1.12 Unnamed Unknown (1 November 2016)<a class="headerlink" href="#v1-1-12-unnamed-unknown-1-november-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed the affine deprecation warning</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">metadata_type</span></code> cli tool which supports <code class="code docutils literal notranslate"><span class="pre">add</span></code> and <code class="code docutils literal notranslate"><span class="pre">update</span></code></li>
+<li>Improved <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">product</span></code> cli tool logging</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-11-unnamed-unknown-19-october-2016">
+<h2>v1.1.11 Unnamed Unknown (19 October 2016)<a class="headerlink" href="#v1-1-11-unnamed-unknown-19-october-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Improved ingester task throughput when using distributed executor</li>
+<li>Fixed an issue where loading tasks from disk would use too much memory</li>
+<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">model.GeoPolygon.to_crs()</span></code> now adds additional points (~every 100km) to improve reprojection accuracy</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-10-rabid-rabbit-5-october-2016">
+<h2>v1.1.10 Rabid Rabbit (5 October 2016)<a class="headerlink" href="#v1-1-10-rabid-rabbit-5-october-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Ingester can now be configured to have WELD/MODIS style tile indexes (thanks Chris Holden)</li>
+<li>Added –queue-size option to <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">ingest</span></code> to control number of tasks queued up for execution</li>
+<li>Product name is now used as primary key when adding datasets.
+This allows easy migration of datasets from one database to another</li>
+<li>Metadata type name is now used as primary key when adding products.
+This allows easy migration of products from one database to another</li>
+<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">DatasetResource.has()</span></code> now takes dataset id insted of <code class="xref py py-class docutils literal notranslate"><span class="pre">model.Dataset</span></code></li>
+<li>Fixed an issues where database connections weren’t recycled fast enough in some cases</li>
+<li>Fixed an issue where <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatasetTypeResource.get()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatasetTypeResource.get_by_name()</span></code>
+would cache <code class="code docutils literal notranslate"><span class="pre">None</span></code> if product didn’t exist</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-9-pest-hippo-20-september-2016">
+<h2>v1.1.9 Pest Hippo (20 September 2016)<a class="headerlink" href="#v1-1-9-pest-hippo-20-september-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added origin, alignment and GeoBox-based methods to <code class="xref py py-class docutils literal notranslate"><span class="pre">model.GridSpec</span></code></li>
+<li>Fixed satellite path/row references in the prepare scripts (Thanks to Chris Holden!)</li>
+<li>Added links to external datasets in <span class="xref std std-ref">indexing</span></li>
+<li>Improved archive and restore command line features: <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">archive</span></code> and <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">restore</span></code></li>
+<li>Improved application support features</li>
+<li>Improved system configuration documentation</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-8-last-mammoth-5-september-2016">
+<h2>v1.1.8 Last Mammoth (5 September 2016)<a class="headerlink" href="#v1-1-8-last-mammoth-5-september-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">GridWorkflow.list_tiles()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">GridWorkflow.list_cells()</span></code> now
+return a <code class="xref py py-class docutils literal notranslate"><span class="pre">Tile</span></code> object</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">resampling</span></code> parameter to <code class="xref py py-meth docutils literal notranslate"><span class="pre">Datacube.load()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">GridWorkflow.load()</span></code>. Will only be used if the requested data requires resampling.</li>
+<li>Improved <code class="xref py py-meth docutils literal notranslate"><span class="pre">Datacube.load()</span></code> <code class="code docutils literal notranslate"><span class="pre">like</span></code> parameter behaviour. This allows passing in a <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> to retrieve data for the same region.</li>
+<li>Fixed an issue with passing tuples to functions in Analytics Expression Language</li>
+<li>Added a <span class="xref std std-ref">user_guide</span> section to the documentation containing useful code snippets</li>
+<li>Reorganized project dependencies into required packages and optional ‘extras’</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">performance</span></code> dependency extras for improving run-time performance</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">analytics</span></code> dependency extras for analytics features</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">interactive</span></code> dependency extras for interactivity features</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-7-bit-shift-22-august-2016">
+<h2>v1.1.7 Bit Shift (22 August 2016)<a class="headerlink" href="#v1-1-7-bit-shift-22-august-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added bit shift and power operators to Analytics Expression Language</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">product</span> <span class="pre">update</span></code> which can be used to update product definitions</li>
+<li>Fixed an issue where dataset geo-registration would be ignored in some cases</li>
+<li>Fixed an issue where Execution Engine was using dask arrays by default</li>
+<li>Fixed an issue where int8 data could not sometimes be retrieved</li>
+<li>Improved search and data retrieval performance</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-6-lightning-roll-8-august-2016">
+<h2>v1.1.6 Lightning Roll (8 August 2016)<a class="headerlink" href="#v1-1-6-lightning-roll-8-august-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Improved spatio-temporal search performance. <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">system</span> <span class="pre">init</span></code> must be run to benefit</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">info</span></code>, <code class="code docutils literal notranslate"><span class="pre">archive</span></code> and <code class="code docutils literal notranslate"><span class="pre">restore</span></code> commands to <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span></code></li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">product-counts</span></code> command to <code class="code docutils literal notranslate"><span class="pre">datacube-search</span></code> tool</li>
+<li>Made Index object thread-safe</li>
+<li>Multiple masking API improvements</li>
+<li>Improved database Index API documentation</li>
+<li>Improved system configuration documentation</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-5-untranslatable-sign-26-july-2016">
+<h2>v1.1.5 Untranslatable Sign (26 July 2016)<a class="headerlink" href="#v1-1-5-untranslatable-sign-26-july-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Updated the way database indexes are patitioned. Use <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">system</span> <span class="pre">init</span> <span class="pre">--rebuild</span></code> to rebuild indexes</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">fuse_data</span></code> ingester configuration parameter to control overlaping data fusion</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">--log-file</span></code> option to <code class="code docutils literal notranslate"><span class="pre">datacube</span> <span class="pre">dataset</span> <span class="pre">add</span></code> command for saving logs to a file</li>
+<li>Added index.datasets.count method returning number of datasets matching the query</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-4-imperfect-inspiration-12-july-2016">
+<h2>v1.1.4 Imperfect Inspiration (12 July 2016)<a class="headerlink" href="#v1-1-4-imperfect-inspiration-12-july-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Improved dataset search performance</li>
+<li>Restored ability to index telemetry data</li>
+<li>Fixed an issue with data access API returning uninitialized memory in some cases</li>
+<li>Fixed an issue where dataset center_time would be calculated incorrectly</li>
+<li>General improvements to documentation and usablity</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-3-speeding-snowball-5-july-2016">
+<h2>v1.1.3 Speeding Snowball (5 July 2016)<a class="headerlink" href="#v1-1-3-speeding-snowball-5-july-2016" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added framework for developing distributed, task-based application</li>
+<li>Several additional Ingester performance improvements</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-2-wind-chill-28-june-2016">
+<h2>v1.1.2 Wind Chill (28 June 2016)<a class="headerlink" href="#v1-1-2-wind-chill-28-june-2016" title="Permalink to this headline">¶</a></h2>
+<p>This release brings major performance and usability improvements</p>
+<blockquote>
+<div><ul class="simple">
+<li>Major performance improvements to GridWorkflow and Ingester</li>
+<li>Ingestion can be limited to one year at a time to limit memory usage</li>
+<li>Ingestion can be done in two stages (serial followed by highly parallel) by using
+–save-tasks/load-task options.
+This should help reduce idle time in distributed processing case.</li>
+<li>General improvements to documentation.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-1-good-idea-23-june-2016">
+<h2>v1.1.1 Good Idea (23 June 2016)<a class="headerlink" href="#v1-1-1-good-idea-23-june-2016" title="Permalink to this headline">¶</a></h2>
+<p>This release contains lots of fixes in preparation for the first large
+ingestion of Geoscience Australia data into a production version of
+AGDCv2.</p>
+<blockquote>
+<div><ul class="simple">
+<li>General improvements to documentation and user friendliness.</li>
+<li>Updated metadata in configuration files for ingested products.</li>
+<li>Full provenance history is saved into ingested files.</li>
+<li>Added software versions, machine info and other details of the
+ingestion run into the provenance.</li>
+<li>Added valid data region information into metadata for ingested data.</li>
+<li>Fixed bugs relating to changes in Rasterio and GDAL versions.</li>
+<li>Refactored <code class="xref py py-class docutils literal notranslate"><span class="pre">GridWorkflow</span></code> to be easier to use, and include
+preliminary code for saving created products.</li>
+<li>Improvements and fixes for bit mask generation.</li>
+<li>Lots of other minor but important fixes throughout the codebase.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="v1-1-0-no-spoon-3-june-2016">
+<h2>v1.1.0 No Spoon (3 June 2016)<a class="headerlink" href="#v1-1-0-no-spoon-3-june-2016" title="Permalink to this headline">¶</a></h2>
+<p>This release includes restructuring of code, APIs, tools, configurations
+and concepts. The result of this churn is cleaner code, faster performance and
+the ability to handle provenance tracking of Datasets created within the Data
+Cube.</p>
+<p>The major changes include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">datacube-config</span></code> and <code class="docutils literal notranslate"><span class="pre">datacube-ingest</span></code> tools have been
+combined into <code class="docutils literal notranslate"><span class="pre">datacube</span></code>.</li>
+<li>Added dependency on <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for nicer search results listing and
+handling.</li>
+<li><span class="xref std std-ref">Indexing</span> and <span class="xref std std-ref">ingestion</span> have been split into
+separate steps.</li>
+<li>Data that has been <span class="xref std std-ref">indexed</span> can be accessed without
+going through the ingestion process.</li>
+<li>Data can be requested in any projection and will be dynamically
+reprojected if required.</li>
+<li><strong>Dataset Type</strong> has been replaced by <span class="xref std std-ref">Product</span></li>
+<li><strong>Storage Type</strong> has been removed, and an <span class="xref std std-ref">Ingestion Configuration</span>
+has taken it’s place.</li>
+<li>A new <a class="reference internal" href="../_dev/api/api.html#datacube-class"><span class="std std-ref">Datacube Class</span></a> for querying and accessing data.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="square-clouds-3-june-2016">
+<h2>1.0.4 Square Clouds (3 June 2016)<a class="headerlink" href="#square-clouds-3-june-2016" title="Permalink to this headline">¶</a></h2>
+<p>Pre-Unification release.</p>
+</div>
+<div class="section" id="april-2016">
+<h2>1.0.3 (14 April 2016)<a class="headerlink" href="#april-2016" title="Permalink to this headline">¶</a></h2>
+<p>Many API improvements.</p>
+</div>
+<div class="section" id="march-2016">
+<h2>1.0.2 (23 March 2016)<a class="headerlink" href="#march-2016" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id93">
+<h2>1.0.1 (18 March 2016)<a class="headerlink" href="#id93" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id94">
+<h2>1.0.0 (11 March 2016)<a class="headerlink" href="#id94" title="Permalink to this headline">¶</a></h2>
+<p>This release is to support generation of GA Landsat reference data.</p>
+</div>
+<div class="section" id="pre-v1-end-2015">
+<h2>pre-v1 (end 2015)<a class="headerlink" href="#pre-v1-end-2015" title="Permalink to this headline">¶</a></h2>
+<p>First working Data Cube v2 code.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

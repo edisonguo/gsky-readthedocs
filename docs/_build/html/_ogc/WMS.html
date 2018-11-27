@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web Map Service (WMS) &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Web Processing Service (WPS)" href="WPS.html" />
+    <link rel="prev" title="Web Coverage Services (WCS)" href="WCS.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/datasets.html">Datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/install_jupyter.html">Using Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/using_terriaJS.html">Using TerriaJS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OGC web services</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="WCS.html">WCS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">WMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constructing-wms-requests">Constructing WMS Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wms-getcapabilities-request">WMS GetCapabilities request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wms-getmap-request">WMS GetMap request</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WPS.html">WPS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS.html">WMS Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WCS.html">WCS Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_ClicknShip.html">WCS Click and Ship</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">WMS ipyleaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WPS_Polygon_Drill.html">WPS Polygon Drill</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GEOGLAM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/gsky_through_the_web.html"> GEOGLAM</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY Source code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_source/source.html">Source code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY license</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_license/license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_help/help.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Web Map Service (WMS)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_ogc/WMS.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="web-map-service-wms">
+<h1>Web Map Service (WMS)<a class="headerlink" href="#web-map-service-wms" title="Permalink to this headline">¶</a></h1>
+<p>NCI’s GSKY Data Server supports the Open Geospatial Consortium (OGC) Web Map Service (WMS), which is a standard protocol for serving geospatial data as images (e.g., PNG).</p>
+<div class="section" id="constructing-wms-requests">
+<h2>Constructing WMS Requests<a class="headerlink" href="#constructing-wms-requests" title="Permalink to this headline">¶</a></h2>
+<p>To request a spatial subset of data through GSKY using WMS, a <strong>GetMap</strong> URL defining the subset has to be constructed. This URL can be used within a web browser to communicate to the GSKY Data Server, which will return the requested map image of the subset.</p>
+<p><strong>For example, the GetMap request takes the following form:</strong></p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?<span class="red">service</span>=WMS&amp;<span class="red">version</span>=1.3.0&amp;<span class="red">request</span>=GetMap&amp;<span class="red">layers</span>=<span class="green">value</span>&amp;<span class="red">crs</span>=<span class="green">value</span>
+&amp;<span class="red">styles</span>=<span class="green">value</span> &amp;<span class="red">format</span>=<span class="green">value</span> &amp;<span class="blue">bbox</span>=<span class="green">value</span>&amp;<span class="red">width</span>=<span class="green">value</span> &amp;<span class="red">height</span>=<span class="green">value</span>
+&amp;<span class="blue">colorscalerange</span>=<span class="green">value</span> &amp;<span class="blue">transparent</span>=<span class="green">value</span>&amp;<span class="blue">time</span>=<span class="green">value</span></p>
+<p>where <span class="red">red</span> indicates required fields, <span class="blue">blue</span> are optional, and <span class="green">green</span> are where input values relevant to the dataset and user request need to be defined.</p>
+<p><strong>GetMap parameters:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="19%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Required/Optional</th>
+<th class="head">Input</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>service</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">WMS</span></code></td>
+</tr>
+<tr class="row-odd"><td>version</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">1.1.1</span> <span class="pre">**</span></code>, <code class="docutils literal notranslate"><span class="pre">1.3.0</span> <span class="pre">(default)</span></code></td>
+</tr>
+<tr class="row-even"><td>request</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">GetMap</span></code></td>
+</tr>
+<tr class="row-odd"><td>layers</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>crs</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;crs_value&gt;</span></code></td>
+</tr>
+<tr class="row-odd"><td>styles</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;style_name&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>format</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">image/png</span></code>, <code class="docutils literal notranslate"><span class="pre">image/png;mode=32bit</span></code>, <code class="docutils literal notranslate"><span class="pre">image/gif</span></code>, <code class="docutils literal notranslate"><span class="pre">image/jpeg</span></code></td>
+</tr>
+<tr class="row-odd"><td>bbox</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;ymin,xmin,ymax,xmax&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>width</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">width</span> <span class="pre">in</span> <span class="pre">pixels</span></code></td>
+</tr>
+<tr class="row-odd"><td>height</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">height</span> <span class="pre">in</span> <span class="pre">pixels</span></code></td>
+</tr>
+<tr class="row-even"><td>colorscalerange</td>
+<td>Optional</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;min,max&gt;</span></code></td>
+</tr>
+<tr class="row-odd"><td>transparent</td>
+<td>Optional</td>
+<td><code class="docutils literal notranslate"><span class="pre">True,</span> <span class="pre">False</span></code></td>
+</tr>
+<tr class="row-even"><td>time</td>
+<td>Optional</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;time_value&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">**</span></code> <strong>Syntax differences for v1.1.1 GetMap requests:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Use <code class="docutils literal notranslate"><span class="pre">src</span></code> in place of <code class="docutils literal notranslate"><span class="pre">crs</span></code></li>
+<li>The order of <code class="docutils literal notranslate"><span class="pre">bbox</span></code> values are: <code class="docutils literal notranslate"><span class="pre">&lt;xmin,ymin,xmax,ymax&gt;</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="wms-getcapabilities-request">
+<h2>WMS GetCapabilities request<a class="headerlink" href="#wms-getcapabilities-request" title="Permalink to this headline">¶</a></h2>
+<p><strong>Where do you find valid input values?</strong></p>
+<p>In order to contruct the <strong>GetMap</strong> URL, a <strong>GetCapabilities</strong> request can be made to the server.
+This requests returns an xml describing the available WMS parameters (metadata, services, and data)
+made available by NCI’s GSKY server.</p>
+<p><strong>GetCapabilities example:</strong></p>
+<blockquote>
+<div><a class="reference external" href="http://gsky.nci.org.au/ows?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities">http://gsky.nci.org.au/ows?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities</a></div></blockquote>
+<img alt="../_images/gsky_wms1.png" src="../_images/gsky_wms1.png" />
+</div>
+<div class="section" id="wms-getmap-request">
+<h2>WMS GetMap request<a class="headerlink" href="#wms-getmap-request" title="Permalink to this headline">¶</a></h2>
+<p>Using the information returned from a GetCapabilities request, a GetMap URL can be constructed
+and then entered into the address bar of any web browser.</p>
+<p><strong>Example GetMap request:</strong></p>
+<div class="line-block">
+<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?</div>
+<div class="line"><span class="red">service</span>=WMS&amp;</div>
+<div class="line"><span class="red">layers</span>=LS7:NBAR:TRUE&amp;</div>
+<div class="line"><span class="red">crs</span>=EPSG:4326&amp;</div>
+<div class="line"><span class="red">format</span>=image/png&amp;</div>
+<div class="line"><span class="red">request</span>=GetMap&amp;</div>
+<div class="line"><span class="red">height</span>=512&amp;</div>
+<div class="line"><span class="red">width</span> =512&amp;</div>
+<div class="line"><span class="red">version</span>=1.3.0&amp;</div>
+<div class="line"><span class="red">bbox</span>=-37,148,-34,151&amp;</div>
+<div class="line"><span class="red">time</span>=2000-02-08T00:00:00.000Z&amp;</div>
+<div class="line"><span class="red">transparent</span>=FALSE</div>
+</div>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows?service=WMS&amp;layers=LS7:NBAR:TRUE&amp;crs=EPSG:4326&amp;format=image/png&amp;request=GetMap&amp;height=512&amp;width=512&amp;version=1.3.0&amp;bbox=-37,148,-34,151&amp;time=2000-02-08T00:00:00.000Z&amp;transparent=FALSE">http://gsky.nci.org.au/ows?service=WMS&amp;layers=LS7:NBAR:TRUE&amp;crs=EPSG:4326&amp;format=image/png &amp;request=GetMap&amp;height=512&amp;width=512&amp;version=1.3.0&amp;bbox=-37,148,-34,151 &amp;time=2000-02-08T00:00:00.000Z&amp;transparent=FALSE</a></p>
+<blockquote>
+<div><p><strong>If the URL is correctly formed, the requested map will be displayed.</strong></p>
+<img alt="../_images/gsky_wms2.png" src="../_images/gsky_wms2.png" />
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="WPS.html" class="btn btn-neutral float-right" title="Web Processing Service (WPS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="WCS.html" class="btn btn-neutral" title="Web Coverage Services (WCS)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

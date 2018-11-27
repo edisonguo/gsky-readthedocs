@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using GSKY through the web &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Jupyter and Python" href="install_jupyter.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_overview/datasets.html">Datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GeoGLAM example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-wps-on-the-geoglam-rapp-map">How to use WPS on the GEOGLAM RAPP Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constructing-wps-requests-using-the-geoglam-polygon-drill">Constructing WPS Requests using the GEOGLAM polygon drill</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install_jupyter.html">Installing Jupyter and Python</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OGC web services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WCS.html">WCS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WMS.html">WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_ogc/WPS.html">WPS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS.html">WMS Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WCS.html">WCS Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_ClicknShip.html">WCS Click and Ship</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">WMS ipyleaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WPS_Polygon_Drill.html">WPS Polygon Drill</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY Source code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_source/source.html">Source code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GSKY license</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_license/license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_help/help.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Using GSKY through the web</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_userguide/gsky_through_the_web.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="using-gsky-through-the-web">
+<h1>Using GSKY through the web<a class="headerlink" href="#using-gsky-through-the-web" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-use-wps-on-the-geoglam-rapp-map">
+<h2>How to use WPS on the GEOGLAM RAPP Map<a class="headerlink" href="#how-to-use-wps-on-the-geoglam-rapp-map" title="Permalink to this headline">¶</a></h2>
+<p>RAPP Map is the spatial data platform for the Rangeland and Pasture Productivity activity which is part of the Group on Earth Observations Global Agricultural Monitoring (GEOGLAM) initiative. This online tool gives access to information about the state and condition of global rangelands. It provides time-series data on the vegetation and environmental conditions, allowing national and regional tracking of the resources which sustains livestock production. It has been developed, and is currently hosted, by Data61 with the assistance of IT resources and services from the National Computational Infrastructure (NCI), and the AusCover facility. RAPP Map is supported by CSIRO and through funding from the Australian Government’s National Landcare Programme.</p>
+</div>
+<div class="section" id="constructing-wps-requests-using-the-geoglam-polygon-drill">
+<h2>Constructing WPS Requests using the GEOGLAM polygon drill<a class="headerlink" href="#constructing-wps-requests-using-the-geoglam-polygon-drill" title="Permalink to this headline">¶</a></h2>
+<p>The current WPS request for GEOGLAM takes a polygon as input and calcuates the band averages over time for the polygon of interest. Let’s first access the GEOGLAM WPS via the TerriaJS interface:</p>
+<p><a class="reference external" href="http://map.geo-rapp.org/">http://map.geo-rapp.org/</a></p>
+<img alt="../_images/geoglam1.png" src="../_images/geoglam1.png" />
+<p>To add data to the map, click on the ‘Add data’ tab:</p>
+<img alt="../_images/geoglam2.png" src="../_images/geoglam2.png" />
+<p>Here we can see a number of both global and Australian datasets that can be added to the GEOGLAM RAPP Map. Have a play around and add some of these datasets to the map. As an example we have added the Global Rainfall (5km) dataset:</p>
+<img alt="../_images/geoglam2b.png" src="../_images/geoglam2b.png" />
+<p>You can adjust the opacity (green box) and time (blue box). To remove the dataset from the map, click the <em>Remove</em> button (red box).</p>
+<img alt="../_images/geoglam2c.png" src="../_images/geoglam2c.png" />
+<p>Try out the split option where you can select two different dates (one left, one right) and use the <em>split</em> bar to see the changes in data between the specified dates:</p>
+<img alt="../_images/geoglam2d.png" src="../_images/geoglam2d.png" />
+<p>Now let’s try using the <strong>Analysis Tools</strong>. Once again, click on the <strong>Add data</strong> tab and then <strong>Analysis Tools</strong>.</p>
+<img alt="../_images/geoglam3.png" src="../_images/geoglam3.png" />
+<p>These tools can be used to query the Vegetation Fractional Cover layer data. The output is a graph which includes NPV, PV, NPV+PV Total, BS, and Precipitation. For this example, we will draw a polygon over an area we are interested in:</p>
+<img alt="../_images/geoglam4.png" src="../_images/geoglam4.png" />
+<p>Let’s draw a polygon on the map and then click the <strong>Done</strong> button:</p>
+<img alt="../_images/geoglam5.png" src="../_images/geoglam5.png" />
+<p>This will take you back to the <strong>Analysis Tools</strong>. Now click the <strong>Run Analysis</strong> button:</p>
+<img alt="../_images/geoglam6.png" src="../_images/geoglam6.png" />
+<p>Now you can visualise the time series charts of Precipitation, PV, NPV, NPV+PV Total and BS.</p>
+<img alt="../_images/geoglam7.png" src="../_images/geoglam7.png" />
+<p>To add or remove time series, click on the appropriate legend items (green box). To download the time series as a csv, click the <strong>Download</strong> button (red box):</p>
+<img alt="../_images/geoglam8.png" src="../_images/geoglam8.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install_jupyter.html" class="btn btn-neutral float-right" title="Installing Jupyter and Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

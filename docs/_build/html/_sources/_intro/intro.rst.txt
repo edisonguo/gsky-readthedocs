@@ -1,0 +1,49 @@
+
+Introduction
+############
+
+Overview
+========
+
+GSKY is a distributed geospatial data server exposing OGC services developed at the NCI.
+
+**In a few lines**
+
+GSKY is designed to:
+
+  * **Scale**: Distributed solution that scales in serving large volume of data for concurrent user access
+  * **Work with raw data**: Transparent ingestion of geospatial collections in many scientific data formats such as NetCDF, HDF or geoTIFF
+  * **Compute on-the-fly**: No need to precompute products. Resampling and reprojection happen on-the-fly in real time
+  * **Standards**:  Implements OGC standards such as WMS, WCS and WPS
+  * More functionalities to come....
+
+`GSKY website`_
+
+.. _GSKY website: http://gsky.nci.org.au/
+
+
+Getting Started
+===============
+
+**Want to try it out?**
+
+Any OGC compatible client can be used. For example:
+
+Go to the National Map web site
+
+`National Map website`_
+
+.. _National Map website: http://nationalmap.gov.au/
+
+Click on Add Data -> My Data -> Web Data and type
+
+http://gsky.nci.org.au/ows
+
+
+Types of Datasets
+==================
+
+
+Ingested Datasets
+==================
+

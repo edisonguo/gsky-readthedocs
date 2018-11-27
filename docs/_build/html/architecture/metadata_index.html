@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Metadata Index &mdash; GSKY  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSKY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_intro/help.html">Help</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">GSKY WMS ipyleaflet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSKY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Metadata Index</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/architecture/metadata_index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="metadata-index">
+<span id="dev-arch-index"></span><h1>Metadata Index<a class="headerlink" href="#metadata-index" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dataset-interface">
+<h2>Dataset Interface<a class="headerlink" href="#dataset-interface" title="Permalink to this headline">¶</a></h2>
+<p>Add/update/archive datasets​
+Search for datasets​
+Manage locations (i.e. file path)​
+Basic stats (Count of datasets)</p>
+</div>
+<div class="section" id="implementations">
+<h2>Implementations<a class="headerlink" href="#implementations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="postgres">
+<h3>Postgres<a class="headerlink" href="#postgres" title="Permalink to this headline">¶</a></h3>
+<p>The current implementation uses Postgres 9.5, with JSONB support.</p>
+<p>The <cite>metadata_types</cite> are used to create database indexes into the JSONB dataset documents.</p>
+</div>
+<div class="section" id="future-possiblities">
+<h3>Future Possiblities<a class="headerlink" href="#future-possiblities" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Spatial:<ul>
+<li>PostGIS - PostgreSQL with optimised geometry datatypes and operations</li>
+</ul>
+</li>
+<li>Lightweight:<ul>
+<li>SQLite</li>
+<li>File-based (eg YAML)</li>
+</ul>
+</li>
+<li>Enterprise:<ul>
+<li>DynamoDB</li>
+</ul>
+</li>
+<li>Remote:<ul>
+<li>OGC Catalog Service-Web (CS-W)</li>
+<li><a class="reference external" href="https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository">NASA Common Metadata Repository</a></li>
+<li><a class="reference external" href="https://github.com/radiantearth/stam-spec/blob/dev/abstract-spec.md">Radiant Earth Spatial Temporal Assest Metadata</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="problems">
+<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spatial-support">
+<h3>Spatial Support<a class="headerlink" href="#spatial-support" title="Permalink to this headline">¶</a></h3>
+<p>Currently the index stores spatial regions for the data, but indexes it on a ranges of latitudes and longitudes.</p>
+<p>A database with support for spatial objects, such as the PostGIS extension for Postgres, could improve the efficiency
+(and simplicity of implementation) of spatial queries.</p>
+</div>
+<div class="section" id="pre-computed-summaries">
+<h3>Pre-computed Summaries<a class="headerlink" href="#pre-computed-summaries" title="Permalink to this headline">¶</a></h3>
+<p>We don’t currently store the spatial and temporal extents of a product.</p>
+<p>To calculate this in the database requires scanning the entire dataset table to get min and max extent values.
+More commonly, to do this in Python, every dataset record is retrieved which is a very memory and CPU intensive
+operation.</p>
+<p>This is an important feature for apps such as <cite>datacube-wms</cite> and <cite>cubedash</cite> that need to know the entire bounds for
+sensibly displaying the user interface.</p>
+</div>
+<div class="section" id="replication">
+<h3>Replication<a class="headerlink" href="#replication" title="Permalink to this headline">¶</a></h3>
+<p>Syncing the index across systems (e.g. from NCI to an external system) requires a standard interface.
+There are issues using Postgres tools that require locking tables, etc, that need to be investigated.</p>
+</div>
+<div class="section" id="publication">
+<h3>Publication<a class="headerlink" href="#publication" title="Permalink to this headline">¶</a></h3>
+<p>There is no standard way to access the <cite>Index</cite> from remote systems.
+Directly using the database exposes implementation specifics.
+We could possibly use an existing protocol, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Various OGC standards, such as CS-W, WCS2-EO or WFS2</li>
+<li><a class="reference external" href="https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository">NASA Common Metadata Repository</a></li>
+<li><a class="reference external" href="https://github.com/radiantearth/stam-spec/blob/dev/abstract-spec.md">Radiant Earth Spatial Temporal Assest Metadata</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, NCI.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

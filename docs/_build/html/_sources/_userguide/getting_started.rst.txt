@@ -18,10 +18,17 @@ http://gsky.nci.org.au/ows
 
 .. image:: ../_static/images/national_map1.png
 
-GSKY provides a catalogue of all the datasets and links to NCI's ISO 19115 data catalogue entries
+GSKY provides a catalogue of all the datasets and links to NCI's ISO 19115 data catalogue entries:
 
 .. image:: ../_static/images/national_map2.png
 
+You can add multiple datasets to the National Map and plot them on top of each other. Here is an example Landsat 8 terrain corrected surface reflectance true colour data overlain by Water Observations from Space (WOfS) data:
+
+.. image:: ../_static/images/national_map3.png
+
+The split bar feature allows one to compare different datasets as well as different dates from the same dataset. Below is a example of using the scroll bar, with Landsat 8 geomedian true colour plotted on the left and Landsat 8 geomedian false colour plotted on the right:
+
+.. image:: ../_static/images/national_map4.png
 
 TerriaJS
 +++++++++

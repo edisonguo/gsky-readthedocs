@@ -1,5 +1,6 @@
 Getting Started
 ===============
+TEST
 
 GSKY can be used with many different OGC compatible clients.
 

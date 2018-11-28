@@ -379,9 +379,9 @@ example.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">owslib.wcs</span> <span class="k">import</span> <span class="n">WebCoverageService</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<span></span>from owslib.wcs import WebCoverageService
+from PIL import Image
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -392,7 +392,7 @@ example.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">gsky_url</span> <span class="o">=</span> <span class="s1">&#39;http://gsky.nci.org.au/ows&#39;</span>
+<span></span>gsky_url = &#39;http://gsky.nci.org.au/ows&#39;
 </pre></div>
 </div>
 </div>
@@ -403,7 +403,7 @@ example.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WebCoverageService</span><span class="p">(</span><span class="n">gsky_url</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">)</span>
+<span></span>wcs = WebCoverageService(gsky_url, version=&#39;1.0.0&#39;)
 </pre></div>
 </div>
 </div>
@@ -414,9 +414,9 @@ example.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">wcs</span><span class="o">.</span><span class="n">contents</span><span class="p">):</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Layer Name:&quot;</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Title:&quot;</span><span class="p">,</span> <span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span></span>for layer in list(wcs.contents):
+    print (&quot;Layer Name:&quot;, layer)
+    print (&quot;Title:&quot;, wcs[layer].title, &#39;\n&#39;)
 </pre></div>
 </div>
 </div>
@@ -547,7 +547,7 @@ layer.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">layer</span> <span class="o">=</span> <span class="s2">&quot;LS8:NBAR:TRUE&quot;</span>
+<span></span>layer = &quot;LS8:NBAR:TRUE&quot;
 </pre></div>
 </div>
 </div>
@@ -557,7 +557,7 @@ layer.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">abstract</span><span class="p">)</span>
+<span></span>print(wcs[layer].abstract)
 </pre></div>
 </div>
 </div>
@@ -577,17 +577,17 @@ This product has been corrected to remove the influences of the atmosphere, the 
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;CRS Options: &quot;</span><span class="p">)</span>
-<span class="n">crs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">supportedCRS</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span></span>print (&quot;CRS Options: &quot;)
+crs = sorted(wcs[layer].supportedCRS)
+print (&#39;\t&#39;, crs, &#39;\n&#39;)
 
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Bounding Box: &quot;</span><span class="p">)</span>
-<span class="n">bbox</span> <span class="o">=</span> <span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">boundingBoxWGS84</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+print (&quot;Bounding Box: &quot;)
+bbox = wcs[layer].boundingBoxWGS84
+print (&#39;\t&#39;, bbox, &#39;\n&#39;)
 
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Time Positions: &quot;</span><span class="p">)</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">timepositions</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:],</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+print (&quot;Time Positions: &quot;)
+time = wcs[layer].timepositions
+print (&#39;\t&#39;, time[-10:], &#39;\n&#39;)
 </pre></div>
 </div>
 </div>
@@ -618,7 +618,7 @@ formats.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">subset_bbox</span> <span class="o">=</span> <span class="p">(</span><span class="mi">137</span><span class="p">,</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="o">-</span><span class="mi">35</span><span class="p">)</span>
+<span></span>subset_bbox = (137,-37,140,-35)
 </pre></div>
 </div>
 </div>
@@ -629,10 +629,10 @@ formats.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">output</span> <span class="o">=</span> <span class="n">wcs</span><span class="o">.</span><span class="n">getCoverage</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
-                         <span class="n">time</span><span class="o">=</span><span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">timepositions</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
-                         <span class="n">bbox</span><span class="o">=</span><span class="n">subset_bbox</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;GeoTIFF&#39;</span><span class="p">,</span>
-                         <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span></span>output = wcs.getCoverage(identifier=layer,
+                         time=wcs[layer].timepositions[6],
+                         bbox=subset_bbox,format=&#39;GeoTIFF&#39;,
+                         crs=&#39;EPSG:4326&#39;, width=256, height=256)
 </pre></div>
 </div>
 </div>
@@ -643,7 +643,7 @@ formats.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">geturl</span><span class="p">())</span>
+<span></span>print(output.geturl())
 </pre></div>
 </div>
 </div>
@@ -662,9 +662,9 @@ http://gsky.nci.org.au/ows?version=1.0.0&amp;request=GetCoverage&amp;service=WCS
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./output/gsky_wcs.tiff&#39;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span></span>filename = &#39;./output/gsky_wcs.tiff&#39;
+with open(filename, &#39;wb&#39;) as f:
+    f.write(output.read())
 </pre></div>
 </div>
 </div>
@@ -676,9 +676,9 @@ GeoTIFF with the Python GDAL library for example:</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">gdal</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<span></span>import gdal
+import matplotlib.pyplot as plt
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -688,11 +688,11 @@ GeoTIFF with the Python GDAL library for example:</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="n">band</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span>
+<span></span>ds = gdal.Open(filename)
+band = ds.GetRasterBand(1).ReadAsArray()
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gist_earth&#39;</span><span class="p">)</span>
+fig = plt.figure(figsize=(10,10))
+plt.imshow(band, cmap=&#39;gist_earth&#39;)
 </pre></div>
 </div>
 </div>
@@ -722,12 +722,12 @@ specifying the NetCDF option.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">subset_bbox</span> <span class="o">=</span> <span class="p">(</span><span class="mi">137</span><span class="p">,</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="o">-</span><span class="mi">35</span><span class="p">)</span>
+<span></span>subset_bbox = (137,-37,140,-35)
 
-<span class="n">output</span> <span class="o">=</span> <span class="n">wcs</span><span class="o">.</span><span class="n">getCoverage</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
-                         <span class="n">time</span><span class="o">=</span><span class="n">wcs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">timepositions</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
-                         <span class="n">bbox</span><span class="o">=</span><span class="n">subset_bbox</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NetCDF&#39;</span><span class="p">,</span>
-                         <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+output = wcs.getCoverage(identifier=layer,
+                         time=wcs[layer].timepositions[6],
+                         bbox=subset_bbox,format=&#39;NetCDF&#39;,
+                         crs=&#39;EPSG:4326&#39;, width=256, height=256)
 </pre></div>
 </div>
 </div>
@@ -737,7 +737,7 @@ specifying the NetCDF option.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">geturl</span><span class="p">())</span>
+<span></span>print(output.geturl())
 </pre></div>
 </div>
 </div>
@@ -756,9 +756,9 @@ http://gsky.nci.org.au/ows?version=1.0.0&amp;request=GetCoverage&amp;service=WCS
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./output/gsky_wcs.nc&#39;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span></span>filename = &#39;./output/gsky_wcs.nc&#39;
+with open(filename, &#39;wb&#39;) as f:
+    f.write(output.read())
 </pre></div>
 </div>
 </div>
@@ -770,8 +770,8 @@ as NetCDF4 Python or GDAL can be used.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span>from netCDF4 import Dataset
+import numpy as np
 </pre></div>
 </div>
 </div>
@@ -781,28 +781,28 @@ as NetCDF4 Python or GDAL can be used.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+<span></span>with Dataset(filename) as ds:
 
-    <span class="n">band</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;Band1&#39;</span><span class="p">]</span>
-    <span class="n">lon</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span>
-    <span class="n">lat</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span>
-
-
-    <span class="c1"># Set figure size</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
-
-    <span class="c1"># Plot image</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">lon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lon</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">lat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">lat</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-
-    <span class="c1"># Add figure title and labels</span>
-    <span class="c1"># We can make use of the defined variable attributes to do this</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">lon</span><span class="o">.</span><span class="n">long_name</span><span class="o">+</span><span class="s1">&#39; (&#39;</span><span class="o">+</span><span class="n">lon</span><span class="o">.</span><span class="n">units</span><span class="o">+</span><span class="s1">&#39;) &#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">lat</span><span class="o">.</span><span class="n">long_name</span><span class="o">+</span><span class="s1">&#39; (&#39;</span><span class="o">+</span><span class="n">lat</span><span class="o">.</span><span class="n">units</span><span class="o">+</span><span class="s1">&#39;) &#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    band = ds[&#39;Band1&#39;]
+    lon = ds[&#39;lon&#39;]
+    lat = ds[&#39;lat&#39;]
 
 
-    <span class="c1"># Adjust tick mark size</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    # Set figure size
+    plt.figure(figsize=(12,12))
+
+    # Plot image
+    plt.imshow(band, extent=[lon[0], lon[-1], lat[-1], lat[0]])
+
+    # Add figure title and labels
+    # We can make use of the defined variable attributes to do this
+    plt.title(layer.title(), fontsize=20)
+    plt.xlabel(lon.long_name+&#39; (&#39;+lon.units+&#39;) &#39;, fontsize=16)
+    plt.ylabel(lat.long_name+&#39; (&#39;+lat.units+&#39;) &#39;, fontsize=16)
+
+
+    # Adjust tick mark size
+    plt.tick_params(labelsize=16)
 </pre></div>
 </div>
 </div>
@@ -840,7 +840,7 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI.
+        &copy; Copyright 2018, NCI
 
     </p>
   </div>
@@ -859,21 +859,13 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
 
   
 

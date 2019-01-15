@@ -1,6 +1,7 @@
 Getting Started
 ===============
 
+
 GSKY can be used with many different OGC compatible clients.
 
 **Want to try it out? Below are some examples that utilise GSKY.**

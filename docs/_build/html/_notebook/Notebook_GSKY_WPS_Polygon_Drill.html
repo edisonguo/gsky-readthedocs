@@ -367,27 +367,27 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Import python libraries</span>
+<span></span># Import python libraries
 
 
-<span class="c1">#######################################################</span>
-<span class="c1">#   OWSLib is a Python package for client             #</span>
-<span class="c1">#   programming with Open Geospatial Consortium (OGC) #</span>
-<span class="c1">#   web service (hence OWS)interface standards,       #</span>
-<span class="c1">#   and their related content models.                 #</span>
-<span class="c1">#######################################################</span>
+#######################################################
+#   OWSLib is a Python package for client             #
+#   programming with Open Geospatial Consortium (OGC) #
+#   web service (hence OWS)interface standards,       #
+#   and their related content models.                 #
+#######################################################
 
 
-<span class="kn">from</span> <span class="nn">owslib.wcs</span> <span class="k">import</span> <span class="n">WebCoverageService</span>
-<span class="kn">from</span> <span class="nn">owslib.wps</span> <span class="k">import</span> <span class="n">WebProcessingService</span>
-<span class="kn">from</span> <span class="nn">owslib.wps</span> <span class="k">import</span> <span class="n">printInputOutput</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+from owslib.wcs import WebCoverageService
+from owslib.wps import WebProcessingService
+from owslib.wps import printInputOutput
+from PIL import Image
+%matplotlib inline
 
-<span class="c1">### Link to GSKY WPS</span>
+### Link to GSKY WPS
 
-<span class="n">gsky_url</span> <span class="o">=</span> <span class="s1">&#39;http://130.56.242.16/ows/internal/wps&#39;</span>
-<span class="c1">#gsky_url = &#39;http://130.56.242.16/ows/edge/generic_wps&#39;</span>
+gsky_url = &#39;http://130.56.242.16/ows/internal/wps&#39;
+#gsky_url = &#39;http://130.56.242.16/ows/edge/generic_wps&#39;
 </pre></div>
 </div>
 </div>
@@ -397,11 +397,11 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Define the WPS</span>
+<span></span># Define the WPS
 
-<span class="n">wps</span> <span class="o">=</span> <span class="n">WebProcessingService</span><span class="p">(</span><span class="n">gsky_url</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_caps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">wps</span><span class="o">.</span><span class="n">getcapabilities</span><span class="p">()</span>
-<span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">title</span>
+wps = WebProcessingService(gsky_url, verbose=False, skip_caps=True)
+wps.getcapabilities()
+wps.identification.title
 </pre></div>
 </div>
 </div>
@@ -421,12 +421,12 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># View the wps abstract</span>
+<span></span># View the wps abstract
 
-<span class="nb">print</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">abstract</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">accessconstraints</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+print(wps.identification.abstract)
+print(wps.identification.type)
+print(wps.identification.accessconstraints)
+print(wps.identification.version)
 </pre></div>
 </div>
 </div>
@@ -447,10 +447,10 @@ None
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Print WPS operations</span>
+<span></span># Print WPS operations
 
-<span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">wps</span><span class="o">.</span><span class="n">operations</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+for operation in wps.operations:
+    print(operation.name)
 </pre></div>
 </div>
 </div>
@@ -470,10 +470,10 @@ Execute
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># List the WPS processes available</span>
+<span></span># List the WPS processes available
 
-<span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="n">wps</span><span class="o">.</span><span class="n">processes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+for process in wps.processes:
+    print(process.identifier)
 </pre></div>
 </div>
 </div>
@@ -494,10 +494,10 @@ LS8 NBART Pixel Drill NDVI NDWI
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># List the WPS processes available</span>
+<span></span># List the WPS processes available
 
-<span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="n">wps</span><span class="o">.</span><span class="n">processes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">process</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+for process in wps.processes:
+    print(process.identifier, process.title)
 </pre></div>
 </div>
 </div>
@@ -523,8 +523,8 @@ input parameters, and output result:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">wps</span> <span class="o">=</span> <span class="n">WebProcessingService</span><span class="p">(</span><span class="n">gsky_url</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_caps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">process</span> <span class="o">=</span> <span class="n">wps</span><span class="o">.</span><span class="n">describeprocess</span><span class="p">(</span><span class="s1">&#39;LS8 NBART Polygon Drill Raw Bands&#39;</span><span class="p">)</span>
+<span></span>wps = WebProcessingService(gsky_url, verbose=False, skip_caps=True)
+process = wps.describeprocess(&#39;LS8 NBART Polygon Drill Raw Bands&#39;)
 </pre></div>
 </div>
 </div>
@@ -534,7 +534,7 @@ input parameters, and output result:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">process</span><span class="o">.</span><span class="n">identifier</span>
+<span></span>process.identifier
 </pre></div>
 </div>
 </div>
@@ -554,8 +554,8 @@ input parameters, and output result:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">process</span><span class="o">.</span><span class="n">processOutputs</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">dataType</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">defaultValue</span><span class="p">)</span>
+<span></span>for output in process.processOutputs:
+    print(output.title, output.identifier, output.dataType, output.defaultValue)
 </pre></div>
 </div>
 </div>
@@ -573,8 +573,8 @@ Time Series Output Result ComplexData &lt;owslib.wps.ComplexData object at 0x122
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">process</span><span class="o">.</span><span class="n">dataInputs</span><span class="p">:</span>
-    <span class="n">printInputOutput</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span></span>for input in process.dataInputs:
+    printInputOutput(input)
 </pre></div>
 </div>
 </div>
@@ -603,8 +603,8 @@ Time Series Output Result ComplexData &lt;owslib.wps.ComplexData object at 0x122
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">process</span><span class="o">.</span><span class="n">processOutputs</span><span class="p">:</span>
-    <span class="n">printInputOutput</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span></span>for output in process.processOutputs:
+    printInputOutput(input)
 </pre></div>
 </div>
 </div>
@@ -631,46 +631,46 @@ until complete:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="k">def</span> <span class="nf">get_request</span><span class="p">(</span><span class="n">process_id</span><span class="p">,</span> <span class="n">start_datetime</span><span class="p">,</span> <span class="n">end_datetime</span><span class="p">,</span> <span class="n">geometry</span><span class="p">):</span>
-    <span class="k">return</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="s2">&lt;wps:Execute version=&quot;1.0.0&quot; service=&quot;WPS&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://www.opengis.net/wps/1.0.0&quot; xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; xmlns:wps=&quot;http://www.opengis.net/wps/1.0.0&quot; xmlns:ows=&quot;http://www.opengis.net/ows/1.1&quot; xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot; xmlns:wcs=&quot;http://www.opengis.net/wcs/1.1.1&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xsi:schemaLocation=&quot;http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd&quot;&gt;</span>
-<span class="s2">  &lt;ows:Identifier&gt;</span><span class="si">%s</span><span class="s2">&lt;/ows:Identifier&gt;</span>
-<span class="s2">  &lt;wps:DataInputs&gt;</span>
-<span class="s2">    &lt;wps:Input&gt;</span>
-<span class="s2">      &lt;ows:Identifier&gt;start_datetime&lt;/ows:Identifier&gt;</span>
-<span class="s2">      &lt;wps:Data&gt;</span>
-<span class="s2">        &lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;timestamp&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;format&quot;:&quot;date-time&quot;,&quot;date-time&quot;:&quot;</span><span class="si">%s</span><span class="s2">&quot;}}}&lt;/wps:ComplexData&gt;</span>
-<span class="s2">      &lt;/wps:Data&gt;</span>
-<span class="s2">    &lt;/wps:Input&gt;</span>
-<span class="s2">    &lt;wps:Input&gt;</span>
-<span class="s2">      &lt;ows:Identifier&gt;end_datetime&lt;/ows:Identifier&gt;</span>
-<span class="s2">      &lt;wps:Data&gt;</span>
-<span class="s2">        &lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;timestamp&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;format&quot;:&quot;date-time&quot;,&quot;date-time&quot;:&quot;</span><span class="si">%s</span><span class="s2">&quot;}}}&lt;/wps:ComplexData&gt;</span>
-<span class="s2">      &lt;/wps:Data&gt;</span>
-<span class="s2">    &lt;/wps:Input&gt;</span>
-<span class="s2">    &lt;wps:Input&gt;</span>
-<span class="s2">      &lt;ows:Identifier&gt;geometry&lt;/ows:Identifier&gt;</span>
-<span class="s2">      &lt;wps:Data&gt;</span>
-<span class="s2">        &lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;FeatureCollection&quot;,&quot;features&quot;:[{&quot;type&quot;:&quot;Feature&quot;,&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[[</span><span class="si">%s</span><span class="s2">]]}}]}&lt;/wps:ComplexData&gt;</span>
-<span class="s2">      &lt;/wps:Data&gt;</span>
-<span class="s2">    &lt;/wps:Input&gt;</span>
-<span class="s2">  &lt;/wps:DataInputs&gt;</span>
-<span class="s2">  &lt;wps:ResponseForm&gt;</span>
-<span class="s2">    &lt;wps:ResponseDocument storeExecuteResponse=&quot;true&quot; status=&quot;true&quot;/&gt;</span>
-<span class="s2">  &lt;/wps:ResponseForm&gt;</span>
-<span class="s2">&lt;/wps:Execute&gt;</span>
-<span class="s2">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">process_id</span><span class="p">,</span> <span class="n">start_datetime</span><span class="p">,</span> <span class="n">end_datetime</span><span class="p">,</span> <span class="n">geometry</span><span class="p">)</span>
+<span></span>import json
+def get_request(process_id, start_datetime, end_datetime, geometry):
+    return&quot;&quot;&quot;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;wps:Execute version=&quot;1.0.0&quot; service=&quot;WPS&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://www.opengis.net/wps/1.0.0&quot; xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; xmlns:wps=&quot;http://www.opengis.net/wps/1.0.0&quot; xmlns:ows=&quot;http://www.opengis.net/ows/1.1&quot; xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot; xmlns:wcs=&quot;http://www.opengis.net/wcs/1.1.1&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xsi:schemaLocation=&quot;http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd&quot;&gt;
+  &lt;ows:Identifier&gt;%s&lt;/ows:Identifier&gt;
+  &lt;wps:DataInputs&gt;
+    &lt;wps:Input&gt;
+      &lt;ows:Identifier&gt;start_datetime&lt;/ows:Identifier&gt;
+      &lt;wps:Data&gt;
+        &lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;timestamp&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;format&quot;:&quot;date-time&quot;,&quot;date-time&quot;:&quot;%s&quot;}}}&lt;/wps:ComplexData&gt;
+      &lt;/wps:Data&gt;
+    &lt;/wps:Input&gt;
+    &lt;wps:Input&gt;
+      &lt;ows:Identifier&gt;end_datetime&lt;/ows:Identifier&gt;
+      &lt;wps:Data&gt;
+        &lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;timestamp&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;format&quot;:&quot;date-time&quot;,&quot;date-time&quot;:&quot;%s&quot;}}}&lt;/wps:ComplexData&gt;
+      &lt;/wps:Data&gt;
+    &lt;/wps:Input&gt;
+    &lt;wps:Input&gt;
+      &lt;ows:Identifier&gt;geometry&lt;/ows:Identifier&gt;
+      &lt;wps:Data&gt;
+        &lt;wps:ComplexData&gt;{&quot;type&quot;:&quot;FeatureCollection&quot;,&quot;features&quot;:[{&quot;type&quot;:&quot;Feature&quot;,&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[[%s]]}}]}&lt;/wps:ComplexData&gt;
+      &lt;/wps:Data&gt;
+    &lt;/wps:Input&gt;
+  &lt;/wps:DataInputs&gt;
+  &lt;wps:ResponseForm&gt;
+    &lt;wps:ResponseDocument storeExecuteResponse=&quot;true&quot; status=&quot;true&quot;/&gt;
+  &lt;/wps:ResponseForm&gt;
+&lt;/wps:Execute&gt;
+&quot;&quot;&quot; % (process_id, start_datetime, end_datetime, geometry)
 
-<span class="n">req</span> <span class="o">=</span> <span class="n">get_request</span><span class="p">(</span><span class="s2">&quot;LS8 NBART Polygon Drill Raw Bands&quot;</span><span class="p">,</span> <span class="s2">&quot;2016-02-15T00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2016-10-22T00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;[114.4,-28.1],[114.8,-28.13],[114.8,-27.94],[114.4,-27.94],[114.4,-28.12]&quot;</span><span class="p">)</span>
+req = get_request(&quot;LS8 NBART Polygon Drill Raw Bands&quot;, &quot;2016-02-15T00:00&quot;, &quot;2016-10-22T00:00&quot;, &quot;[114.4,-28.1],[114.8,-28.13],[114.8,-27.94],[114.4,-27.94],[114.4,-28.12]&quot;)
 
-<span class="n">execution</span> <span class="o">=</span> <span class="n">wps</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">req</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;sync&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)])</span>
-<span class="n">outputRaw</span> <span class="o">=</span> <span class="n">execution</span><span class="o">.</span><span class="n">processOutputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">outputRaw</span><span class="p">)</span>
+execution = wps.execute(None, None, request=req, mode=&#39;sync&#39;, output=[(&#39;output&#39;, True)])
+outputRaw = execution.processOutputs[0].data[0]
+output = json.loads(outputRaw)
 
-<span class="c1"># output.data is the csv payload returned from the polygon drill WPS</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+# output.data is the csv payload returned from the polygon drill WPS
+print(output[&#39;data&#39;])
 
 </pre></div>
 </div>
@@ -787,9 +787,9 @@ date,Red,Nir
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span></span>import subprocess
 
-<span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;curl&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="s1">&#39;@payload.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;result_22nov.json&#39;</span><span class="p">,</span> <span class="s1">&#39;http://130.56.242.16/ows/internal/wps?service=WPS&#39;</span><span class="p">])</span>
+subprocess.call([&#39;curl&#39;, &#39;-X&#39;, &#39;POST&#39;, &#39;-d&#39;, &#39;@payload.xml&#39;, &#39;-o&#39;, &#39;result_22nov.json&#39;, &#39;http://130.56.242.16/ows/internal/wps?service=WPS&#39;])
 </pre></div>
 </div>
 </div>
@@ -812,15 +812,15 @@ date,Red,Nir
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Import libraries</span>
+<span></span># Import libraries
 
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+import csv
+import numpy as np
+import datetime as dt
+import matplotlib.dates as mdates
 
-<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="k">import</span> <span class="n">gridplot</span>
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">output_file</span>
+from bokeh.layouts import gridplot
+from bokeh.plotting import figure, show, output_file
 
 </pre></div>
 </div>
@@ -831,33 +831,33 @@ date,Red,Nir
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># extract the data we want to plot</span>
+<span></span># extract the data we want to plot
 
-<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;result_long.txt&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputfile</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">inputfile</span><span class="p">):</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+results = []
+with open(&#39;result_long.txt&#39;, newline=&#39;&#39;) as inputfile:
+    for row in csv.reader(inputfile):
+        results.append(row)
 
-<span class="n">orig_dates</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">orig_PV</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">orig_NPV</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">orig_BS</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">3</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">orig_Total</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">4</span><span class="p">::</span><span class="mi">5</span><span class="p">]</span>
+orig_dates = results[0::5]
+orig_PV = results[1::5]
+orig_NPV = results[2::5]
+orig_BS = results[3::5]
+orig_Total = results[4::5]
 
-<span class="n">dates_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_dates</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-<span class="n">PV_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_PV</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-<span class="n">NPV_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_NPV</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-<span class="n">BS_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_BS</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-<span class="n">Total_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">orig_Total</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
+dates_array = np.asarray([item for sublist in orig_dates for item in sublist])
+PV_array = np.asarray([item for sublist in orig_PV for item in sublist])
+NPV_array = np.asarray([item for sublist in orig_NPV for item in sublist])
+BS_array = np.asarray([item for sublist in orig_BS for item in sublist])
+Total_array = np.asarray([item for sublist in orig_Total for item in sublist])
 
-<span class="n">PV</span> <span class="o">=</span> <span class="n">PV_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="n">NPV</span> <span class="o">=</span> <span class="n">NPV_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="n">BS</span> <span class="o">=</span> <span class="n">BS_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="n">Total</span> <span class="o">=</span> <span class="n">Total_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+PV = PV_array.astype(np.float)
+NPV = NPV_array.astype(np.float)
+BS = BS_array.astype(np.float)
+Total = Total_array.astype(np.float)
 
-<span class="c1"># make dates python plottable</span>
-<span class="n">dt_dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S.000Z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">dates_array</span> <span class="p">]</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">))</span>
+# make dates python plottable
+dt_dates = [dt.datetime.strptime(date,&#39;%Y-%m-%dT%H:%M:%S.000Z&#39;).date() for date in dates_array ]
+dates = mdates.date2num(list(dt_dates))
 </pre></div>
 </div>
 </div>
@@ -868,32 +868,32 @@ date,Red,Nir
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">######################################################################################################</span>
-<span class="c1">#                                                                                                    #</span>
-<span class="c1">#   Bokeh is an interactive visualization library that targets modern web browsers for presentation. #</span>
-<span class="c1">#   Its goal is to provide elegant, concise construction of versatile graphics, and to extend this   #</span>
-<span class="c1">#   capability with high-performance interactivity over very large or streaming datasets.            #</span>
-<span class="c1">#                                                                                                    #</span>
-<span class="c1">#   For more information about Bokeh, please visit https://bokeh.pydata.org/en/latest/               #</span>
-<span class="c1">#                                                                                                    #</span>
-<span class="c1">######################################################################################################</span>
+<span></span>######################################################################################################
+#                                                                                                    #
+#   Bokeh is an interactive visualization library that targets modern web browsers for presentation. #
+#   Its goal is to provide elegant, concise construction of versatile graphics, and to extend this   #
+#   capability with high-performance interactivity over very large or streaming datasets.            #
+#                                                                                                    #
+#   For more information about Bokeh, please visit https://bokeh.pydata.org/en/latest/               #
+#                                                                                                    #
+######################################################################################################
 
-<span class="c1">## Plot PV NPV BS Total all on the same graph</span>
+## Plot PV NPV BS Total all on the same graph
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;8-day Fractional Cover Drill&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">1600</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
-<span class="n">p</span><span class="o">.</span><span class="n">background_fill_color</span> <span class="o">=</span> <span class="s2">&quot;beige&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">background_fill_alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">p</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
+p = figure(x_axis_type=&quot;datetime&quot;, title=&quot;8-day Fractional Cover Drill&quot;, plot_height=800, plot_width=1600)
+p.xgrid.grid_line_color=None
+p.background_fill_color = &quot;beige&quot;
+p.background_fill_alpha = 0.5
+p.ygrid.grid_line_alpha=0.5
+p.xaxis.axis_label = &#39;Time&#39;
+p.yaxis.axis_label = &#39;%&#39;
 
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">PV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;PV&#39;</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">NPV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;NPV&#39;</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">BS</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;BS&#39;</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">Total</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+p.line(dt_dates, PV, color = &#39;green&#39;, legend=&#39;PV&#39;)
+p.line(dt_dates, NPV, color = &#39;blue&#39;, legend=&#39;NPV&#39;)
+p.line(dt_dates, BS, color = &#39;red&#39;, legend=&#39;BS&#39;)
+p.line(dt_dates, Total, color = &#39;orange&#39;, legend=&#39;Total&#39;)
 
-<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+show(p)
 </pre></div>
 </div>
 </div>
@@ -903,48 +903,48 @@ date,Red,Nir
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## Plot seperate graphs for each of PV NPV BS Total</span>
+<span></span>## Plot seperate graphs for each of PV NPV BS Total
 
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span>
-<span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="k">import</span> <span class="n">Spectral6</span>
-<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="k">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">DataRange1d</span><span class="p">,</span> <span class="n">Plot</span><span class="p">,</span> <span class="n">LinearAxis</span><span class="p">,</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">Legend</span><span class="p">,</span> <span class="n">LegendItem</span>
-<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="k">import</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">gridplot</span>
+from bokeh.plotting import figure, show
+from bokeh.palettes import Spectral6
+from bokeh.models import ColumnDataSource, DataRange1d, Plot, LinearAxis, Grid, Legend, LegendItem
+from bokeh.layouts import row, column, gridplot
 
-<span class="n">p1</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PV&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
-<span class="n">p1</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
-<span class="c1">#p1.background_fill_color = &quot;beige&quot;</span>
-<span class="c1">#p1.background_fill_alpha = 0.5</span>
-<span class="n">p1</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="n">p1</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
-<span class="n">p1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
-<span class="n">p1</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">PV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;PV&#39;)</span>
+p1 = figure(x_axis_type=&quot;datetime&quot;, title=&quot;PV&quot;, plot_height=350, plot_width=800)
+p1.xgrid.grid_line_color=None
+#p1.background_fill_color = &quot;beige&quot;
+#p1.background_fill_alpha = 0.5
+p1.ygrid.grid_line_alpha=0.5
+p1.xaxis.axis_label = &#39;Time&#39;
+p1.yaxis.axis_label = &#39;%&#39;
+p1.line(dt_dates, PV, color = &#39;green&#39;)#, legend=&#39;PV&#39;)
 
-<span class="n">p2</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;NPV&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
-<span class="c1">#p2.background_fill_color = &quot;beige&quot;</span>
-<span class="c1">#p2.background_fill_alpha = 0.5</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">NPV</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;NPV&#39;)</span>
+p2 = figure(x_axis_type=&quot;datetime&quot;, title=&quot;NPV&quot;, plot_height=350, plot_width=800)
+p2.xgrid.grid_line_color=None
+#p2.background_fill_color = &quot;beige&quot;
+#p2.background_fill_alpha = 0.5
+p2.ygrid.grid_line_alpha=0.5
+p2.xaxis.axis_label = &#39;Time&#39;
+p2.yaxis.axis_label = &#39;%&#39;
+p2.line(dt_dates, NPV, color = &#39;blue&#39;)#, legend=&#39;NPV&#39;)
 
-<span class="n">p3</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;BS&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
-<span class="n">p3</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
-<span class="n">p3</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="n">p3</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
-<span class="n">p3</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
-<span class="n">p3</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">BS</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;BS&#39;)</span>
+p3 = figure(x_axis_type=&quot;datetime&quot;, title=&quot;BS&quot;, plot_height=350, plot_width=800)
+p3.xgrid.grid_line_color=None
+p3.ygrid.grid_line_alpha=0.5
+p3.xaxis.axis_label = &#39;Time&#39;
+p3.yaxis.axis_label = &#39;%&#39;
+p3.line(dt_dates, BS, color = &#39;red&#39;)#, legend=&#39;BS&#39;)
 
-<span class="n">p4</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
-<span class="n">p4</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span><span class="o">=</span><span class="kc">None</span>
-<span class="n">p4</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_alpha</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="n">p4</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span>
-<span class="n">p4</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span>
-<span class="n">p4</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">dt_dates</span><span class="p">,</span> <span class="n">Total</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span><span class="c1">#, legend=&#39;Total&#39;)</span>
+p4 = figure(x_axis_type=&quot;datetime&quot;, title=&quot;Total&quot;, plot_height=350, plot_width=800)
+p4.xgrid.grid_line_color=None
+p4.ygrid.grid_line_alpha=0.5
+p4.xaxis.axis_label = &#39;Time&#39;
+p4.yaxis.axis_label = &#39;%&#39;
+p4.line(dt_dates, Total, color = &#39;orange&#39;)#, legend=&#39;Total&#39;)
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">([[</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">],[</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">]])</span>
+p = gridplot([[p1,p2],[p3,p4]])
 
-<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+show(p)
 
 </pre></div>
 </div>
@@ -963,7 +963,7 @@ date,Red,Nir
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI.
+        &copy; Copyright 2018, NCI
 
     </p>
   </div>
@@ -982,21 +982,13 @@ date,Red,Nir
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
 
   
 

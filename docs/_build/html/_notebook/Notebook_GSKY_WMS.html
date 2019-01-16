@@ -378,10 +378,10 @@ data as images (e.g., PNG).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from owslib.wms import WebMapService
-from PIL import Image
-import matplotlib.pyplot as plt
-%matplotlib inline
+<span></span><span class="kn">from</span> <span class="nn">owslib.wms</span> <span class="k">import</span> <span class="n">WebMapService</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -392,7 +392,7 @@ import matplotlib.pyplot as plt
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>gsky_url = &#39;http://gsky.nci.org.au/ows&#39;
+<span></span><span class="n">gsky_url</span> <span class="o">=</span> <span class="s1">&#39;http://gsky.nci.org.au/ows/dea&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -403,7 +403,7 @@ import matplotlib.pyplot as plt
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>wms = WebMapService(gsky_url, version=&#39;1.3.0&#39;)
+<span></span><span class="n">wms</span> <span class="o">=</span> <span class="n">WebMapService</span><span class="p">(</span><span class="n">gsky_url</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.3.0&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -414,9 +414,9 @@ import matplotlib.pyplot as plt
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>for layer in list(wms.contents):
-    print(&quot;Layer Name:&quot;, wms[layer].name)
-    print(&quot;Title:&quot;, wms[layer].title, &#39;\n&#39;)
+<span></span><span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">wms</span><span class="o">.</span><span class="n">contents</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Layer Name:&quot;</span><span class="p">,</span> <span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Title:&quot;</span><span class="p">,</span> <span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -425,113 +425,62 @@ import matplotlib.pyplot as plt
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Layer Name: hltc:high:fc
-Title: DEA High Tide Composite 25m v2.0 false colour
+Layer Name: hltc_high
+Title: DEA High Tide Composite 25m v2.0
 
-Layer Name: hltc:high:tc
-Title: DEA High Tide Composite 25m v2.0 true colour
+Layer Name: hltc_low
+Title: DEA Low Tide Composite 25m v2.0
 
-Layer Name: hltc:low:fc
-Title: DEA Low Tide Composite 25m v2.0 false colour
-
-Layer Name: hltc:low:tc
-Title: DEA Low Tide Composite 25m v2.0 true colour
-
-Layer Name: item:relative
+Layer Name: item_relative
 Title: DEA Intertidal Extents Model Relative Layer 25m v2.0
 
-Layer Name: item:stddev
+Layer Name: item_stddev
 Title: DEA Intertidal Extents Model Confidence Layer 25m v2.0
 
-Layer Name: LS5:GEOMEDIAN:FALSE
-Title: DEA Landsat 5 terrain corrected surface reflectance geometric median false colour
+Layer Name: landsat5_geomedian
+Title: DEA Landsat 5 terrain corrected surface reflectance geometric median
 
-Layer Name: LS5:GEOMEDIAN:TRUE
-Title: DEA Landsat 5 terrain corrected surface reflectance geometric median true colour
+Layer Name: landsat5_nbar_16day
+Title: 16-day DEA Landsat 5 surface reflectance
 
-Layer Name: LS5:NBAR:FALSE
-Title: 16-day DEA Landsat 5 surface reflectance false colour
+Layer Name: landsat5_nbar_daily
+Title: Daily DEA Landsat 5 surface reflectance
 
-Layer Name: LS5:NBAR:FALSE:DAILY
-Title: Daily DEA Landsat 5 surface reflectance false colour
+Layer Name: landsat5_nbart_16day
+Title: 16-day DEA Landsat 5 terrain corrected surface reflectance
 
-Layer Name: LS5:NBAR:TRUE
-Title: 16-day DEA Landsat 5 surface reflectance true colour
+Layer Name: landsat5_nbart_daily
+Title: Daily DEA Landsat 5 terrain corrected surface reflectance
 
-Layer Name: LS5:NBAR:TRUE:DAILY
-Title: Daily DEA Landsat 5 surface reflectance true colour
+Layer Name: landsat7_geomedian
+Title: DEA Landsat 7 terrain corrected surface reflectance geometric median
 
-Layer Name: LS5:NBART:FALSE
-Title: 16-day DEA Landsat 5 terrain corrected surface reflectance false colour
+Layer Name: landsat7_nbar_16day
+Title: 16-day DEA Landsat 7 surface reflectance
 
-Layer Name: LS5:NBART:FALSE:DAILY
-Title: Daily DEA Landsat 5 terrain corrected surface reflectance false colour
+Layer Name: landsat7_nbar_daily
+Title: Daily DEA Landsat 7 surface reflectance
 
-Layer Name: LS5:NBART:TRUE
-Title: 16-day DEA Landsat 5 terrain corrected surface reflectance true colour
+Layer Name: landsat7_nbart_16day
+Title: 16-day DEA Landsat 7 terrain corrected surface reflectance
 
-Layer Name: LS5:NBART:TRUE:DAILY
-Title: Daily DEA Landsat 5 terrain corrected surface reflectance true colour
+Layer Name: landsat7_nbart_daily
+Title: Daily DEA Landsat 7 terrain corrected surface reflectance
 
-Layer Name: LS7:GEOMEDIAN:FALSE
-Title: DEA Landsat 7 terrain corrected surface reflectance geometric median false colour
+Layer Name: landsat8_geomedian
+Title: DEA Landsat 8 terrain corrected surface reflectance geometric median
 
-Layer Name: LS7:GEOMEDIAN:TRUE
-Title: DEA Landsat 7 terrain corrected surface reflectance geometric median true colour
+Layer Name: landsat8_nbar_16day
+Title: 16-day DEA Landsat 8 surface reflectance
 
-Layer Name: LS7:NBAR:FALSE
-Title: 16-day DEA Landsat 7 surface reflectance false colour
+Layer Name: landsat8_nbar_daily
+Title: Daily DEA Landsat 8 surface reflectance
 
-Layer Name: LS7:NBAR:FALSE:DAILY
-Title: Daily DEA Landsat 7 surface reflectance false colour
+Layer Name: landsat8_nbart_16day
+Title: 16-day DEA Landsat 8 terrain corrected surface reflectance
 
-Layer Name: LS7:NBAR:TRUE
-Title: 16-day DEA Landsat 7 surface reflectance true colour
-
-Layer Name: LS7:NBAR:TRUE:DAILY
-Title: Daily DEA Landsat 7 surface reflectance true colour
-
-Layer Name: LS7:NBART:FALSE
-Title: 16-day DEA Landsat 7 terrain corrected surface reflectance false colour
-
-Layer Name: LS7:NBART:FALSE:DAILY
-Title: Daily DEA Landsat 7 terrain corrected surface reflectance false colour
-
-Layer Name: LS7:NBART:TRUE
-Title: 16-day DEA Landsat 7 terrain corrected surface reflectance true colour
-
-Layer Name: LS7:NBART:TRUE:DAILY
-Title: Daily DEA Landsat 7 terrain corrected surface reflectance true colour
-
-Layer Name: LS8:GEOMEDIAN:FALSE
-Title: DEA Landsat 8 terrain corrected surface reflectance geometric median false colour
-
-Layer Name: LS8:GEOMEDIAN:TRUE
-Title: DEA Landsat 8 terrain corrected surface reflectance geometric median true colour
-
-Layer Name: LS8:NBAR:FALSE
-Title: 16-day DEA Landsat 8 surface reflectance false colour
-
-Layer Name: LS8:NBAR:FALSE:DAILY
-Title: Daily DEA Landsat 8 surface reflectance false colour
-
-Layer Name: LS8:NBAR:TRUE
-Title: 16-day DEA Landsat 8 surface reflectance true colour
-
-Layer Name: LS8:NBAR:TRUE:DAILY
-Title: Daily DEA Landsat 8 surface reflectance true colour
-
-Layer Name: LS8:NBART:FALSE
-Title: 16-day DEA Landsat 8 terrain corrected surface reflectance false colour
-
-Layer Name: LS8:NBART:FALSE:DAILY
-Title: Daily DEA Landsat 8 terrain corrected surface reflectance false colour
-
-Layer Name: LS8:NBART:TRUE
-Title: 16-day DEA Landsat 8 terrain corrected surface reflectance true colour
-
-Layer Name: LS8:NBART:TRUE:DAILY
-Title: Daily DEA Landsat 8 terrain corrected surface reflectance true colour
+Layer Name: landsat8_nbart_daily
+Title: Daily DEA Landsat 8 terrain corrected surface reflectance
 
 Layer Name: wofs
 Title: DEA Water Observation Feature Layer
@@ -547,7 +496,7 @@ layer.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>layer = &quot;LS8:GEOMEDIAN:TRUE&quot;
+<span></span><span class="n">layer</span> <span class="o">=</span> <span class="s2">&quot;landsat8_nbart_16day&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -557,7 +506,7 @@ layer.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>print(wms[layer].abstract)
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">abstract</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -566,7 +515,7 @@ layer.</strong></p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-The terrain corrected surface reflectance geometric median (geomedian) is a pixel composite mosaic of a time series of earth observations. Essentially the value of a pixel in a geomedian image is the statistical median of all observations for that pixel from a period of time. For example the 2016 Landsat 8 geomedian image over an area will be the median of Landsat 8 pixels observed for that area in 2016. Multispectral satellite imagery, such as is available from Landsat and Sentinel-2, consists of multiple measurements per pixel: one for each spectral band. In order to create a meaningful median, a median pixel must take all concurrent spectral measurements into account simultaneously as a multi-dimensional set, rather than each measurement independently as occurs with a simple median. The geomedian is a high-dimensional statistic, which calculates a multi-dimensional median from all the spectral measurements from the satellite imagery at the same time, and maintains the relationships among the measurements. This provides a median of the physical conditions measured by the earth observations used to create it, and provides a good representation of a typical pixel observation devoid of outliers, and exhibits reduced spatial noise. Details of the geomedian algortihm are available at https://doi.org/10.1109/TGRS.2017.2723896. As of version 2.0.0, the geometric median products are available as annual datasets, each created from one calendar year of earth observation data from a single satellite. The true colour composite is composed of wavelengths of light as seen by the human eye.
+This product has been corrected to remove the influences of the atmosphere, the time of year, terrain shadow and satellite view angles using the methods described in Li et al. 2012 https://doi.org/10.1016/j.rse.2012.06.018. Landsat 8 Operational Land Imager (OLI) data is available from March 2013 and onwards. More detailed information about the terrain corrected surface reflectance product suite produced using Digital Earth Australia including CCBY4.0 is available at http://dx.doi.org/10.4225/25/5a7a76d2e129e. This service provides access to Landsat 8 OLI terrain corrected surface reflectance data. The image composites are made from images acquired within a 16 day period, and may include clouds.
 </pre></div></div>
 </div>
 <p><strong>Or view the CRS options, bounding box, and time positions available
@@ -577,17 +526,21 @@ The terrain corrected surface reflectance geometric median (geomedian) is a pixe
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>print(&quot;CRS Options: &quot;)
-crs = sorted(wms[layer].crsOptions)
-print(&#39;\t&#39;, crs, &#39;\n&#39;)
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CRS Options: &quot;</span><span class="p">)</span>
+<span class="n">crs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">crsOptions</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-print(&quot;Bounding Box: &quot;)
-bbox = wms[layer].boundingBox
-print(&#39;\t&#39;, bbox, &#39;\n&#39;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bounding Box: &quot;</span><span class="p">)</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">boundingBox</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-print(&quot;Time Positions: &quot;)
-time = wms[layer].timepositions
-print(&#39;\t&#39;, time[:10], &#39;\n&#39;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time Positions: &quot;</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">timepositions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">time</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Styles: &quot;</span><span class="p">)</span>
+<span class="n">styles</span> <span class="o">=</span> <span class="n">wms</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">styles</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -603,7 +556,10 @@ Bounding Box:
          (-180.0, -90.0, 180.0, 90.0, &#39;CRS:84&#39;)
 
 Time Positions:
-         [&#39;2013-01-01T00:00:00.000Z&#39;, &#39;2014-01-01T00:00:00.000Z&#39;, &#39;2015-01-01T00:00:00.000Z&#39;, &#39;2016-01-01T00:00:00.000Z&#39;, &#39;2017-01-01T00:00:00.000Z&#39;]
+         [&#39;2013-03-19T00:00:00.000Z&#39;, &#39;2013-04-04T00:00:00.000Z&#39;, &#39;2013-04-20T00:00:00.000Z&#39;, &#39;2013-05-06T00:00:00.000Z&#39;, &#39;2013-05-22T00:00:00.000Z&#39;, &#39;2013-06-07T00:00:00.000Z&#39;, &#39;2013-06-23T00:00:00.000Z&#39;, &#39;2013-07-09T00:00:00.000Z&#39;, &#39;2013-07-25T00:00:00.000Z&#39;, &#39;2013-08-10T00:00:00.000Z&#39;]
+
+Styles:
+         {&#39;fc&#39;: {&#39;title&#39;: &#39;False colour&#39;}, &#39;tc&#39;: {&#39;title&#39;: &#39;True colour&#39;}}
 
 </pre></div></div>
 </div>
@@ -616,7 +572,7 @@ request.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>subset_bbox = (148, -37, 151, -34)
+<span></span><span class="n">subset_bbox</span> <span class="o">=</span> <span class="p">(</span><span class="mi">147</span><span class="p">,</span> <span class="o">-</span><span class="mi">37</span><span class="p">,</span> <span class="mi">148</span><span class="p">,</span> <span class="o">-</span><span class="mi">35</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -627,13 +583,14 @@ request.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>output = wms.getmap(layers=[layer],
-                        srs=crs[2],
-                        bbox=(subset_bbox[0], subset_bbox[1], subset_bbox[2], subset_bbox[3]),
-                        size=(256, 256),
-                        format=&#39;image/png&#39;,
-                        time=time[2]
-                        )
+<span></span><span class="n">output</span> <span class="o">=</span> <span class="n">wms</span><span class="o">.</span><span class="n">getmap</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span>
+                        <span class="n">Styles</span><span class="o">=</span><span class="s1">&#39;tc&#39;</span><span class="p">,</span>
+                        <span class="n">srs</span><span class="o">=</span><span class="n">crs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                        <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="n">subset_bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">subset_bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">subset_bbox</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">subset_bbox</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                        <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+                        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;image/png&#39;</span><span class="p">,</span>
+                        <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -644,7 +601,7 @@ request.</strong></p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>print(output.geturl())
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">geturl</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -653,7 +610,7 @@ request.</strong></p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-http://gsky.nci.org.au/ows?SERVICE=WMS&amp;service=WMS&amp;version=1.3.0&amp;request=GetMap&amp;layers=LS8%3AGEOMEDIAN%3ATRUE&amp;styles=&amp;width=256&amp;height=256&amp;crs=EPSG%3A4326&amp;bbox=-37%2C148%2C-34%2C151&amp;format=image%2Fpng&amp;transparent=FALSE&amp;bgcolor=0xFFFFFF&amp;exceptions=XML&amp;time=2015-01-01T00%3A00%3A00.000Z
+http://gsky.nci.org.au/ows/dea?SERVICE=WMS&amp;service=WMS&amp;version=1.3.0&amp;request=GetMap&amp;layers=landsat8_nbart_16day&amp;styles=&amp;width=256&amp;height=256&amp;crs=EPSG%3A4326&amp;bbox=-37%2C147%2C-35%2C148&amp;format=image%2Fpng&amp;transparent=FALSE&amp;bgcolor=0xFFFFFF&amp;exceptions=XML&amp;time=2013-04-20T00%3A00%3A00.000Z&amp;Styles=tc
 </pre></div></div>
 </div>
 <p><strong>Lastly, we need to write the GetMap result to a file:</strong></p>
@@ -663,9 +620,9 @@ http://gsky.nci.org.au/ows?SERVICE=WMS&amp;service=WMS&amp;version=1.3.0&amp;req
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pngfile = &#39;./output/gsky_getMap.png&#39;
-with open(pngfile, &#39;wb&#39;) as out:
-    out.write(output.read())
+<span></span><span class="n">pngfile</span> <span class="o">=</span> <span class="s1">&#39;./output/gsky_getMap.png&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pngfile</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -676,9 +633,9 @@ with open(pngfile, &#39;wb&#39;) as out:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>im = Image.open(pngfile)
-plt.figure(figsize=(10, 10))
-plt.imshow(im)
+<span></span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">pngfile</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -688,7 +645,7 @@ plt.imshow(im)
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.image.AxesImage at 0x12806ce48&gt;
+<span></span>&lt;matplotlib.image.AxesImage at 0x11ad6ccf8&gt;
 </pre></div>
 </div>
 </div>
@@ -726,7 +683,7 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI
+        &copy; Copyright 2018, NCI.
 
     </p>
   </div>
@@ -745,13 +702,21 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
 
   
 
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-    
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

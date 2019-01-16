@@ -208,7 +208,7 @@
 <h2>Constructing WCS requests<a class="headerlink" href="#constructing-wcs-requests" title="Permalink to this headline">¶</a></h2>
 <p>GSKY’s Web Coverage Service (WCS) allows users to request data or subsets of data in either NetCDF3 or GeoTIFF format. The request is made by constructing a GetCoverage URL, which is then used within a web browser to communicate to the GSKY Data Server.</p>
 <p>For example, the GetCoverage request takes the following form:</p>
-<p><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?<span class="red">service</span>=WCS&amp;<span class="red">version</span>=1.0.0&amp;<span class="red">request</span>=GetCoverage&amp;<span class="red">coverage</span>=<span class="green">value</span>&amp;<span class="red">format</span>=<span class="green">value</span>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows/dea">http://gsky.nci.org.au/ows/dea</a>?<span class="red">service</span>=WCS&amp;<span class="red">version</span>=1.0.0&amp;<span class="red">request</span>=GetCoverage&amp;<span class="red">coverage</span>=<span class="green">value</span>&amp;<span class="red">format</span>=<span class="green">value</span>&amp;<span class="red">Styles</span>=<span class="green">value</span>
 &amp;<span class="blue">bbox</span>=<span class="green">value</span>&amp;<span class="blue">crs</span>=<span class="green">value</span></p>
 <p>where <span class="red">red</span> indicates required fields, <span class="blue">blue</span> are optional, and <span class="green">green</span> are where input values relevant to the dataset and user request need to be defined.</p>
 </div>
@@ -243,19 +243,23 @@
 <td>Required</td>
 <td><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></td>
 </tr>
-<tr class="row-even"><td>format</td>
+<tr class="row-even"><td>Styles</td>
+<td>Required</td>
+<td><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></td>
+</tr>
+<tr class="row-odd"><td>format</td>
 <td>Required</td>
 <td><code class="docutils literal notranslate"><span class="pre">GeoTIFF,</span> <span class="pre">GeoTIFF_Float,</span> <span class="pre">NetCDF3</span></code></td>
 </tr>
-<tr class="row-odd"><td>bbox <code class="docutils literal notranslate"><span class="pre">*</span></code></td>
+<tr class="row-even"><td>bbox <code class="docutils literal notranslate"><span class="pre">*</span></code></td>
 <td>Required</td>
 <td><code class="docutils literal notranslate"><span class="pre">&lt;xmin,ymin,xmax,ymax&gt;</span></code></td>
 </tr>
-<tr class="row-even"><td>time <code class="docutils literal notranslate"><span class="pre">*</span></code></td>
+<tr class="row-odd"><td>time <code class="docutils literal notranslate"><span class="pre">*</span></code></td>
 <td>Required/Optional</td>
 <td><code class="docutils literal notranslate"><span class="pre">&lt;time_value&gt;</span></code></td>
 </tr>
-<tr class="row-odd"><td>srs, or crs</td>
+<tr class="row-even"><td>srs, or crs</td>
 <td>Required/Optional</td>
 <td><code class="docutils literal notranslate"><span class="pre">&lt;srs_value&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;crs_value&gt;</span></code></td>
 </tr>
@@ -271,11 +275,11 @@ and if <code class="docutils literal notranslate"><span class="pre">time</span><
 WCS parameters (metadata, services, and data) made available by NCI’s GSKY server. Additional metadata information can also be requested about a specific
 coverage layer by making a <strong>DescribeCoverage</strong> request.</p>
 <p><strong>GetCapabilities example:</strong></p>
-<p><a class="reference external" href="http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;request=GetCapabilities">http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;request=GetCapabilities</a></p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows/dea?service=WCS&amp;version=1.0.0&amp;request=GetCapabilities">http://gsky.nci.org.au/ows/dea?service=WCS&amp;version=1.0.0&amp;request=GetCapabilities</a></p>
 <img alt="../_images/gsky_wcs1.png" src="../_images/gsky_wcs1.png" />
 <p><strong>DescribeCoverage example:</strong></p>
-<p><a class="reference external" href="http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;coverage=LS5:NBAR:TRUE&amp;request=DescribeCoverage">http://gsky.nci.org.au/ows?service=WCS&amp;version=1.0.0&amp;coverage=LS5:NBAR:TRUE&amp;request=DescribeCoverage</a></p>
-<img alt="../_images/gsky_wcs2.png" src="../_images/gsky_wcs2.png" />
+<p><a class="reference external" href="http://gsky.nci.org.au/ows/dea?service=WCS&amp;version=1.0.0&amp;coverage=landsat5_nbart_16day&amp;request=DescribeCoverage">http://gsky.nci.org.au/ows/dea?service=WCS&amp;version=1.0.0&amp;coverage=landsat5_nbart_16day&amp;request=DescribeCoverage</a></p>
+<img alt="../_images/gsky_wcs2a.png" src="../_images/gsky_wcs2a.png" />
 </div>
 <div class="section" id="getcoverage-request">
 <h2>GetCoverage request<a class="headerlink" href="#getcoverage-request" title="Permalink to this headline">¶</a></h2>
@@ -284,38 +288,40 @@ coverage layer by making a <strong>DescribeCoverage</strong> request.</p>
 <blockquote>
 <div><blockquote>
 <div><div class="line-block">
-<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?</div>
+<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows/dea">http://gsky.nci.org.au/ows/dea</a>?</div>
 <div class="line"><span class="red">service</span>=WCS&amp;</div>
-<div class="line"><span class="red">coverage</span>=LS7:NBAR:TRUE&amp;</div>
+<div class="line"><span class="red">coverage</span>=landsat8_nbart_16day&amp;</div>
 <div class="line"><span class="red">crs</span>=EPSG:4326&amp;</div>
 <div class="line"><span class="red">format</span>=NetCDF&amp;</div>
 <div class="line"><span class="red">request</span>=GetCoverage&amp;</div>
 <div class="line"><span class="red">height</span>=256&amp;</div>
 <div class="line"><span class="red">width</span> =256&amp;</div>
 <div class="line"><span class="red">version</span>=1.0.0&amp;</div>
-<div class="line"><span class="red">bbox</span>=148,-37,151,-34&amp;</div>
-<div class="line"><span class="red">time</span>=1999-08-05T00:00:00.000Z</div>
+<div class="line"><span class="red">bbox</span>=147,-37,148,-35&amp;</div>
+<div class="line"><span class="red">time</span>=2013-04-20T00:00:00.000Z&amp;</div>
+<div class="line"><span class="red">Styles</span>=tc</div>
 </div>
 </div></blockquote>
-<p><a class="reference external" href="http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=NetCDF&amp;request=GetCoverage&amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE&amp;time=1999-08-05T00:00:00.000Z">http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=NetCDF&amp;request=GetCoverage &amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE &amp;time=1999-08-05T00:00:00.000Z</a>.</p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows/dea?service=WCS&amp;crs=EPSG:4326&amp;format=NetCDF&amp;request=GetCoverage&amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=147,-37,148,-35&amp;coverage=landsat8_nbart_16day&amp;time=2013-04-20T00:00:00.000Z&amp;Styles=tc">http://gsky.nci.org.au/ows/dea?service=WCS&amp;crs=EPSG:4326&amp;format=NetCDF&amp;request=GetCoverage &amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=147,-37,148,-35&amp;coverage=landsat8_nbart_16day &amp;time=2013-04-20T00:00:00.000Z&amp;Styles=tc</a>.</p>
 <p><strong>Example GetCoverage (GeoTIFF format)</strong></p>
 <blockquote>
 <div><blockquote>
 <div><div class="line-block">
-<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows">http://gsky.nci.org.au/ows</a>?</div>
+<div class="line"><a class="reference external" href="http://gsky.nci.org.au/ows/dea">http://gsky.nci.org.au/ows/dea</a>?</div>
 <div class="line"><span class="red">service</span>=WCS&amp;</div>
-<div class="line"><span class="red">coverage</span>=LS7:NBAR:TRUE&amp;</div>
+<div class="line"><span class="red">coverage</span>=landsat8_nbart_16day&amp;</div>
 <div class="line"><span class="red">crs</span>=EPSG:4326&amp;</div>
 <div class="line"><span class="red">format</span>=GeoTIFF&amp;</div>
 <div class="line"><span class="red">request</span>=GetCoverage&amp;</div>
 <div class="line"><span class="red">height</span>=256&amp;</div>
 <div class="line"><span class="red">width</span> =256&amp;</div>
 <div class="line"><span class="red">version</span>=1.0.0&amp;</div>
-<div class="line"><span class="red">bbox</span>=148,-37,151,-34&amp;</div>
-<div class="line"><span class="red">time</span>=1999-08-05T00:00:00.000Z</div>
+<div class="line"><span class="red">bbox</span>=147,-37,148,-35&amp;</div>
+<div class="line"><span class="red">time</span>=2013-04-20T00:00:00.000Z&amp;</div>
+<div class="line"><span class="red">Styles</span>=tc</div>
 </div>
 </div></blockquote>
-<p><a class="reference external" href="http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=GeoTIFF&amp;request=GetCoverage&amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE&amp;time=1999-08-05T00:00:00.000Z">http://gsky.nci.org.au/ows?SERVICE=WCS&amp;service=WCS&amp;crs=EPSG:4326&amp;format=GeoTIFF&amp;request=GetCoverage &amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=148,-37,151,-34&amp;coverage=LS7:NBAR:TRUE &amp;time=1999-08-05T00:00:00.000Z</a>.</p>
+<p><a class="reference external" href="http://gsky.nci.org.au/ows/dea?service=WCS&amp;crs=EPSG:4326&amp;format=GeoTIFF&amp;request=GetCoverage&amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=147,-37,148,-35&amp;coverage=landsat8_nbart_16day&amp;time=2013-04-20T00:00:00.000Z&amp;Styles=tc">http://gsky.nci.org.au/ows/dea?service=WCS&amp;crs=EPSG:4326&amp;format=GeoTIFF&amp;request=GetCoverage &amp;height=256&amp;width=256&amp;version=1.0.0&amp;bbox=147,-37,148,-35&amp;coverage=landsat8_nbart_16day &amp;time=2013-04-20T00:00:00.000Z&amp;Styles=tc</a>.</p>
 </div></blockquote>
 </div></blockquote>
 </div>
@@ -341,7 +347,7 @@ coverage layer by making a <strong>DescribeCoverage</strong> request.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI
+        &copy; Copyright 2018, NCI.
 
     </p>
   </div>
@@ -360,13 +366,21 @@ coverage layer by making a <strong>DescribeCoverage</strong> request.</p>
 
   
 
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-    
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -19,7 +19,7 @@ GSKY's Web Coverage Service (WCS) allows users to request data or subsets of dat
 For example, the GetCoverage request takes the following form:
 
 
-http://gsky.nci.org.au/ows?\ :red:`service`\ =WCS&\ :red:`version`\ =1.0.0&\ :red:`request`\ =GetCoverage&\ :red:`coverage`\ =\ :green:`value`\ &\ :red:`format`\ =\ :green:`value`
+http://gsky.nci.org.au/ows/dea?\ :red:`service`\ =WCS&\ :red:`version`\ =1.0.0&\ :red:`request`\ =GetCoverage&\ :red:`coverage`\ =\ :green:`value`\ &\ :red:`format`\ =\ :green:`value`\ &\ :red:`Styles`\ =\ :green:`value`
 \
 &\ :blue:`bbox`\ =\ :green:`value`\ &\ :blue:`crs`\ =\ :green:`value`\
 
@@ -38,6 +38,8 @@ GetCoverage parameters
 | request                |  Required             | ``GetCoverage``                      |
 +------------------------+-----------------------+--------------------------------------+
 | coverage               |  Required             | ``<variable>``                       |
++------------------------+-----------------------+--------------------------------------+
+| Styles                 |  Required             | ``<variable>``                       |
 +------------------------+-----------------------+--------------------------------------+
 | format                 |  Required             | ``GeoTIFF, GeoTIFF_Float, NetCDF3``  |
 +------------------------+-----------------------+--------------------------------------+
@@ -63,16 +65,16 @@ coverage layer by making a **DescribeCoverage** request.
 
 **GetCapabilities example:**
 
-http://gsky.nci.org.au/ows?service=WCS&version=1.0.0&request=GetCapabilities
+http://gsky.nci.org.au/ows/dea?service=WCS&version=1.0.0&request=GetCapabilities
 
 .. image:: ../_static/images/gsky_wcs1.png
 
 
 **DescribeCoverage example:**
 
-http://gsky.nci.org.au/ows?service=WCS&version=1.0.0&coverage=LS5:NBAR:TRUE&request=DescribeCoverage
+http://gsky.nci.org.au/ows/dea?service=WCS&version=1.0.0&coverage=landsat5_nbart_16day&request=DescribeCoverage
 
-.. image:: ../_static/images/gsky_wcs2.png
+.. image:: ../_static/images/gsky_wcs2a.png
 
 
 GetCoverage request
@@ -83,35 +85,37 @@ Using the information returned from the GetCapabilities and DescribeCoverage req
 **Example GetCoverage (NetCDF format)**
 
 
-  | http://gsky.nci.org.au/ows?
+  | http://gsky.nci.org.au/ows/dea?
   | :red:`service`\ =WCS&
-  | :red:`coverage`\ =LS7:NBAR:TRUE&
+  | :red:`coverage`\ =landsat8_nbart_16day&
   | :red:`crs`\ =EPSG:4326&
   | :red:`format`\ =NetCDF&
   | :red:`request`\ =GetCoverage&
   | :red:`height`\ =256&
   | :red:`width` =256&
   | :red:`version`\ =1.0.0&
-  | :red:`bbox`\ =148,-37,151,-34&
-  | :red:`time`\ =1999-08-05T00:00:00.000Z
+  | :red:`bbox`\ =147,-37,148,-35&
+  | :red:`time`\ =2013-04-20T00:00:00.000Z&
+  | :red:`Styles`\ =tc
 
 
- `http://gsky.nci.org.au/ows?SERVICE=WCS&service=WCS&crs=EPSG:4326&format=NetCDF&request=GetCoverage \ &height=256&width=256&version=1.0.0&bbox=148,-37,151,-34&coverage=LS7:NBAR:TRUE \ &time=1999-08-05T00:00:00.000Z <http://gsky.nci.org.au/ows?SERVICE=WCS&service=WCS&crs=EPSG:4326&format=NetCDF&request=GetCoverage&height=256&width=256&version=1.0.0&bbox=148,-37,151,-34&coverage=LS7:NBAR:TRUE&time=1999-08-05T00:00:00.000Z>`_.
+ `http://gsky.nci.org.au/ows/dea?service=WCS&crs=EPSG:4326&format=NetCDF&request=GetCoverage \ &height=256&width=256&version=1.0.0&bbox=147,-37,148,-35&coverage=landsat8_nbart_16day \ &time=2013-04-20T00:00:00.000Z&Styles=tc <http://gsky.nci.org.au/ows/dea?service=WCS&crs=EPSG:4326&format=NetCDF&request=GetCoverage&height=256&width=256&version=1.0.0&bbox=147,-37,148,-35&coverage=landsat8_nbart_16day&time=2013-04-20T00:00:00.000Z&Styles=tc>`_.
 
  **Example GetCoverage (GeoTIFF format)**
 
 
-   | http://gsky.nci.org.au/ows?
+   | http://gsky.nci.org.au/ows/dea?
    | :red:`service`\ =WCS&
-   | :red:`coverage`\ =LS7:NBAR:TRUE&
+   | :red:`coverage`\ =landsat8_nbart_16day&
    | :red:`crs`\ =EPSG:4326&
    | :red:`format`\ =GeoTIFF&
    | :red:`request`\ =GetCoverage&
    | :red:`height`\ =256&
    | :red:`width` =256&
    | :red:`version`\ =1.0.0&
-   | :red:`bbox`\ =148,-37,151,-34&
-   | :red:`time`\ =1999-08-05T00:00:00.000Z
+   | :red:`bbox`\ =147,-37,148,-35&
+   | :red:`time`\ =2013-04-20T00:00:00.000Z&
+   | :red:`Styles`\ =tc
 
 
-  `http://gsky.nci.org.au/ows?SERVICE=WCS&service=WCS&crs=EPSG:4326&format=GeoTIFF&request=GetCoverage \ &height=256&width=256&version=1.0.0&bbox=148,-37,151,-34&coverage=LS7:NBAR:TRUE \ &time=1999-08-05T00:00:00.000Z <http://gsky.nci.org.au/ows?SERVICE=WCS&service=WCS&crs=EPSG:4326&format=GeoTIFF&request=GetCoverage&height=256&width=256&version=1.0.0&bbox=148,-37,151,-34&coverage=LS7:NBAR:TRUE&time=1999-08-05T00:00:00.000Z>`_.
+  `http://gsky.nci.org.au/ows/dea?service=WCS&crs=EPSG:4326&format=GeoTIFF&request=GetCoverage \ &height=256&width=256&version=1.0.0&bbox=147,-37,148,-35&coverage=landsat8_nbart_16day \ &time=2013-04-20T00:00:00.000Z&Styles=tc <http://gsky.nci.org.au/ows/dea?service=WCS&crs=EPSG:4326&format=GeoTIFF&request=GetCoverage&height=256&width=256&version=1.0.0&bbox=147,-37,148,-35&coverage=landsat8_nbart_16day&time=2013-04-20T00:00:00.000Z&Styles=tc>`_.

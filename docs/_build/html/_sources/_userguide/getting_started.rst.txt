@@ -1,6 +1,6 @@
 Getting Started
 ===============
-TEST
+
 
 GSKY can be used with many different OGC compatible clients.
 
@@ -15,9 +15,11 @@ Go to the `National Map website`_
 
 Click on Add Data -> My Data -> Web Data and type:
 
-http://gsky.nci.org.au/ows
+http://gsky.nci.org.au/ows/dea
 
-.. image:: ../_static/images/national_map1.png
+.. image:: ../_static/images/national_map1a.png
+
+.. image:: ../_static/images/national_map1b.png
 
 GSKY provides a catalogue of all the datasets and links to NCI's ISO 19115 data catalogue entries:
 

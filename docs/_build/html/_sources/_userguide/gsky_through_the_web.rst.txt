@@ -9,6 +9,14 @@ RAPP Map is the spatial data platform for the Rangeland and Pasture Productivity
 Constructing WPS Requests using the GEOGLAM polygon drill
 ----------------------------------------------------------
 
+Below is a short video tutorial on how to run a WPS request using the GEOGLAM RAPP Map.
+
+.. raw:: html
+
+    <video controls src="../_static/geoglam_polygon_drill.mp4" frameborder="0" allowfullscreen style="width: 100%; height: 140%;"></video>
+
+|
+
 The current WPS request for GEOGLAM takes a polygon as input and calcuates the band averages over time for the polygon of interest. Let's first access the GEOGLAM WPS via the TerriaJS interface:
 
 http://map.geo-rapp.org/

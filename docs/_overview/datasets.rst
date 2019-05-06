@@ -32,7 +32,7 @@ To view the DEA or GEOGLAM  collections, click on Add Data -> My Data -> Add Web
 
 http://gsky.nci.org.au/ows/dea
 
-http://gsky.nci.org.au/ows/dea/geoglam 
+http://gsky.nci.org.au/ows/geoglam 
  
 .. raw:: html
 

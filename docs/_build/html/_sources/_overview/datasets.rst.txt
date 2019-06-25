@@ -12,7 +12,8 @@ GSKY currently serves data collections such as:
   * Intertidal Extents Models (ITEM)
   * High and Low Tide Composites (HLTC)
   * Water Observations from Space (WOfS)
-  * Sentinel 2 Analysis Ready Data (Beta)
+  * Sentinel 2 Analysis Ready Data
+  * Multi-sensor (Landsat and Sentinel 2) surface reflectance (Beta)
 
 **GEOGLAM**, the GEO Global Agricultural Monitoring initiative, which include the following products:
 

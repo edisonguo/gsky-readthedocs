@@ -1,7 +1,8 @@
 
-.. image:: _static/images/NCI_logo.jpg
-  :width: 300
+.. image:: _static/images/NCI_Australia_logo.png
+   :width: 300
 
+\
 
 Welcome to the GSKY Manual
 ===========================

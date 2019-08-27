@@ -2,6 +2,15 @@
  "cells": [
   {
    "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div>\n",
+    "<img src=\"./images/NCI_Australia_logo.png\" width=\"300\" align=\"left\"/>\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
    "metadata": {
     "extensions": {
      "jupyter_dashboards": {
@@ -20,16 +29,12 @@
     }
    },
    "source": [
-    "![](http://nci.org.au/wp-content/themes/nci/img/img-logo-large.png)\n",
     "\n",
-    "-------\n",
     "\n",
     "## GSKY WMS with ipyleafet and widgets\n",
     "\n",
     "**Please note:** If the images/maps below are not shown, please click [here](https://nbviewer.jupyter.org/github/nci/gsky-demos/blob/master/Notebook_GSKY_WMS_ipyleaflet.ipynb?flush_cache=true) to see a completed preview of the interactive features of this notebook.\n",
-    "\n",
-    "\n",
-    "---------"
+    "\n"
    ]
   },
   {
@@ -673,7 +678,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.6"
+   "version": "3.6.8"
   },
   "widgets": {
    "application/vnd.jupyter.widget-state+json": {

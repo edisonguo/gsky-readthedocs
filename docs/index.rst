@@ -21,8 +21,8 @@ Welcome to the GSKY Manual
    GeoGLAM example <_userguide/gsky_through_the_web>
    ArcGIS example <_userguide/GSKY_ArcGIS>
    QGIS example <_userguide/GSKY_QGIS>
-..   Google Earth Web example <_userguide/GoogleEarthWeb.rst>
    Installing Jupyter and Python <_userguide/install_jupyter>
+..   Google Earth Web example <_userguide/GoogleEarthWeb.rst>
 
 .. toctree::
    :caption: Jupyter notebooks

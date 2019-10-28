@@ -4,10 +4,6 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "![](../../_static/images/NCI_logo.png)\n",
-    "\n",
-    "-------\n",
-    "\n",
     "# Request GSKY's WMS from Python (bushfire example)\n",
     "\n",
     "In this notebook, \n",
@@ -337,7 +333,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.7.3"
+   "version": "3.6.8"
   }
  },
  "nbformat": 4,

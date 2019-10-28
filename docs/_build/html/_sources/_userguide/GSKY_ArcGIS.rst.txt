@@ -1,8 +1,7 @@
 GSKY interacts with ArcGIS suite
 ===============================================================
 
-This tutorial demonstrate how ArcGIS pro, ArcGIS Earth and ArcMap interact with GSKY Web Mapping Services (WMS). In this tutorial, you will learn to add the layer by calling GSKY WMS server. 
-
+This tutorial demonstrate how ArcGIS pro, ArcGIS Earth and ArcMap interact with the GSKY Web Mapping Services (WMS). In this tutorial, you will learn to add layers by calling the GSKY WMS server. 
 
 
 Introduction
@@ -12,14 +11,14 @@ ArcGIS
 
 https://learn.arcgis.com/en/projects/get-started-with-arcgis-online/
  
-In this tutorial, we are going to demonstrate 
+In this tutorial, we are going to demonstrate how to: 
 
 * Create a map showing evacuation routes in Houston
 * Use smart mapping and pop-ups to determine areas with low vehicle ownership.
 * Configure a web app to share your findings with others.
 
-0. Prerequisite 
-~~~~~~~~~~~~~~~~~~~~~~~
+0. Prerequisites 
+~~~~~~~~~~~~~~~~
 
 In this lesson, you'll create a map that shows hurricane evacuation routes in Houston, Texas. First, you'll create a new map and locate Houston, Texas. Then, you'll add a map layer that shows evacuation routes. Lastly, you'll change the way your map and layers look to better display the data.
 
@@ -34,7 +33,7 @@ Type this link in your web browser: https://www.arcgis.com/home/createaccount.ht
 
 .. image:: ../_static/images/GSKY_ArcGISweb1.png
 
-Click "Using Google" to login. You might need to click twice to login.
+Click "Using Google" to login.
 
 .. image:: ../_static/images/GSKY_ArcGISweb2.png
 
@@ -69,11 +68,11 @@ You will see a list of options from the drop down box below. Choose "A WMS OGC W
 
 .. image:: ../_static/images/GSKY_ArcGISweb8.png
 
-Type is "https://gsky.nci.org.au/ows/geoglam" in the URL box. Then click "ADD LAYER". You can tick the box beneath of URL box "Use as Basemap" if you like. 
+Type "https://gsky.nci.org.au/ows/geoglam" in the URL box. Then click "ADD LAYER". You can tick the box beneath of URL box "Use as Basemap" if you like. 
 
 .. image:: ../_static/images/GSKY_ArcGISweb9.png
 
-All data layers published through GSKY production server should be now available for you to choose. Click the grey arrow to expend the dataset list. Note if you untick the top layer "GSKY Web Map Service", all the GSKY layers will be invisible. 
+All data layers published through GSKY production server should now be available for you to choose. Click the grey arrow to expend the dataset list. Note if you untick the top layer "GSKY Web Map Service", all the GSKY layers will be invisible. 
 
 .. image:: ../_static/images/GSKY_ArcGISweb10.png
 
@@ -129,11 +128,11 @@ Move the bar up to expand the table view.
 
 .. image:: ../_static/images/GSKY_ArcGISweb21.png
 
-Select the records that are interested. Click "Show Selected Records".
+Select the records that you find interesting. Click "Show Selected Records".
 
 .. image:: ../_static/images/GSKY_ArcGISweb22.png
 
-The four selected records are highlighted on map.
+The four selected records are highlighted on the map.
 
 .. image:: ../_static/images/GSKY_ArcGISweb23.png
 

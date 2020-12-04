@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,44 +11,49 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using GSKY’s WMS in Python" href="../_notebook/Notebook_GSKY_WMS.html" />
-    <link rel="prev" title="Using GSKY through the web" href="gsky_through_the_web.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+    <link rel="prev" title="GSKY interacts with QGIS" href="GSKY_QGIS.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSKY
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> GSKY
           
 
           
@@ -72,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,6 +92,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gsky_through_the_web.html">GeoGLAM example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GSKY_ArcGIS.html">ArcGIS example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GSKY_QGIS.html">QGIS example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Jupyter and Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-miniconda-on-macos">Installing Miniconda on macOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setting-up-virtual-environment">Setting up virtual environment</a></li>
@@ -102,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">WMS ipyleaflet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WCS.html">WCS Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_ClicknShip.html">WCS Click and Ship</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html">Create a GIF using GSKY WMS endpoints</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OGC web services</span></p>
 <ul>
@@ -124,6 +132,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -162,7 +171,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Installing Jupyter and Python</li>
     
@@ -188,18 +197,23 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
 }
 </style>
 <div class="section" id="installing-jupyter-and-python">
@@ -207,9 +221,9 @@
 <p>We recommend installing <a class="reference external" href="https://conda.io/docs/user-guide/install/index.html">Miniconda</a>, a mini version of <a class="reference external" href="https://www.anaconda.com/download/#macos">Anaconda</a> which conveniently installs:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Python</li>
-<li>Jupyter Notebook</li>
-<li>Other commonly used packages for scientific computing and data science</li>
+<li><p>Python</p></li>
+<li><p>Jupyter Notebook</p></li>
+<li><p>Other commonly used packages for scientific computing and data science</p></li>
 </ul>
 </div></blockquote>
 <p>Miniconda includes only conda and its dependencies. If you would like to have conda plus over 720 open source packages, install Anaconda.</p>
@@ -217,18 +231,16 @@
 <h2>Installing Miniconda on macOS<a class="headerlink" href="#installing-miniconda-on-macos" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ol class="arabic">
-<li><dl class="first docutils">
-<dt>Download the installers</dt>
-<dd><ul class="first last simple">
-<li><a class="reference external" href="https://conda.io/miniconda.html">Miniconda installer for macOS</a></li>
+<li><dl class="simple">
+<dt>Download the installers</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://conda.io/miniconda.html">Miniconda installer for macOS</a></p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>Install</dt>
-<dd><ul class="first last">
-<li><p class="first"><strong>Miniconda</strong> via terminal:</p>
+<li><dl>
+<dt>Install</dt><dd><ul>
+<li><p><strong>Miniconda</strong> via terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ~/Downloads
 
 $ bash Miniconda3-latest-MacOSX-x86_64.sh
@@ -239,9 +251,8 @@ $ bash Miniconda3-latest-MacOSX-x86_64.sh
 </dd>
 </dl>
 </li>
-<li><p class="first">Close and re-open your terminal window.</p>
-</li>
-<li><p class="first">To test that the installation was successful, run the following command:</p>
+<li><p>Close and re-open your terminal window.</p></li>
+<li><p>To test that the installation was successful, run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda list
 </pre></div>
 </div>
@@ -308,7 +319,7 @@ $ conda install -c bokeh bokeh
         <a href="../_notebook/Notebook_GSKY_WMS.html" class="btn btn-neutral float-right" title="Using GSKY’s WMS in Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gsky_through_the_web.html" class="btn btn-neutral" title="Using GSKY through the web" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="GSKY_QGIS.html" class="btn btn-neutral float-left" title="GSKY interacts with QGIS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -317,11 +328,19 @@ $ conda install -c bokeh bokeh
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI.
+        
+        &copy; Copyright 2018, NCI
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -333,34 +352,16 @@ $ conda install -c bokeh bokeh
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

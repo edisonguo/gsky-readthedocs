@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,44 +11,49 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Web Coverage Services (WCS)" href="WCS.html" />
-    <link rel="prev" title="GSKY Click and Ship" href="../_notebook/Notebook_GSKY_ClicknShip.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+    <link rel="prev" title="Request GSKY’s WMS from Python (bushfire example)" href="../_notebook/request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSKY
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> GSKY
           
 
           
@@ -72,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,6 +92,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../_userguide/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_userguide/gsky_through_the_web.html">GeoGLAM example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/GSKY_ArcGIS.html">ArcGIS example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/GSKY_QGIS.html">QGIS example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_userguide/install_jupyter.html">Installing Jupyter and Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
@@ -95,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WMS_ipyleaflet.html">WMS ipyleaflet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_WCS.html">WCS Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_notebook/Notebook_GSKY_ClicknShip.html">WCS Click and Ship</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_notebook/request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html">Create a GIF using GSKY WMS endpoints</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OGC web services</span></p>
 <ul class="current">
@@ -122,6 +130,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +169,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Web Map Service (WMS)</li>
     
@@ -186,18 +195,23 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
 }
 </style>
 <div class="section" id="web-map-service-wms">
@@ -212,78 +226,78 @@
 &amp;<span class="blue">colorscalerange</span>=<span class="green">value</span> &amp;<span class="blue">transparent</span>=<span class="green">value</span>&amp;<span class="blue">time</span>=<span class="green">value</span>&amp;<span class="blue">Styles</span>=<span class="green">value</span></p>
 <p>where <span class="red">red</span> indicates required fields, <span class="blue">blue</span> are optional, and <span class="green">green</span> are where input values relevant to the dataset and user request need to be defined.</p>
 <p><strong>GetMap parameters:</strong></p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="19%" />
-<col width="60%" />
+<col style="width: 20%" />
+<col style="width: 19%" />
+<col style="width: 60%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Required/Optional</th>
-<th class="head">Input</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Required/Optional</p></th>
+<th class="head"><p>Input</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>service</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">WMS</span></code></td>
+<tbody>
+<tr class="row-even"><td><p>service</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">WMS</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>version</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">1.1.1</span> <span class="pre">**</span></code>, <code class="docutils literal notranslate"><span class="pre">1.3.0</span> <span class="pre">(default)</span></code></td>
+<tr class="row-odd"><td><p>version</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.1.1</span> <span class="pre">**</span></code>, <code class="docutils literal notranslate"><span class="pre">1.3.0</span> <span class="pre">(default)</span></code></p></td>
 </tr>
-<tr class="row-even"><td>request</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">GetMap</span></code></td>
+<tr class="row-even"><td><p>request</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GetMap</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>layers</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></td>
+<tr class="row-odd"><td><p>layers</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></p></td>
 </tr>
-<tr class="row-even"><td>crs</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">&lt;crs_value&gt;</span></code></td>
+<tr class="row-even"><td><p>crs</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;crs_value&gt;</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>format</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">image/png</span></code>, <code class="docutils literal notranslate"><span class="pre">image/png;mode=32bit</span></code>, <code class="docutils literal notranslate"><span class="pre">image/gif</span></code>, <code class="docutils literal notranslate"><span class="pre">image/jpeg</span></code></td>
+<tr class="row-odd"><td><p>format</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">image/png</span></code>, <code class="docutils literal notranslate"><span class="pre">image/png;mode=32bit</span></code>, <code class="docutils literal notranslate"><span class="pre">image/gif</span></code>, <code class="docutils literal notranslate"><span class="pre">image/jpeg</span></code></p></td>
 </tr>
-<tr class="row-even"><td>bbox</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">&lt;ymin,xmin,ymax,xmax&gt;</span></code></td>
+<tr class="row-even"><td><p>bbox</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;ymin,xmin,ymax,xmax&gt;</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>width</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">width</span> <span class="pre">in</span> <span class="pre">pixels</span></code></td>
+<tr class="row-odd"><td><p>width</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">width</span> <span class="pre">in</span> <span class="pre">pixels</span></code></p></td>
 </tr>
-<tr class="row-even"><td>height</td>
-<td>Required</td>
-<td><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">height</span> <span class="pre">in</span> <span class="pre">pixels</span></code></td>
+<tr class="row-even"><td><p>height</p></td>
+<td><p>Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">height</span> <span class="pre">in</span> <span class="pre">pixels</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>colorscalerange</td>
-<td>Optional</td>
-<td><code class="docutils literal notranslate"><span class="pre">&lt;min,max&gt;</span></code></td>
+<tr class="row-odd"><td><p>colorscalerange</p></td>
+<td><p>Optional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;min,max&gt;</span></code></p></td>
 </tr>
-<tr class="row-even"><td>transparent</td>
-<td>Optional</td>
-<td><code class="docutils literal notranslate"><span class="pre">True,</span> <span class="pre">False</span></code></td>
+<tr class="row-even"><td><p>transparent</p></td>
+<td><p>Optional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True,</span> <span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>time</td>
-<td>Optional</td>
-<td><code class="docutils literal notranslate"><span class="pre">&lt;time_value&gt;</span></code></td>
+<tr class="row-odd"><td><p>time</p></td>
+<td><p>Optional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;time_value&gt;</span></code></p></td>
 </tr>
-<tr class="row-even"><td>Styles</td>
-<td>Optional</td>
-<td><code class="docutils literal notranslate"><span class="pre">&lt;style_name&gt;</span></code></td>
+<tr class="row-even"><td><p>Styles</p></td>
+<td><p>Optional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;style_name&gt;</span></code></p></td>
 </tr>
 </tbody>
 </table>
 <p><code class="docutils literal notranslate"><span class="pre">**</span></code> <strong>Syntax differences for v1.1.1 GetMap requests:</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>Use <code class="docutils literal notranslate"><span class="pre">src</span></code> in place of <code class="docutils literal notranslate"><span class="pre">crs</span></code></li>
-<li>The order of <code class="docutils literal notranslate"><span class="pre">bbox</span></code> values are: <code class="docutils literal notranslate"><span class="pre">&lt;xmin,ymin,xmax,ymax&gt;</span></code></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">src</span></code> in place of <code class="docutils literal notranslate"><span class="pre">crs</span></code></p></li>
+<li><p>The order of <code class="docutils literal notranslate"><span class="pre">bbox</span></code> values are: <code class="docutils literal notranslate"><span class="pre">&lt;xmin,ymin,xmax,ymax&gt;</span></code></p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -295,7 +309,8 @@ This requests returns an xml describing the available WMS parameters (metadata, 
 made available by NCI’s GSKY server.</p>
 <p><strong>GetCapabilities example:</strong></p>
 <blockquote>
-<div><a class="reference external" href="http://gsky.nci.org.au/ows/dea?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities">http://gsky.nci.org.au/ows/dea?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities</a></div></blockquote>
+<div><p><a class="reference external" href="http://gsky.nci.org.au/ows/dea?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities">http://gsky.nci.org.au/ows/dea?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities</a></p>
+</div></blockquote>
 <img alt="../_images/gsky_wms1.png" src="../_images/gsky_wms1.png" />
 </div>
 <div class="section" id="wms-getmap-request">
@@ -337,7 +352,7 @@ and then entered into the address bar of any web browser.</p>
         <a href="WCS.html" class="btn btn-neutral float-right" title="Web Coverage Services (WCS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../_notebook/Notebook_GSKY_ClicknShip.html" class="btn btn-neutral" title="GSKY Click and Ship" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../_notebook/request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html" class="btn btn-neutral float-left" title="Request GSKY’s WMS from Python (bushfire example)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -346,11 +361,19 @@ and then entered into the address bar of any web browser.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI.
+        
+        &copy; Copyright 2018, NCI
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -362,34 +385,16 @@ and then entered into the address bar of any web browser.</p>
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

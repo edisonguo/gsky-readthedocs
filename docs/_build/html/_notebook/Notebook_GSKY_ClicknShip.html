@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,44 +11,49 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Web Map Service (WMS)" href="../_ogc/WMS.html" />
-    <link rel="prev" title="Using GSKY’s WCS in Python" href="Notebook_GSKY_WCS.html" /> 
 
   
-  <script src="../_static/js/modernizr.min.js"></script>
+  
+  
+  
 
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Request GSKY’s WMS from Python (bushfire example)" href="request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html" />
+    <link rel="prev" title="Using GSKY’s WCS in Python" href="Notebook_GSKY_WCS.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSKY
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> GSKY
           
 
           
@@ -72,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,6 +92,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../_userguide/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_userguide/gsky_through_the_web.html">GeoGLAM example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/GSKY_ArcGIS.html">ArcGIS example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_userguide/GSKY_QGIS.html">QGIS example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_userguide/install_jupyter.html">Installing Jupyter and Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
@@ -103,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#And-ship!">And ship!</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html">Create a GIF using GSKY WMS endpoints</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OGC web services</span></p>
 <ul>
@@ -125,6 +133,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -163,7 +172,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>GSKY Click and Ship</li>
     
@@ -189,16 +198,16 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput,
-div.nbinput div.prompt,
-div.nbinput div.input_area,
-div.nbinput div[class*=highlight],
-div.nbinput div[class*=highlight] pre,
-div.nboutput,
-div.nbinput div.prompt,
-div.nbinput div.output_area,
-div.nboutput div[class*=highlight],
-div.nboutput div[class*=highlight] pre {
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
     background: none;
     border: none;
     padding: 0 0;
@@ -207,13 +216,13 @@ div.nboutput div[class*=highlight] pre {
 }
 
 /* avoid gaps between output lines */
-div.nboutput div[class*=highlight] pre {
+div.nboutput.container div[class*=highlight] pre {
     line-height: normal;
 }
 
 /* input/output containers */
-div.nbinput,
-div.nboutput {
+div.nbinput.container,
+div.nboutput.container {
     display: -webkit-flex;
     display: flex;
     align-items: flex-start;
@@ -221,92 +230,104 @@ div.nboutput {
     width: 100%;
 }
 @media (max-width: 540px) {
-    div.nbinput,
-    div.nboutput {
+    div.nbinput.container,
+    div.nboutput.container {
         flex-direction: column;
     }
 }
 
 /* input container */
-div.nbinput {
+div.nbinput.container {
     padding-top: 5px;
 }
 
 /* last container */
-div.nblast {
+div.nblast.container {
     padding-bottom: 5px;
 }
 
 /* input prompt */
-div.nbinput div.prompt pre {
-    color: #303F9F;
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
 }
 
 /* output prompt */
-div.nboutput div.prompt pre {
-    color: #D84315;
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
 }
 
 /* all prompts */
-div.nbinput div.prompt,
-div.nboutput div.prompt {
-    min-width: 8ex;
-    padding-top: 0.4em;
-    padding-right: 0.4em;
-    text-align: right;
-    flex: 0;
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
 }
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
 @media (max-width: 540px) {
-    div.nbinput div.prompt,
-    div.nboutput div.prompt {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
         text-align: left;
         padding: 0.4em;
     }
-    div.nboutput div.prompt.empty {
+    div.nboutput.container div.prompt.empty {
         padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
     }
 }
 
 /* disable scrollbars on prompts */
-div.nbinput div.prompt pre,
-div.nboutput div.prompt pre {
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
     overflow: hidden;
 }
 
 /* input/output area */
-div.nbinput div.input_area,
-div.nboutput div.output_area {
-    padding: 0.4em;
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
     -webkit-flex: 1;
     flex: 1;
     overflow: auto;
 }
 @media (max-width: 540px) {
-    div.nbinput div.input_area,
-    div.nboutput div.output_area {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
         width: 100%;
     }
 }
 
 /* input area */
-div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
-div.nboutput div[class*=MathJax] {
+div.nboutput.container div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
-div.nboutput div.math p {
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
     text-align: left;
 }
 
 /* standard error */
-div.nboutput div.output_area.stderr {
+div.nboutput.container div.output_area.stderr {
     background: #fdd;
 }
 
@@ -350,40 +371,99 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
-<div></div><div class="section" id="GSKY-Click-and-Ship">
+<div><p><img alt="c7a06c035ae2473ba3f021a267e3ab36" class="no-scaled-link" src="../_images/NCI_Australia_logo.png" style="width: 300px;" /></p>
+</div><div class="section" id="GSKY-Click-and-Ship">
 <h1>GSKY Click and Ship<a class="headerlink" href="#GSKY-Click-and-Ship" title="Permalink to this headline">¶</a></h1>
-<p><strong>The following libraries will need to be imported for the below
-example.</strong></p>
+<p><strong>The following libraries will need to be imported for the below example.</strong></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">owslib.wms</span> <span class="k">import</span> <span class="n">WebMapService</span>
-<span class="kn">from</span> <span class="nn">owslib.wcs</span> <span class="k">import</span> <span class="n">WebCoverageService</span>
+<span></span><span class="kn">from</span> <span class="nn">owslib.wms</span> <span class="kn">import</span> <span class="n">WebMapService</span>
+<span class="kn">from</span> <span class="nn">owslib.wcs</span> <span class="kn">import</span> <span class="n">WebCoverageService</span>
 <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
@@ -393,18 +473,16 @@ example.</strong></p>
 <h2>Preview available data<a class="headerlink" href="#Preview-available-data" title="Permalink to this headline">¶</a></h2>
 <p><strong>Let’s preview the available data first with WMS</strong></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">gsky_url</span> <span class="o">=</span> <span class="s1">&#39;http://gsky.nci.org.au/ows/dea&#39;</span>
+<span></span><span class="n">gsky_url</span> <span class="o">=</span> <span class="s1">&#39;https://gsky.nci.org.au/ows/dea&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -414,8 +492,7 @@ example.</strong></p>
 </div>
 <p><strong>Find out the available data layers that can be requested:</strong></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -430,6 +507,9 @@ example.</strong></p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
+Layer Name: blend_sentinel2_landsat_nbart_daily
+Title: Multi-sensor (Landsat and Sentinel 2) surface reflectance (Beta)
+
 Layer Name: hltc_high
 Title: DEA High Tide Composite 25m v2.0
 
@@ -487,17 +567,17 @@ Title: 16-day DEA Landsat 8 terrain corrected surface reflectance
 Layer Name: landsat8_nbart_daily
 Title: Daily DEA Landsat 8 terrain corrected surface reflectance
 
+Layer Name: sentinel2_nbart_daily
+Title: Sentinel 2 Analysis Ready Data
+
 Layer Name: wofs
 Title: DEA Water Observation Feature Layer
 
 </pre></div></div>
 </div>
-<p><strong>We can also view metadata that is available about a selected layer.
-For example, you can view the abstract associated with that data
-layer.</strong></p>
+<p><strong>We can also view metadata that is available about a selected layer. For example, you can view the abstract associated with that data layer.</strong></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -506,8 +586,7 @@ layer.</strong></p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -524,8 +603,7 @@ This product has been corrected to remove the influences of the atmosphere, the 
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -538,14 +616,13 @@ This product has been corrected to remove the influences of the atmosphere, the 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;fc&#39;: {&#39;title&#39;: &#39;False colour&#39;}, &#39;tc&#39;: {&#39;title&#39;: &#39;True colour&#39;}}
+{&#39;fc&#39;: {&#39;title&#39;: &#39;False colour&#39;}, &#39;tc&#39;: {&#39;title&#39;: &#39;True colour&#39;}, &#39;NDVI&#39;: {&#39;title&#39;: &#39;Normalised Difference Vegetation Index&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=NDVI&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}, &#39;NDWI&#39;: {&#39;title&#39;: &#39;Normalised Difference Water Index&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=NDWI&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}, &#39;MNDWI&#39;: {&#39;title&#39;: &#39;Modified Normalised Difference Water Index&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=MNDWI&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}, &#39;NBR&#39;: {&#39;title&#39;: &#39;Normalised Burn Ratio&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=NBR&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}}
 </pre></div></div>
 </div>
 <p><strong>Let’s request a preview of the dataset through WMS</strong></p>
 <p><strong>WMS function</strong></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -569,18 +646,17 @@ This product has been corrected to remove the influences of the atmosphere, the 
 </div>
 <p><strong>Make a request</strong></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">subset_bbox</span> <span class="o">=</span> <span class="p">(</span><span class="mi">148</span><span class="p">,</span> <span class="o">-</span><span class="mi">37</span><span class="p">,</span> <span class="mi">151</span><span class="p">,</span> <span class="o">-</span><span class="mi">36</span><span class="p">)</span>
+<span></span><span class="n">subset_bbox</span> <span class="o">=</span> <span class="p">(</span><span class="mf">148.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">35.93</span><span class="p">,</span> <span class="mf">149.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">35.13</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<p>Note that there are currently server side limits on the size of a WMS request. If you request bounding boxes that are too large, you will run into a <strong>“zoom into view this layer”</strong> error message. This means you would need to reduce the size of your bounding box request.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -596,13 +672,12 @@ This product has been corrected to remove the influences of the atmosphere, the 
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Time Positions:
-         [&#39;2013-03-19T00:00:00.000Z&#39;, &#39;2013-04-04T00:00:00.000Z&#39;, &#39;2013-04-20T00:00:00.000Z&#39;, &#39;2013-05-06T00:00:00.000Z&#39;, &#39;2013-05-22T00:00:00.000Z&#39;, &#39;2013-06-07T00:00:00.000Z&#39;, &#39;2013-06-23T00:00:00.000Z&#39;, &#39;2013-07-09T00:00:00.000Z&#39;, &#39;2013-07-25T00:00:00.000Z&#39;, &#39;2013-08-10T00:00:00.000Z&#39;]
+         [&#39;2013-01-01T00:00:00.000Z&#39;, &#39;2013-01-17T00:00:00.000Z&#39;, &#39;2013-02-02T00:00:00.000Z&#39;, &#39;2013-02-18T00:00:00.000Z&#39;, &#39;2013-03-06T00:00:00.000Z&#39;, &#39;2013-03-22T00:00:00.000Z&#39;, &#39;2013-04-07T00:00:00.000Z&#39;, &#39;2013-04-23T00:00:00.000Z&#39;, &#39;2013-05-09T00:00:00.000Z&#39;, &#39;2013-05-25T00:00:00.000Z&#39;]
 
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -615,12 +690,11 @@ Time Positions:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;fc&#39;: {&#39;title&#39;: &#39;False colour&#39;}, &#39;tc&#39;: {&#39;title&#39;: &#39;True colour&#39;}}
+{&#39;fc&#39;: {&#39;title&#39;: &#39;False colour&#39;}, &#39;tc&#39;: {&#39;title&#39;: &#39;True colour&#39;}, &#39;NDVI&#39;: {&#39;title&#39;: &#39;Normalised Difference Vegetation Index&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=NDVI&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}, &#39;NDWI&#39;: {&#39;title&#39;: &#39;Normalised Difference Water Index&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=NDWI&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}, &#39;MNDWI&#39;: {&#39;title&#39;: &#39;Modified Normalised Difference Water Index&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=MNDWI&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}, &#39;NBR&#39;: {&#39;title&#39;: &#39;Normalised Burn Ratio&#39;, &#39;legend&#39;: &#39;http://gsky.nci.org.au/ows/dea?service=WMS&amp;request=GetLegendGraphic&amp;version=1.3.0&amp;layers=landsat8_nbart_16day&amp;styles=NBR&#39;, &#39;legend_width&#39;: &#39;160&#39;, &#39;legend_height&#39;: &#39;320&#39;, &#39;legend_format&#39;: &#39;image/png&#39;}}
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -629,20 +703,27 @@ Time Positions:
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pngfile</span> <span class="o">=</span> <span class="n">get_map</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">subset_bbox</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">style</span><span class="p">)</span>
+<span></span><span class="n">request_time</span> <span class="o">=</span> <span class="s1">&#39;2013-04-07T00:00:00.000Z&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pngfile</span> <span class="o">=</span> <span class="n">get_map</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">subset_bbox</span><span class="p">,</span> <span class="n">request_time</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="And-if-we’d-like-to-confirm-the-result:">
 <h3>And if we’d like to confirm the result:<a class="headerlink" href="#And-if-we’d-like-to-confirm-the-result:" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -653,25 +734,23 @@ Time Positions:
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.image.AxesImage at 0x1202f4940&gt;
-</pre></div>
-</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.image.AxesImage at 0x122f77e10&gt;
+</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/_notebook_Notebook_GSKY_ClicknShip_24_1.png" src="../_images/_notebook_Notebook_GSKY_ClicknShip_24_1.png" />
+<img alt="../_images/_notebook_Notebook_GSKY_ClicknShip_26_1.png" src="../_images/_notebook_Notebook_GSKY_ClicknShip_26_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -700,8 +779,7 @@ Time Positions:
 <div class="section" id="Select/click-region">
 <h2>Select/click region<a class="headerlink" href="#Select/click-region" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -734,8 +812,7 @@ Time Positions:
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -748,17 +825,16 @@ Time Positions:
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d53207922f3b4ce881e5bc3c6de44148", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c2a66820f5a845c2937514955c628383", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d13871814fe64af4902625cddda37466", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fd06934a164748c5bd9c7a3a6ca3c7be", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -777,8 +853,7 @@ longitude = (135, 145)
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -787,8 +862,7 @@ longitude = (135, 145)
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -800,18 +874,16 @@ longitude = (135, 145)
 <div class="section" id="And-ship!">
 <h2>And ship!<a class="headerlink" href="#And-ship!" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">wcs_output</span> <span class="o">=</span> <span class="n">get_coverage</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span></span><span class="n">wcs_output</span> <span class="o">=</span> <span class="n">get_coverage</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="n">request_time</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -844,13 +916,11 @@ longitude = (135, 145)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/_notebook_Notebook_GSKY_ClicknShip_34_0.png" src="../_images/_notebook_Notebook_GSKY_ClicknShip_34_0.png" />
+<img alt="../_images/_notebook_Notebook_GSKY_ClicknShip_36_0.png" src="../_images/_notebook_Notebook_GSKY_ClicknShip_36_0.png" />
 </div>
 </div>
 <hr class="docutils" />
-<p><strong>For more information on the OGC WMS standard specifications and the
-Python OWSLib package:</strong> <a class="reference external" href="http://www.opengeospatial.org/standards/wms">http://www.opengeospatial.org/standards/wms</a>
-<a class="reference external" href="https://geopython.github.io/OWSLib/#wms">https://geopython.github.io/OWSLib/#wms</a></p>
+<p><strong>For more information on the OGC WMS standard specifications and the Python OWSLib package:</strong> <a class="reference external" href="http://www.opengeospatial.org/standards/wms">http://www.opengeospatial.org/standards/wms</a> <a class="reference external" href="https://geopython.github.io/OWSLib/#wms">https://geopython.github.io/OWSLib/#wms</a></p>
 </div>
 </div>
 
@@ -862,10 +932,10 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../_ogc/WMS.html" class="btn btn-neutral float-right" title="Web Map Service (WMS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019.html" class="btn btn-neutral float-right" title="Request GSKY’s WMS from Python (bushfire example)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Notebook_GSKY_WCS.html" class="btn btn-neutral" title="Using GSKY’s WCS in Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Notebook_GSKY_WCS.html" class="btn btn-neutral float-left" title="Using GSKY’s WCS in Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -874,11 +944,19 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI.
+        
+        &copy; Copyright 2018, NCI
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -890,34 +968,16 @@ Python OWSLib package:</strong> <a class="reference external" href="http://www.o
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

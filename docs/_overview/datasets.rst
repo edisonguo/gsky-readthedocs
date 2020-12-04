@@ -27,7 +27,7 @@ GSKY currently serves data collections such as:
 You can browse and search NCI’s full collection by going to the `Terria Map`_ or `National Map`_  websites.
 
 .. _National Map: http://nationalmap.gov.au/
-.. _Terria Map: https:map.terria.io
+.. _Terria Map: https://map.terria.io/
 
 To view the DEA or GEOGLAM  collections, click on Add Data -> My Data -> Add Web Data and enter the following URLs respectively:
 

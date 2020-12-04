@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,44 +11,47 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installing Jupyter and Python" href="install_jupyter.html" />
-    <link rel="prev" title="GSKY interacts with QGIS" href="GSKY_QGIS.html" /> 
 
   
-  <script src="../_static/js/modernizr.min.js"></script>
+  
+  
+  
 
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSKY
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> GSKY
           
 
           
@@ -72,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,20 +87,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../_overview/datasets.html">Datasets</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User Guide</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gsky_through_the_web.html">GeoGLAM example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GSKY_ArcGIS.html">ArcGIS example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GSKY_QGIS.html">QGIS example</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Google Earth Web example</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisite">0. Prerequisite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lauch-digital-earth-australia-server">1. Lauch Digital Earth Australia server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-kml-file">2. Create a KML file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#open-the-kml-file-in-the-google-earth-web">3. Open the KML file in the Google Earth Web</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-bounding-box-using-bbox-finder">4. Get Bounding Box using BBox Finder</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="install_jupyter.html">Installing Jupyter and Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Jupyter notebooks</span></p>
@@ -129,6 +123,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -167,7 +162,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Google Earth Web - A web app to use Google Earth Web with EDA</li>
     
@@ -193,18 +188,23 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
 }
 </style>
 <div class="section" id="google-earth-web-a-web-app-to-use-google-earth-web-with-eda">
@@ -230,11 +230,11 @@
 <p>You can select the following parameters to define the time and space of the imagee:</p>
 <blockquote>
 <div><ul class="simple">
-<li>layer</li>
-<li>Region</li>
-<li>Bounding Box in Lat and Lon</li>
-<li>Date</li>
-<li>Resolution</li>
+<li><p>layer</p></li>
+<li><p>Region</p></li>
+<li><p>Bounding Box in Lat and Lon</p></li>
+<li><p>Date</p></li>
+<li><p>Resolution</p></li>
 </ul>
 </div></blockquote>
 <p>Parameters are selected as in the screenshot below.</p>
@@ -271,25 +271,24 @@ You can keep importting more layers if you like. Each KML files will be listed o
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="install_jupyter.html" class="btn btn-neutral float-right" title="Installing Jupyter and Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="GSKY_QGIS.html" class="btn btn-neutral" title="GSKY interacts with QGIS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, NCI.
+        
+        &copy; Copyright 2018, NCI
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -301,34 +300,16 @@ You can keep importting more layers if you like. Each KML files will be listed o
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

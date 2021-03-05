@@ -32,6 +32,7 @@ Welcome to the GSKY Manual
    WMS ipyleaflet <_notebook/Notebook_GSKY_WMS_ipyleaflet.ipynb>
    WCS Basics <_notebook/Notebook_GSKY_WCS>
    WCS Click and Ship <_notebook/Notebook_GSKY_ClicknShip>
+   User-defined Band Math <_notebook/Notebook_GSKY_User_Defined_Band_Math>
    Create a GIF using GSKY WMS endpoints <_notebook/request_GSKY_WMS_sentinel2_bushfire_NSW_Sep2019>
 
 ..  WPS Polygon Drill <_notebook/Notebook_GSKY_WPS_Polygon_Drill.ipynb>
